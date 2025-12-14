@@ -1,0 +1,75 @@
+@layer base {
+  .prose {
+    @apply text-foreground;
+  }
+
+  .prose h1 {
+    @apply text-3xl font-serif mb-4 mt-8;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-serif mb-3 mt-6;
+  }
+
+  .prose h3 {
+    @apply text-xl font-medium mb-2 mt-4;
+  }
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose a {
+    @apply text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all;
+  }
+
+  .prose a:hover {
+    @apply opacity-100 decoration-solid;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply mb-4 ml-8;
+  }
+
+  .prose ul {
+    list-style-type: "➢ ";
+  }
+  
+  .prose ul > li::marker {
+    color: var(--muted-foreground);
+    font-size: 0.85em;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose ol > li::marker {
+    color: var(--muted-foreground);
+    font-size: 0.85em;
+    font-weight: 400;
+    margin-right: 1em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ol.list-decimal > li::marker {
+    color: var(--muted-foreground);
+    font-size: 0.85em;
+    font-weight: 400;
+    margin-right: 1em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .prose code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm;
+  }
+
+  .prose pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-border pl-4 italic my-4;
+  }
+}

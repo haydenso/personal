@@ -1,0 +1,2 @@
+older react version needed for some
+''npm install --legacy-peer-deps''

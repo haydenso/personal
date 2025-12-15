@@ -42,21 +42,68 @@ export default function PersonalWebsite() {
     setMobileMenuOpen(false)
   }
 
-  // Auto-select first musing when musings tab becomes active
+  // Track viewport width (wide vs narrow) so we can change musings behavior
+  const [isWideViewport, setIsWideViewport] = useState<boolean>(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches)
   useEffect(() => {
-    if (activeTab === "musings" && !selectedMusing) {
-      // Sort musings: pinned first, then by date descending
-      const sortedMusings = [...musings].sort((a, b) => {
-        if (a.pinned && !b.pinned) return -1
-        if (!a.pinned && b.pinned) return 1
-        return new Date(b.date).getTime() - new Date(a.date).getTime()
-      })
-      
-      if (sortedMusings.length > 0) {
-        setSelectedMusing(sortedMusings[0].slug)
-      }
+    if (typeof window === 'undefined') return
+    const mq = window.matchMedia('(min-width: 768px)')
+    const handler = () => setIsWideViewport(mq.matches)
+    mq.addEventListener?.('change', handler)
+    mq.addListener?.(handler)
+    handler()
+    return () => {
+      mq.removeEventListener?.('change', handler)
+      mq.removeListener?.(handler)
     }
-  }, [activeTab, selectedMusing])
+  }, [])
+
+  // Auto-select first musing when musings tab becomes active, but only on wide screens
+  useEffect(() => {
+    if (activeTab !== 'musings' || selectedMusing) return
+    if (!isWideViewport) return
+
+    // Sort musings: pinned first, then by date descending
+    const sortedMusings = [...musings].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1
+      if (!a.pinned && b.pinned) return 1
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
+
+    if (sortedMusings.length > 0) {
+      setSelectedMusing(sortedMusings[0].slug)
+    }
+  }, [activeTab, selectedMusing, isWideViewport])
+
+  // Auto-select first blog when blogs tab becomes active, but only on wide screens
+  useEffect(() => {
+    if (activeTab !== 'blogs' || selectedBlog) return
+    if (!isWideViewport) return
+
+    ;(async () => {
+      const m = await import('@/content/blogs')
+      const sorted = [...m.blogs].sort((a: any, b: any) => {
+        const [am, ad, ay] = a.date.split('-').map(Number)
+        const [bm, bd, by] = b.date.split('-').map(Number)
+        return new Date(by, bm - 1, bd).getTime() - new Date(ay, am - 1, ad).getTime()
+      })
+
+      if (sorted.length > 0) setSelectedBlog(sorted[0].slug)
+    })()
+  }, [activeTab, selectedBlog, isWideViewport])
+
+  // If viewport becomes narrow while a blog is open, close it
+  useEffect(() => {
+    if (activeTab !== 'blogs') return
+    if (isWideViewport) return
+    if (selectedBlog) setSelectedBlog(null)
+  }, [isWideViewport, activeTab])
+
+  // If viewport becomes narrow while a musing is open, close it (so list is the default view on small screens)
+  useEffect(() => {
+    if (activeTab !== 'musings') return
+    if (isWideViewport) return
+    if (selectedMusing) setSelectedMusing(null)
+  }, [isWideViewport, activeTab])
 
   return (
     <div className="flex min-h-screen">
@@ -121,41 +168,46 @@ export default function PersonalWebsite() {
 
               <div className="space-y-4">
                 <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
-                <ol className="space-y-2 list-decimal list-inside font-serif">
-                  <li className="text-foreground">
-                    currently working on AI (governance, RL environments and evals) 
-                  </li>
-                  <li className="text-foreground">
-                    i think about China, AI and the weather
-                  </li>
-                  <li className="text-foreground">
-                    i sold guns in the arctic for a summer
-                  </li>
+                  <ol className="space-y-2 list-decimal list-inside font-serif"> 
+                  <p className="font-serif" style={{ color: 'oklch(0.42 0.18 25)' }}>/currently/</p>                
                     <li className="text-foreground">
-                    i like to 
+                    thinking and writing about AI governance, RL environments and China
                   </li>
                   <li className="text-foreground">
-                    founding design engineer at{" "}
+                    reading biographies, sherlock, history and engineering blogs
+                  </li>
+                  <li className="text-foreground">
+                    studying cs + planets at hkust, politics at hku
+                  </li>
+                </ol>
+
+                <ol className="space-y-2 list-decimal list-inside font-serif"> 
+                  <p className="font-serif pt-1.5" style={{ color: 'oklch(0.42 0.18 25)' }}>/previously/</p> 
+                  <li className="text-foreground">
+                    i sold guns in the arctic for a summer. finished high school in Norway{" "}
                     <a
-                      href="https://paradigmai.com"
+                      href="https://uwcrcn.no"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
                     >
-                      Paradigm
+                      (UWC)
                     </a>
-                    ; previously at{" "}
+                  </li>
+                  <li className="text-foreground">
+                      technical: software engineering at Set Sail AI and NLP research at {''}
                     <a
                       href="https://vercel.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
                     >
-                      Vercel
+                      Yale
                     </a>
-                    .
                   </li>
-                  <p>places i've lived: hong kong, flekke (norway), svalbard, brussels, london, toronto</p>
+                  <li className="text-foreground">
+                    non-technical: HK's foreign relations and trade (Brussels), energy private equity
+                  </li>
                 </ol>
 
                 <div className="flex items-center gap-4 pt-8 font-serif">

@@ -2,6 +2,7 @@ import { blogs } from "@/content/blogs"
 import { cn } from "@/lib/utils"
 import { ResizeHandle } from "./resize-handle"
 import { Footer } from "./footer"
+import { useEffect, useState } from "react"
 
 interface BlogsListProps {
   selectedBlog: string | null
@@ -23,10 +24,25 @@ function sortBlogsByDate() {
 }
 
 export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMouseDown }: BlogsListProps) {
+  const [isWide, setIsWide] = useState<boolean>(() => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const mq = window.matchMedia("(min-width: 768px)")
+    const handler = () => setIsWide(mq.matches)
+    mq.addEventListener?.("change", handler)
+    mq.addListener?.(handler)
+    handler()
+    return () => {
+      mq.removeEventListener?.("change", handler)
+      mq.removeListener?.(handler)
+    }
+  }, [])
+
   const sortedBlogs = sortBlogsByDate()
   return (
     <div
-      style={{ width: `${width}px` }}
+      style={{ width: isWide ? `${width}px` : "100%" }}
       className={cn(
         "relative overflow-y-auto shrink-0 border-r border-border",
         selectedBlog && "max-md:hidden",
@@ -44,7 +60,7 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
                   className="w-full text-left space-y-1.5 py-3 transition-colors group"
                 >
                   <div className="flex items-baseline gap-2">
-                    <h2 className="text-base font-medium text-foreground">{blog.title}</h2>
+                    <h2 className="text-base font-serif text-foreground">{blog.title}</h2>
                     <span className="text-muted-foreground text-sm transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                   </div>
                   <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest">{blog.date}</p>

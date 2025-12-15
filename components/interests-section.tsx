@@ -1,19 +1,19 @@
 
 const interestsData = {
 "technical projects": [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+    "interpretability research on hurricane prediction",
+    "agent-based simulation of airplane boarding",
+    "natural language processing + biomedical informatics (pre-chatGPT era)"
   ],
-  "my writing": [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+  "my fav writing": [
+    "on China and AI governance",
+    "my thesis on AI adoption and rollups",
+    "the career chameleon"
   ]
 }
 
 const icons = {
-  "my writing": "★",
+  "my fav writing": "★",
   "technical projects": "●"
 }
 

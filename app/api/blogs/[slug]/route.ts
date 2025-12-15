@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { getNoteBySlug, markdownToHtml } from "@/lib/mdx"
-import { notes } from "@/content/notes"
+import { getBlogBySlug, markdownToHtml } from "@/lib/mdx"
+import { blogs } from "@/content/blogs"
 
 export async function GET(
   _req: Request,
@@ -8,7 +8,7 @@ export async function GET(
 ) {
   const { slug } = await params
 
-  const mdx = getNoteBySlug(slug)
+  const mdx = getBlogBySlug(slug)
   if (mdx) {
     return NextResponse.json({
       slug: mdx.slug,
@@ -18,14 +18,14 @@ export async function GET(
     })
   }
 
-  // Fallback to inline notes content
-  const note = notes.find((n) => n.slug === slug)
-  if (note) {
+  // Fallback to inline blogs content
+  const blog = blogs.find((n) => n.slug === slug)
+  if (blog) {
     return NextResponse.json({
-      slug: note.slug,
-      title: note.title,
-      date: note.date,
-      contentHtml: note.content, // already HTML
+      slug: blog.slug,
+      title: blog.title,
+      date: blog.date,
+      contentHtml: blog.content, // already HTML
     })
   }
 

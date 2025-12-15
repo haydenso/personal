@@ -5,28 +5,29 @@ import { Menu, X } from "lucide-react"
 import { useResizable } from "@/hooks/use-resizable"
 import { Sidebar } from "@/components/sidebar"
 import { AboutSection } from "@/components/about-section"
-import { NotesList } from "@/components/notes-list"
-import { BookshelfList } from "@/components/bookshelf-list"
-import { NoteReader } from "@/components/note-reader"
-import { BookReader } from "@/components/book-reader"
+import { BlogsList } from "@/components/blogs-list"
+import { MusingsList } from "@/components/musings-list"
+import { BlogReader } from "@/components/blog-reader"
+import { MusingReader } from "@/components/musing-reader"
+import { Bookshelf } from "@/components/bookshelf"
 import { ContentPanel } from "@/components/content-panel"
 
-type Tab = "about" | "bookshelf" | "notes"
+type Tab = "about" | "musings" | "blogs" | "bookshelf"
 
 export default function PersonalWebsite() {
   const [activeTab, setActiveTab] = useState<Tab>("about")
-  const [selectedNote, setSelectedNote] = useState<string | null>(null)
-  const [selectedBook, setSelectedBook] = useState<string | null>(null)
+  const [selectedBlog, setSelectedBlog] = useState<string | null>(null)
+  const [selectedMusing, setSelectedMusing] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const sidebar = useResizable({ initialWidth: 192, minWidth: 150, maxWidth: 400 })
-  const notesList = useResizable({
+  const blogsList = useResizable({
     initialWidth: 600,
     minWidth: 200,
     maxWidth: 600,
     offsetX: sidebar.width,
   })
-  const bookList = useResizable({
+  const musingsList = useResizable({
     initialWidth: 600,
     minWidth: 200,
     maxWidth: 600,
@@ -57,36 +58,38 @@ export default function PersonalWebsite() {
         mobileMenuOpen={mobileMenuOpen}
       />
 
-      {activeTab === "notes" ? (
+      {activeTab === "blogs" ? (
         <>
-          <NotesList
-            selectedNote={selectedNote}
-            onSelectNote={setSelectedNote}
-            width={notesList.width}
-            isDragging={notesList.isDragging}
-            onMouseDown={notesList.handleMouseDown}
+          <BlogsList
+            selectedBlog={selectedBlog}
+            onSelectBlog={setSelectedBlog}
+            width={blogsList.width}
+            isDragging={blogsList.isDragging}
+            onMouseDown={blogsList.handleMouseDown}
           />
-          {selectedNote && (
-            <ContentPanel onClose={() => setSelectedNote(null)}>
-              <NoteReader slug={selectedNote} />
+          {selectedBlog && (
+            <ContentPanel onClose={() => setSelectedBlog(null)}>
+              <BlogReader slug={selectedBlog} />
+            </ContentPanel>
+          )}
+        </>
+      ) : activeTab === "musings" ? (
+        <>
+          <MusingsList
+            selectedMusing={selectedMusing}
+            onSelectMusing={setSelectedMusing}
+            width={musingsList.width}
+            isDragging={musingsList.isDragging}
+            onMouseDown={musingsList.handleMouseDown}
+          />
+          {selectedMusing && (
+            <ContentPanel onClose={() => setSelectedMusing(null)}>
+              <MusingReader slug={selectedMusing} />
             </ContentPanel>
           )}
         </>
       ) : activeTab === "bookshelf" ? (
-        <>
-          <BookshelfList
-            selectedBook={selectedBook}
-            onSelectBook={setSelectedBook}
-            width={bookList.width}
-            isDragging={bookList.isDragging}
-            onMouseDown={bookList.handleMouseDown}
-          />
-          {selectedBook && (
-            <ContentPanel onClose={() => setSelectedBook(null)}>
-              <BookReader slug={selectedBook} />
-            </ContentPanel>
-          )}
-        </>
+        <Bookshelf />
       ) : (
         <main className="flex-1 px-8 md:px-16 max-w-3xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
           <AboutSection />

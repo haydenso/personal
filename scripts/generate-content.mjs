@@ -119,14 +119,14 @@ function markdownToHtml(markdown) {
   return html.join("\n")
 }
 
-// Generate notes content
-function generateNotes() {
-  const notesDir = path.join(rootDir, "content/notes")
-  const files = fs.readdirSync(notesDir).filter((f) => f.endsWith(".mdx"))
+// Generate blogs content
+function generateBlogs() {
+  const blogsDir = path.join(rootDir, "content/blogs")
+  const files = fs.readdirSync(blogsDir).filter((f) => f.endsWith(".mdx"))
 
-  const notes = files.map((filename) => {
+  const blogs = files.map((filename) => {
     const slug = filename.replace(/\.mdx$/, "")
-    const fullPath = path.join(notesDir, filename)
+    const fullPath = path.join(blogsDir, filename)
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data, content } = matter(fileContents)
 
@@ -139,7 +139,7 @@ function generateNotes() {
     }
   })
 
-  const output = `export interface Note {
+  const output = `export interface Blog {
   slug: string
   title: string
   date: string
@@ -147,63 +147,66 @@ function generateNotes() {
   content: string
 }
 
-export const notes: Note[] = ${JSON.stringify(notes, null, 2)}
+export const blogs: Blog[] = ${JSON.stringify(blogs, null, 2)}
 `
 
-  fs.writeFileSync(path.join(rootDir, "content/notes.tsx"), output)
-  console.log(`✓ Generated content for ${notes.length} notes`)
+  fs.writeFileSync(path.join(rootDir, "content/blogs.tsx"), output)
+  console.log(`✓ Generated content for ${blogs.length} blogs`)
 }
 
-// Generate books content
-function generateBooks() {
-  const booksDir = path.join(rootDir, "content/books")
-  const files = fs.readdirSync(booksDir).filter((f) => f.endsWith(".mdx"))
+// Generate musings content
+function generateMusings() {
+  const musingsDir = path.join(rootDir, "content/musings")
+  const files = fs.readdirSync(musingsDir).filter((f) => f.endsWith(".mdx"))
 
-  const books = files.map((filename) => {
+  const musings = files.map((filename) => {
     const slug = filename.replace(/\.mdx$/, "")
-    const fullPath = path.join(booksDir, filename)
+    const fullPath = path.join(musingsDir, filename)
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data, content: mdxContent } = matter(fileContents)
 
     // Read metadata from frontmatter with defaults
     const title = data.title || slug
     const author = data.author || ""
-    const year = data.year || 0
+    const date = data.date || ""
     const lastUpdated = data.lastUpdated
     const hasNotes = data.hasNotes ?? (mdxContent.trim().length > 0)
     const isReading = data.isReading ?? false
+    const pinned = data.pinned ?? false
     const content = markdownToHtml(mdxContent)
 
     return {
       slug,
       title,
       author,
-      year,
+      date,
       ...(lastUpdated && { lastUpdated }),
       hasNotes,
       isReading,
+      pinned,
       content,
     }
   })
 
-  const output = `export interface Book {
+  const output = `export interface Musing {
   slug: string
   title: string
   author: string
-  year: number
+  date: string
   lastUpdated?: string
   hasNotes: boolean
   isReading: boolean
+  pinned: boolean
   content: string
 }
 
-export const books: Book[] = ${JSON.stringify(books, null, 2)}
+export const musings: Musing[] = ${JSON.stringify(musings, null, 2)}
 `
 
-  fs.writeFileSync(path.join(rootDir, "content/books.tsx"), output)
-  console.log(`✓ Generated content for ${books.length} books`)
+  fs.writeFileSync(path.join(rootDir, "content/musings.tsx"), output)
+  console.log(`✓ Generated content for ${musings.length} musings`)
 }
 
 // Run generators
-generateNotes()
-generateBooks()
+generateBlogs()
+generateMusings()

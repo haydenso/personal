@@ -2,49 +2,50 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 
-const notesDirectory = path.join(process.cwd(), "content/notes")
-const booksDirectory = path.join(process.cwd(), "content/books")
+const blogsDirectory = path.join(process.cwd(), "content/blogs")
+const musingsDirectory = path.join(process.cwd(), "content/musings")
 
-export interface NoteMetadata {
+export interface BlogMetadata {
   slug: string
   title: string
   date: string
   excerpt: string
 }
 
-export interface NoteWithContent extends NoteMetadata {
+export interface BlogWithContent extends BlogMetadata {
   content: string
 }
 
-export interface BookMetadata {
+export interface MusingMetadata {
   slug: string
   title: string
   author: string
-  year: number
+  date: string
   lastUpdated?: string
   hasNotes: boolean
   isReading: boolean
+  pinned: boolean
 }
 
-export interface BookWithContent extends BookMetadata {
+export interface MusingWithContent extends MusingMetadata {
   content: string
 }
 
-// Helper to get all note files
-export function getNoteFiles() {
-  if (!fs.existsSync(notesDirectory)) {
+// Helper to get all blog files
+export function getBlogFiles() {
+  if (!fs.existsSync(blogsDirectory)) {
     return []
   }
-  return fs.readdirSync(notesDirectory).filter((file) => file.endsWith(".mdx"))
+  return fs.readdirSync(blogsDirectory).filter((file) => file.endsWith(".mdx"))
 }
 
-// Get all notes metadata
-export function getAllNotes(): NoteMetadata[] {
-  const files = getNoteFiles()
+// Get all blogs metadata
+export function getAllBlogs(): BlogMetadata[] {
+  const files = getBlogFiles()
 
-  const notes = files.map((filename) => {
+  const blogs = files.map((filename) => {
     const slug = filename.replace(/\.mdx$/, "")
-    const fullPath = path.join(notesDirectory, filename)
+    const fullPath = path.join(blogsDirectory, filename)
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data } = matter(fileContents)
 
@@ -56,13 +57,13 @@ export function getAllNotes(): NoteMetadata[] {
     }
   })
 
-  return notes.sort((a, b) => (a.date > b.date ? -1 : 1))
+  return blogs.sort((a, b) => (a.date > b.date ? -1 : 1))
 }
 
-// Get a single note by slug
-export function getNoteBySlug(slug: string): NoteWithContent | null {
+// Get a single blog by slug
+export function getBlogBySlug(slug: string): BlogWithContent | null {
   try {
-    const fullPath = path.join(notesDirectory, `${slug}.mdx`)
+    const fullPath = path.join(blogsDirectory, `${slug}.mdx`)
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data, content } = matter(fileContents)
 
@@ -78,20 +79,20 @@ export function getNoteBySlug(slug: string): NoteWithContent | null {
   }
 }
 
-// Book helper functions
-export function getBookFiles() {
-  if (!fs.existsSync(booksDirectory)) {
+// Musing helper functions
+export function getMusingFiles() {
+  if (!fs.existsSync(musingsDirectory)) {
     return []
   }
-  return fs.readdirSync(booksDirectory).filter((file) => file.endsWith(".mdx"))
+  return fs.readdirSync(musingsDirectory).filter((file) => file.endsWith(".mdx"))
 }
 
-export function getAllBooks(): BookMetadata[] {
-  const files = getBookFiles()
+export function getAllMusings(): MusingMetadata[] {
+  const files = getMusingFiles()
 
-  const books = files.map((filename) => {
+  const musings = files.map((filename) => {
     const slug = filename.replace(/\.mdx$/, "")
-    const fullPath = path.join(booksDirectory, filename)
+    const fullPath = path.join(musingsDirectory, filename)
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data, content } = matter(fileContents)
 
@@ -99,19 +100,20 @@ export function getAllBooks(): BookMetadata[] {
       slug,
       title: data.title || slug,
       author: data.author || "",
-      year: data.year || 0,
+      date: data.date || "",
       lastUpdated: data.lastUpdated,
       hasNotes: data.hasNotes ?? (content.trim().length > 0),
       isReading: data.isReading ?? false,
+      pinned: data.pinned ?? false,
     }
   })
 
-  return books
+  return musings
 }
 
-export function getBookBySlug(slug: string): BookWithContent | null {
+export function getMusingBySlug(slug: string): MusingWithContent | null {
   try {
-    const fullPath = path.join(booksDirectory, `${slug}.mdx`)
+    const fullPath = path.join(musingsDirectory, `${slug}.mdx`)
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data, content } = matter(fileContents)
 
@@ -119,10 +121,11 @@ export function getBookBySlug(slug: string): BookWithContent | null {
       slug,
       title: data.title || slug,
       author: data.author || "",
-      year: data.year || 0,
+      date: data.date || "",
       lastUpdated: data.lastUpdated,
       hasNotes: data.hasNotes ?? (content.trim().length > 0),
       isReading: data.isReading ?? false,
+      pinned: data.pinned ?? false,
       content,
     }
   } catch {

@@ -1,4 +1,4 @@
-export interface Note {
+export interface Blog {
   slug: string
   title: string
   date: string
@@ -6,7 +6,7 @@ export interface Note {
   content: string
 }
 
-export const notes: Note[] = [
+export const blogs: Blog[] = [
   {
     "slug": "favourite-links",
     "title": "Example: Resource Collection",

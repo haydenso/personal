@@ -133,11 +133,11 @@ export default function PersonalWebsite() {
             isDragging={blogsList.isDragging}
             onMouseDown={blogsList.handleMouseDown}
           />
-              {selectedMusing && (
-                <ContentPanel onClose={() => setSelectedMusing(null)}>
-                  <MusingReader slug={selectedMusing} onBack={() => setSelectedMusing(null)} />
-                </ContentPanel>
-              )}
+          {selectedBlog && (
+            <ContentPanel onClose={() => setSelectedBlog(null)}>
+              <BlogReader slug={selectedBlog} />
+            </ContentPanel>
+          )}
         </>
       ) : activeTab === "musings" ? (
         <>

@@ -12,6 +12,13 @@ interface MusingsListProps {
 }
 
 export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging, onMouseDown }: MusingsListProps) {
+  // Sort musings: pinned first, then by date descending
+  const sortedMusings = [...musings].sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1
+    if (!a.pinned && b.pinned) return 1
+    return new Date(b.date).getTime() - new Date(a.date).getTime()
+  })
+
   return (
     <div
       style={{ width: `${width}px` }}
@@ -20,86 +27,54 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
         selectedMusing && "max-md:hidden",
       )}
     >
-      <div className="px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full">
-        <div>
-          <h1 className="text-4xl font-serif mb-8">Musings</h1>
-
-          <div className="space-y-8">
-          <div>
-            <h2 className=" text-xs uppercase tracking-widest text-muted-foreground mb-4">Pinned</h2>
-            <ol className="space-y-0">
-              {musings
-                .filter((musing) => musing.pinned)
-                .map((musing, index, filteredMusings) => (
-                  <li key={musing.slug} className="text-foreground">
-                    <div className="inline-block align-top" style={{ width: "calc(100% - 1.5em)" }}>
-                      <button
-                        onClick={() => {
-                          if (musing.hasNotes) {
-                            onSelectMusing(musing.slug)
-                          }
-                        }}
-                        disabled={!musing.hasNotes}
-                        className={cn(
-                          "w-full text-left space-y-1.5 py-3 transition-colors group",
-                          musing.hasNotes && "cursor-pointer",
-                          !musing.hasNotes && "cursor-default",
-                        )}
-                      >
-                        <div className="flex items-baseline gap-2">
-                          <div className="text-base font-medium text-foreground">{musing.title}</div>
-                          {musing.hasNotes && (
-                            <span className="text-muted-foreground text-sm transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                          )}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {musing.author}, {musing.date}
-                        </div>
-                      </button>
-                    </div>
-                  </li>
-                ))}
-            </ol>
-          </div>
-
-          <div>
-            <h2 className=" text-xs uppercase tracking-widest text-muted-foreground mb-4">By date</h2>
-            <ol className="space-y-0">
-              {musings
-                .filter((musing) => !musing.pinned)
-                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                .map((musing, index, filteredMusings) => (
-                  <li key={musing.slug} className="text-foreground">
-                    <div className="inline-block align-top">
-                      <button
-                        onClick={() => {
-                          if (musing.hasNotes) {
-                            onSelectMusing(musing.slug)
-                          }
-                        }}
-                        disabled={!musing.hasNotes}
-                        className={cn(
-                          "w-full text-left space-y-1.5 py-3 transition-colors group",
-                          musing.hasNotes && "cursor-pointer",
-                          !musing.hasNotes && "cursor-default",
-                        )}
-                      >
-                        <div className="flex items-baseline gap-2">
-                          <div className={cn("text-base font-medium text-foreground", musing.hasNotes && "group-hover:underline")}>{musing.title}</div>
-                          {musing.hasNotes && (
-                            <span className="text-muted-foreground text-sm transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                          )}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {musing.author}, {musing.date}
-                        </div>
-                      </button>
-                    </div>
-                  </li>
-                ))}
-            </ol>
-          </div>
+      <div className="px-4 pt-28 md:pt-16 pb-0 flex flex-col min-h-full">
+        <div className="mb-4">
+          <h1 className="text-4xl font-serif mb-2">Musings</h1>
+          <p className="text-muted-foreground text-sm">a peek into my notes app</p>
         </div>
+
+        <div className="flex-1">
+          {sortedMusings.map((musing) => {
+            const isSelected = selectedMusing === musing.slug
+            // Create a simple preview from content (strip HTML and truncate)
+            const preview = musing.content
+              .replace(/<[^>]*>/g, '') // Remove HTML tags
+              .replace(/\s+/g, ' ') // Normalize whitespace
+              .trim()
+              .substring(0, 100) + (musing.content.length > 100 ? '...' : '')
+
+            return (
+              <button
+                key={musing.slug}
+                onClick={() => onSelectMusing(musing.slug)}
+                className={cn(
+                  "w-full text-left p-3 mb-1 rounded-lg transition-colors border-l-4",
+                  isSelected 
+                    ? "bg-[#ffd52e] border-[#ffd52e]" 
+                    : "bg-transparent border-transparent hover:bg-orange-100"
+                )}
+              >
+                <div className="flex flex-col">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className={cn(
+                      "text-sm font-semibold truncate",
+                      isSelected ? "text-foreground" : "text-foreground"
+                    )}>
+                      {musing.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    {musing.author} • {musing.date}
+                  </p>
+                  {preview && (
+                    <p className="text-xs text-muted-foreground line-clamp-2">
+                      {preview}
+                    </p>
+                  )}
+                </div>
+              </button>
+            )
+          })}
         </div>
 
         <Footer />

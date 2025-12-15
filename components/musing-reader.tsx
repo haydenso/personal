@@ -9,18 +9,28 @@ export function MusingReader({ slug }: MusingReaderProps) {
   if (!musing) return null
 
   return (
-    <article className="prose prose-neutral dark:prose-invert max-w-none">
-      {musing.lastUpdated && (
-        <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest mb-2">
-          Last updated {musing.lastUpdated}
-        </p>
-      )}
-      <div className="mb-8">
-        <h1 className="text-4xl font-serif mb-2">{musing.title}</h1>
-        <p className="text-muted-foreground">{musing.author}</p>
-        <p className="text-sm text-muted-foreground mt-1">{musing.date}</p>
+    <div className="flex-1 flex flex-col min-h-0">
+      {/* Toolbar */}
+      <div className="bg-[#f9f9f9] h-11 flex items-center justify-between px-4 border-b border-[#e5e5e5] text-sm text-[#666]">
+        <div className="flex items-center gap-4">
+          <span>Aa</span>
+          <span>☰</span>
+        </div>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: musing.content }} />
-    </article>
+
+      {/* Content */}
+      <div className="flex-1 px-12 py-8 overflow-y-auto bg-white min-h-0">
+        <article className="max-w-none">
+          <div className="note-time text-sm text-[#888] mb-8">
+            {musing.date}
+            {musing.lastUpdated && ` • Last updated ${musing.lastUpdated}`}
+          </div>
+          <div 
+            className="note-body text-sm leading-relaxed text-[#333] prose prose-neutral dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: musing.content }} 
+          />
+        </article>
+      </div>
+    </div>
   )
 }

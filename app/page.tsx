@@ -163,13 +163,13 @@ export default function PersonalWebsite() {
             <div className="lg:w-[60%] space-y-8">
               <div>
                 <h1 className="text-3xl font-serif mb-2">hey there, i'm hayden!</h1>
-                <p className="text-muted-foreground text-sm font-serif">hong kong </p>
+                <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
               </div>
 
               <div className="space-y-4">
                 <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
                   <ol className="space-y-2 list-decimal list-inside font-serif"> 
-                  <p className="font-serif" style={{ color: 'oklch(0.42 0.18 25)' }}>/currently/</p>                
+                  <p className="font-serif" style={{ color: 'oklch(0.42 0.18 25)' }}>/currently/ - cofounder @ sidoai.org</p>                
                     <li className="text-foreground">
                     thinking and writing about AI governance, RL environments and China
                   </li>
@@ -242,7 +242,7 @@ export default function PersonalWebsite() {
               rel="noopener noreferrer"
               className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
             >
-            haydenso.hk [at] gmail.com</a>
+            email</a>
           </div>
 
               </div>

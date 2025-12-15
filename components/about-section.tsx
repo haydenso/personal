@@ -1,4 +1,5 @@
 import { Footer } from "./footer"
+import { InterestsSection } from "./interests-section"
 
 export function AboutSection() {
   return (
@@ -44,6 +45,8 @@ export function AboutSection() {
           </li>
         </ol>
       </div>
+
+      <InterestsSection />
 
       <div className="flex items-center gap-4 pt-4">
         <span className="text-muted-foreground">See also:</span>

@@ -19,7 +19,7 @@ export const musings: Musing[] = [
     "lastUpdated": "10-26-2025",
     "hasNotes": true,
     "isReading": true,
-    "pinned": false,
+    "pinned": true,
     "content": "<ul><li>Zen and the Art of Motorcycle Maintenance, Robert Pirsig (1974), p. 38</li></ul>"
   },
   {

@@ -133,11 +133,11 @@ export default function PersonalWebsite() {
             isDragging={blogsList.isDragging}
             onMouseDown={blogsList.handleMouseDown}
           />
-          {selectedBlog && (
-            <ContentPanel onClose={() => setSelectedBlog(null)}>
-              <BlogReader slug={selectedBlog} />
-            </ContentPanel>
-          )}
+              {selectedMusing && (
+                <ContentPanel onClose={() => setSelectedMusing(null)}>
+                  <MusingReader slug={selectedMusing} onBack={() => setSelectedMusing(null)} />
+                </ContentPanel>
+              )}
         </>
       ) : activeTab === "musings" ? (
         <>
@@ -150,7 +150,7 @@ export default function PersonalWebsite() {
           />
           {selectedMusing && (
             <ContentPanel onClose={() => setSelectedMusing(null)}>
-              <MusingReader slug={selectedMusing} />
+              <MusingReader slug={selectedMusing} onBack={() => setSelectedMusing(null)} />
             </ContentPanel>
           )}
         </>
@@ -162,53 +162,33 @@ export default function PersonalWebsite() {
             {/* Left column: Bio and images - 60% width on large screens */}
             <div className="lg:w-[60%] space-y-8">
               <div>
-                <h1 className="text-3xl font-serif mb-2">hey there, i'm hayden!</h1>
-                <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
-              </div>
-
+                <div className="flex items-center gap-4 pb-6">
+                  <img src="/face/logo.png" alt="logo" className="w-12 h-12 rounded-md object-cover" />
+                  <div>
+                    <h1 className="text-3xl font-serif mb-2">hey there, i'm hayden!</h1>
+                    <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
+                  </div>
+                </div>
               <div className="space-y-4">
                 <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
-                  <ol className="space-y-2 list-decimal list-inside font-serif"> 
-                  <p className="font-serif" style={{ color: 'oklch(0.42 0.18 25)' }}>/currently/ - cofounder @ sidoai.org</p>                
-                    <li className="text-foreground">
-                    thinking and writing about AI governance, RL environments and China
-                  </li>
-                  <li className="text-foreground">
-                    reading biographies, sherlock, history and engineering blogs
-                  </li>
-                  <li className="text-foreground">
-                    studying cs + planets at hkust, politics at hku
-                  </li>
-                </ol>
+                <div>
+                  <p className="font-serif" style={{ color: 'oklch(0.42 0.18 25)' }}>/currently/ - cofounder @ sidoai.org</p>
+                  <ol className="space-y-2 list-decimal list-inside font-serif">
+                    <li className="text-foreground">thinking and writing about AI governance, RL environments and China</li>
+                    <li className="text-foreground">reading biographies, sherlock, history and engineering blogs</li>
+                    <li className="text-foreground">studying cs + planets at hkust, politics at hku</li>
+                  </ol>
+                </div>
 
-                <ol className="space-y-2 list-decimal list-inside font-serif"> 
-                  <p className="font-serif pt-1.5" style={{ color: 'oklch(0.42 0.18 25)' }}>/previously/</p> 
-                  <li className="text-foreground">
-                    i sold guns in the arctic for a summer. finished high school in Norway{" "}
-                    <a
-                      href="https://uwcrcn.no"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-                    >
-                      (UWC)
-                    </a>
-                  </li>
-                  <li className="text-foreground">
-                      technical: software engineering at Set Sail AI and NLP research at {''}
-                    <a
-                      href="https://vercel.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-                    >
-                      Yale
-                    </a>
-                  </li>
-                  <li className="text-foreground">
-                    non-technical: HK's foreign relations and trade (Brussels), energy private equity
-                  </li>
-                </ol>
+                <div>
+                  <p className="font-serif pt-1.5" style={{ color: 'oklch(0.42 0.18 25)' }}>/previously/</p>
+                  <ol className="space-y-2 list-decimal list-inside font-serif">
+                    <li className="text-foreground">i sold guns in the arctic for a summer. finished high school in Norway <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">(UWC)</a></li>
+                    <li className="text-foreground">technical: software engineering at Set Sail AI and NLP research at <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a></li>
+                    <li className="text-foreground">non-technical: HK's foreign relations and trade (Brussels), energy private equity</li>
+                  </ol>
+                </div>
+              </div>
 
                 <div className="flex items-center gap-4 pt-8 font-serif">
             <span className="text-muted-foreground">contact:</span>

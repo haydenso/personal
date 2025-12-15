@@ -110,26 +110,29 @@ export default function PersonalWebsite() {
       ) : activeTab === "bookshelf" ? (
         <Bookshelf />
       ) : (
-        <main className="flex-1 px-8 md:px-16 max-w-6xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-            {/* Left column: Bio and images - spans 2 columns on large screens */}
-            <div className="lg:col-span-2 space-y-8">
+        <main className="flex-1 px-8 md:px-16 max-w-6xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+            {/* Left column: Bio and images - 60% width on large screens */}
+            <div className="lg:w-[60%] space-y-8">
               <div>
-                <h1 className="text-3xl font-serif mb-2">hey! i'm hayden so</h1>
-                <p className="text-muted-foreground text-sm">蘇晞諾</p>
+                <h1 className="text-3xl font-serif mb-2">hey there, i'm hayden!</h1>
+                <p className="text-muted-foreground text-sm font-serif">hong kong </p>
               </div>
 
               <div className="space-y-4">
-                <p className="text-muted-foreground">member of non-technical technical staff</p>
-                <ol className="space-y-2 list-decimal list-inside">
+                <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
+                <ol className="space-y-2 list-decimal list-inside font-serif">
                   <li className="text-foreground">
-                    currently working on AI (governance, RL environments and evals). 
+                    currently working on AI (governance, RL environments and evals) 
                   </li>
                   <li className="text-foreground">
-                    i think about China, AI and the weather.
+                    i think about China, AI and the weather
                   </li>
                   <li className="text-foreground">
-                    i sold guns in the arctic for a summer.
+                    i sold guns in the arctic for a summer
+                  </li>
+                    <li className="text-foreground">
+                    i like to 
                   </li>
                   <li className="text-foreground">
                     founding design engineer at{" "}
@@ -152,32 +155,26 @@ export default function PersonalWebsite() {
                     </a>
                     .
                   </li>
+                  <p>places i've lived: hong kong, flekke (norway), svalbard, brussels, london, toronto</p>
                 </ol>
-              </div>
 
-              <ImagesRow images={[
-                { src: "/about/about-1.jpg", alt: "Image 1" },
-                { src: "/about/about-2.jpg", alt: "Image 2" },
-                { src: "/about/about-3.jpg", alt: "Image 3" },
-                { src: "/about/about-4.jpg", alt: "Image 4" }
-              ]} />
-            </div>
-
-            {/* Right column: Interests - spans 1 column on large screens */}
-            <div className="lg:col-span-1 lg:mt-0">
-              <InterestsSection />
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-4 pt-8">
-            <span className="text-muted-foreground">See also:</span>
+                <div className="flex items-center gap-4 pt-8 font-serif">
+            <span className="text-muted-foreground">contact:</span>
+            <a
+              href="https://www.linkedin.com/in/haydenso/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+            >
+              linkedin
+            </a>
             <a
               href="https://github.com/haydsso"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
             >
-              GitHub
+              github
             </a>
             <a
               href="https://x.com/haydsso"
@@ -185,9 +182,33 @@ export default function PersonalWebsite() {
               rel="noopener noreferrer"
               className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
             >
-              Twitter
+              twitter
             </a>
+            <a              
+              href="haydenso.hk@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+            >
+            haydenso.hk [at] gmail.com</a>
           </div>
+
+              </div>
+            </div>
+            
+
+            {/* Right column: Interests - 40% width on large screens */}
+            <div className="lg:w-[40%] lg:mt-0">
+              <InterestsSection />
+            </div>
+          </div>
+          
+          <ImagesRow images={[
+                { src: "/about/about-1.jpg", alt: "Image 1" },
+                { src: "/about/about-2.jpg", alt: "Image 2" },
+                { src: "/about/about-3.jpg", alt: "Image 3" },
+                { src: "/about/about-4.jpg", alt: "Image 4" }
+              ]} />
           
           <Footer />
         </main>

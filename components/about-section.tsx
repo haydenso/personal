@@ -6,7 +6,7 @@ export function AboutSection() {
     <div className="flex flex-col justify-between min-h-full">
       <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-serif mb-2">hey! i'm hayden so</h1>
+        <h1 className="text-3xl font-serif mb-2">hey there! i'm hayden </h1>
         <p className="text-muted-foreground text-sm">蘇晞諾</p>
       </div>
 

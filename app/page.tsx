@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react"
 import { useResizable } from "@/hooks/use-resizable"
 import { Sidebar } from "@/components/sidebar"
 import { InterestsSection } from "@/components/interests-section"
+import { ImagesRow } from "@/components/images-row"
 import { Footer } from "@/components/footer"
 import { BlogsList } from "@/components/blogs-list"
 import { MusingsList } from "@/components/musings-list"
@@ -109,51 +110,64 @@ export default function PersonalWebsite() {
       ) : activeTab === "bookshelf" ? (
         <Bookshelf />
       ) : (
-        <main className="flex-1 px-8 md:px-16 max-w-3xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
-          <div className="space-y-8">
-            <div>
-              <h1 className="text-3xl font-serif mb-2">hey! i'm hayden so</h1>
-              <p className="text-muted-foreground text-sm">蘇晞諾</p>
+        <main className="flex-1 px-8 md:px-16 max-w-6xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+            {/* Left column: Bio and images - spans 2 columns on large screens */}
+            <div className="lg:col-span-2 space-y-8">
+              <div>
+                <h1 className="text-3xl font-serif mb-2">hey! i'm hayden so</h1>
+                <p className="text-muted-foreground text-sm">蘇晞諾</p>
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-muted-foreground">member of non-technical technical staff</p>
+                <ol className="space-y-2 list-decimal list-inside">
+                  <li className="text-foreground">
+                    currently working on AI (governance, RL environments and evals). 
+                  </li>
+                  <li className="text-foreground">
+                    i think about China, AI and the weather.
+                  </li>
+                  <li className="text-foreground">
+                    i sold guns in the arctic for a summer.
+                  </li>
+                  <li className="text-foreground">
+                    founding design engineer at{" "}
+                    <a
+                      href="https://paradigmai.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                    >
+                      Paradigm
+                    </a>
+                    ; previously at{" "}
+                    <a
+                      href="https://vercel.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                    >
+                      Vercel
+                    </a>
+                    .
+                  </li>
+                </ol>
+              </div>
+
+              <ImagesRow images={[
+                { src: "/about/about-1.jpg", alt: "Image 1" },
+                { src: "/about/about-2.jpg", alt: "Image 2" },
+                { src: "/about/about-3.jpg", alt: "Image 3" },
+                { src: "/about/about-4.jpg", alt: "Image 4" }
+              ]} />
             </div>
 
-            <div className="space-y-4">
-              <p className="text-muted-foreground">member of non-technical technical staff</p>
-              <ol className="space-y-2 list-decimal list-inside">
-                <li className="text-foreground">
-                  currently working on AI (governance, RL environments and evals). 
-                </li>
-                <li className="text-foreground">
-                  i think about China, AI and the weather.
-                </li>
-                <li className="text-foreground">
-                  i sold guns in the arctic for a summer.
-                </li>
-                <li className="text-foreground">
-                  founding design engineer at{" "}
-                  <a
-                    href="https://paradigmai.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-                  >
-                    Paradigm
-                  </a>
-                  ; previously at{" "}
-                  <a
-                    href="https://vercel.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-                  >
-                    Vercel
-                  </a>
-                  .
-                </li>
-              </ol>
+            {/* Right column: Interests - spans 1 column on large screens */}
+            <div className="lg:col-span-1 lg:mt-0">
+              <InterestsSection />
             </div>
           </div>
-          
-          <InterestsSection />
           
           <div className="flex items-center gap-4 pt-8">
             <span className="text-muted-foreground">See also:</span>

@@ -269,7 +269,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   {/* Peek into quick links (sticky note buttons) */}
                   <div className="mt-6">
                     <div className="font-serif mb-2">
-                      <span style={{ color: '#000000', backgroundColor: '#FEEABF', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/peek into my/</span>
+                      <span style={{ color: '#000000', backgroundColor: '#FEEABF', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <button
@@ -339,6 +339,14 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
               className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
             >
             email</a>
+                        <a
+              href="https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+            >
+              scholar
+            </a>
           </div>
 
               </div>

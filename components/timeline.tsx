@@ -23,6 +23,7 @@ export function Timeline() {
   return (
     <main className="flex-1 px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl overflow-y-auto">
       <div>
+        <h1 className="text-4xl font-serif mb-8">timeline - under construction!</h1>
         <p className="text-muted-foreground mb-8">i optimistically aim to do monthly updates, but probably more like quarterly. inspired by <a className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid" href="https://selvaradov.net/">rohan</a></p>
 
         <div className="space-y-4">
@@ -32,10 +33,10 @@ export function Timeline() {
               <div key={item.slug}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full text-left rounded-md border border-border bg-white flex items-center justify-between p-3"
+                  className="w-full text-left rounded-md border border-border bg-[#FEEABF] flex items-center justify-between p-3"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="text-md font-serif bg-[#FEEABF] text-foreground">{item.title}</div>
+                    <div className="text-md font-serif text-foreground">{item.title}</div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="text-xs text-muted-foreground">{item.date}</div>

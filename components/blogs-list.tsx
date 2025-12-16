@@ -24,7 +24,8 @@ function sortBlogsByDate() {
 }
 
 export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMouseDown }: BlogsListProps) {
-  const [isWide, setIsWide] = useState<boolean>(() => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches)
+  // Start false on the server to avoid hydration mismatch; update on client in effect
+  const [isWide, setIsWide] = useState<boolean>(false)
 
   useEffect(() => {
     if (typeof window === "undefined") return

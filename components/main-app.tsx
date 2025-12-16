@@ -83,7 +83,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   }
 
   // Track viewport width (wide vs narrow) so we can change musings behavior
-  const [isWideViewport, setIsWideViewport] = useState<boolean>(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches)
+  // Start false on the server to avoid hydration mismatch; update on client in effect
+  const [isWideViewport, setIsWideViewport] = useState<boolean>(false)
   useEffect(() => {
     if (typeof window === 'undefined') return
     const mq = window.matchMedia('(min-width: 768px)')

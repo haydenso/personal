@@ -57,7 +57,8 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
     )
   }
 
-  const [isWide, setIsWide] = useState<boolean>(() => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches)
+  // Start false on the server to avoid hydration mismatch; update on client in effect
+  const [isWide, setIsWide] = useState<boolean>(false)
 
   useEffect(() => {
     if (typeof window === "undefined") return

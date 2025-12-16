@@ -30,8 +30,8 @@ export function Sidebar({ activeTab, onTabChange, width, isDragging, onMouseDown
         <div
           className="w-full h-full relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.42 0.18 25), oklch(0.52 0.18 25) 50%, oklch(0.42 0.18 25))',
-            border: '1px solid oklch(0.42 0.18 25)',
+            background: 'linear-gradient(135deg, #FFD52E, #FFD82E 50%, #FFD52E)',
+            border: '1px solid #FFD52E',
             clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 12px), 0 100%)',
             boxShadow: '2px 2px 6px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(0,0,0,0.2)',
           }}

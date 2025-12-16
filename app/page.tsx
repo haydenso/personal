@@ -172,22 +172,70 @@ export default function PersonalWebsite() {
               <div className="space-y-4">
                 <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
                 <div>
-                  <p className="font-serif" style={{ color: 'oklch(0.42 0.18 25)' }}>/currently/ - cofounder @ sidoai.org</p>
+                  <p
+                    className="font-serif"
+                    style={{
+                      color: '#000000',
+                      backgroundColor: '#FEEABF',
+                      padding: '0 0.375rem',
+                      borderRadius: '0.125rem',
+                      display: 'inline-block',
+                    }}
+                  >/currently/ - cofounder @ sidoai.org</p>
                   <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground">thinking and writing about AI governance, RL environments and China</li>
-                    <li className="text-foreground">reading biographies, sherlock, history and engineering blogs</li>
+                    <li className="text-foreground"><a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about AI governance, RL environments and China</li>
+                    <li className="text-foreground"><a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading biographies, sherlock, history and engineering blogs</a></li>
                     <li className="text-foreground">studying cs + planets at hkust, politics at hku</li>
                   </ol>
                 </div>
 
                 <div>
-                  <p className="font-serif pt-1.5" style={{ color: 'oklch(0.42 0.18 25)' }}>/previously/</p>
+                  <p
+                    className="font-serif pt-1.5"
+                    style={{
+                      color: '#000000',
+                      backgroundColor: '#FEEABF',
+                      padding: '0 0.375rem',
+                      borderRadius: '0.125rem',
+                      display: 'inline-block',
+                    }}
+                  >/previously/</p>
                   <ol className="space-y-2 list-decimal list-inside font-serif">
                     <li className="text-foreground">i sold guns in the arctic for a summer. finished high school in Norway <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">(UWC)</a></li>
-                    <li className="text-foreground">technical: software engineering at Set Sail AI and NLP research at <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a></li>
-                    <li className="text-foreground">non-technical: HK's foreign relations and trade (Brussels), energy private equity</li>
+                    <li className="text-foreground">technical: software engineering at <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Set Sail AI</a> and NLP research at <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a></li>
+                    <li className="text-foreground">non-technical: HK's foreign relations and trade (Brussels), <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">energy</a> private equity</li>
                   </ol>
                 </div>
+
+                  {/* Peek into quick links (sticky note buttons) */}
+                  <div className="mt-6">
+                    <div className="font-serif mb-2">peek into my:</div>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => { handleTabChange('musings'); setSelectedMusing(null); }}
+                        aria-label="Open notes app"
+                        className="inline-block bg-[#FEEABF] text-gray-800 px-3 py-2 rounded-md shadow-lg transform -rotate-3 hover:scale-105 transition-all cursor-pointer select-none font-mono text-sm"
+                      >
+                        notes app
+                      </button>
+
+                      <button
+                        onClick={() => { handleTabChange('blogs'); setSelectedBlog(null); }}
+                        aria-label="Open writings"
+                        className="inline-block bg-[#FEEABF] text-gray-800 px-3 py-2 rounded-md shadow-lg transform hover:scale-105 transition-all cursor-pointer select-none font-mono text-sm"
+                      >
+                        writings
+                      </button>
+
+                      <button
+                        onClick={() => { handleTabChange('bookshelf'); }}
+                        aria-label="Open bookshelf"
+                        className="inline-block bg-[#FEEABF] text-gray-800 px-3 py-2 rounded-md shadow-lg transform -rotate-3 hover:scale-105 transition-all cursor-pointer select-none font-mono text-sm"
+                      >
+                        bookshelf
+                      </button>
+                    </div>
+                  </div>
               </div>
 
                 <div className="flex items-center gap-4 pt-8 font-serif">

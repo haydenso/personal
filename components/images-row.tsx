@@ -9,35 +9,53 @@ interface ImagesRowProps {
 }
 
 export function ImagesRow({ images }: ImagesRowProps) {
+  // Track the current src and how many retries we've attempted for each image
   const [imageSrcs, setImageSrcs] = useState<Record<number, string>>(
     images.reduce((acc, _, index) => ({ ...acc, [index]: images[index].src }), {})
   )
+  const [attempts, setAttempts] = useState<Record<number, number>>(
+    images.reduce((acc, _, index) => ({ ...acc, [index]: 0 }), {})
+  )
+
+  const placeholder = `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><rect width='100%' height='100%' fill='%23f3f3f3'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-family='sans-serif' font-size='20'>Image unavailable</text></svg>`
+  )}`
+
+  const tryNextFallback = (index: number) => {
+    const current = imageSrcs[index]
+    const attempt = (attempts[index] || 0) + 1
+
+    // Sequence of fallback strategies
+    let next = current
+    if (attempt === 1) {
+      // Toggle extension case (jpg -> JPG, jpeg -> JPEG, png -> PNG, etc.)
+      const extMatch = current.match(/(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i)
+      if (extMatch) {
+        const base = current.slice(0, -extMatch[0].length)
+        next = base + extMatch[0].toUpperCase()
+      } else {
+        next = current + '.JPG'
+      }
+    } else if (attempt === 2) {
+      // Try .webp version (if not already webp)
+      if (!/\.webp$/i.test(current)) next = current.replace(/(\.jpg|\.jpeg|\.png|\.gif)$/i, '.webp')
+      else next = current + '?v=1'
+    } else if (attempt === 3) {
+      // Cache-bust the URL
+      next = current.includes('?') ? `${current}&cb=1` : `${current}?cb=1`
+    } else {
+      // Fallback to placeholder
+      next = placeholder
+    }
+
+    setAttempts((prev) => ({ ...prev, [index]: attempt }))
+    setImageSrcs((prev) => ({ ...prev, [index]: next }))
+  }
 
   const handleImageError = (index: number) => {
-    const currentSrc = imageSrcs[index]
-    let newSrc = currentSrc
-
-    if (currentSrc.toLowerCase().endsWith('.jpg')) {
-      // If ends with .jpg (case insensitive), try .JPG
-      const base = currentSrc.slice(0, -4)
-      newSrc = base + '.JPG'
-    } else if (currentSrc.toLowerCase().endsWith('.jpeg')) {
-      const base = currentSrc.slice(0, -5)
-      newSrc = base + '.JPEG'
-    } else if (currentSrc.toLowerCase().endsWith('.png')) {
-      const base = currentSrc.slice(0, -4)
-      newSrc = base + '.PNG'
-    } else if (currentSrc.toLowerCase().endsWith('.gif')) {
-      const base = currentSrc.slice(0, -4)
-      newSrc = base + '.GIF'
-    } else if (currentSrc.toLowerCase().endsWith('.webp')) {
-      const base = currentSrc.slice(0, -5)
-      newSrc = base + '.WEBP'
-    }
-
-    if (newSrc !== currentSrc) {
-      setImageSrcs(prev => ({ ...prev, [index]: newSrc }))
-    }
+    // Avoid retrying forever
+    if ((attempts[index] || 0) >= 4) return
+    tryNextFallback(index)
   }
 
   return (

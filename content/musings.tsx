@@ -20,21 +20,11 @@ export const musings: Musing[] = [
     "hasNotes": true,
     "isReading": true,
     "pinned": true,
-    "content": "<ul><li>Zen and the Art of Motorcycle Maintenance, Robert Pirsig (1974), p. 38</li></ul>"
+    "content": "<ul><li>Zen and the Art of Motorcycle Maintenance, Robert Pirsig (1974), p. 38</li><li>test</li><li>so if i add a point here</li><li>and another here</li><li>whip out new ones</li></ul>"
   },
   {
     "slug": "colors-of-wes-anderson",
-    "title": "Colors of Wes Anderson",
-    "author": "Hannah Strong",
-    "date": "2025",
-    "hasNotes": false,
-    "isReading": false,
-    "pinned": false,
-    "content": ""
-  },
-  {
-    "slug": "prayer",
-    "title": "Prayer",
+    "title": "test 2",
     "author": "Timothy Keller",
     "date": "2014",
     "hasNotes": false,
@@ -43,10 +33,42 @@ export const musings: Musing[] = [
     "content": ""
   },
   {
+    "slug": "prayer",
+    "title": "Prayer",
+    "author": "Timothy Keller",
+    "date": "2014",
+    "hasNotes": true,
+    "isReading": true,
+    "pinned": false,
+    "content": "<p>what if i just write here. how does it feel?</p>"
+  },
+  {
     "slug": "severence",
     "title": "Severance",
     "author": "Ling Ma",
     "date": "2018",
+    "hasNotes": true,
+    "isReading": false,
+    "pinned": false,
+    "content": "<p>test edit fe LOL</p>\n<p>HEHE how fast is this hah fefeefe jhifefefsefefefefow</p>"
+  },
+  {
+    "slug": "test-added-musing-note",
+    "title": "test added musing note",
+    "author": "Hayden",
+    "date": "2025",
+    "lastUpdated": "12-17-2025",
+    "hasNotes": false,
+    "isReading": false,
+    "pinned": false,
+    "content": ""
+  },
+  {
+    "slug": "untitled2",
+    "title": "Untitled 2",
+    "author": "Hayden",
+    "date": "2025",
+    "lastUpdated": "12-17-2025",
     "hasNotes": false,
     "isReading": false,
     "pinned": false,
@@ -57,9 +79,9 @@ export const musings: Musing[] = [
     "title": "Wabi-Sabi for Artists, Designers, and Creatives",
     "author": "Leonard Koren",
     "date": "1994",
-    "hasNotes": false,
+    "hasNotes": true,
     "isReading": false,
     "pinned": false,
-    "content": ""
+    "content": "<p>TEST</p>"
   }
 ]

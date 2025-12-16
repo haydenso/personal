@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# my personal editor
+/editor/
+
 # production
 /build
 

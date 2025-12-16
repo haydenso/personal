@@ -122,4 +122,14 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Ensure links and interactive controls show pointer cursor */
+  a, button, [role="button"] {
+    cursor: pointer;
+  }
+
+  /* Ensure children inside interactive elements also show pointer (e.g., headings inside buttons) */
+  a *, button *, [role="button"] * {
+    cursor: pointer;
+  }
 }

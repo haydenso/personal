@@ -49,28 +49,19 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
       )}
     >
       <div className="px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full">
-        <div>
-          <h1 className="text-4xl font-serif mb-8">blogs</h1>
-          <p className="text-muted-foreground mb-8">field observations & works-in-progress.</p>
-          <div className="space-y-0">
-            {sortedBlogs.map((blog, index) => (
-              <div key={blog.slug} className="relative">
-                <button
-                  onClick={() => onSelectBlog(blog.slug)}
-                  className="w-full text-left space-y-1.5 py-3 transition-colors group"
-                >
-                  <div className="flex items-baseline gap-2">
-                    <h2 className="text-base font-serif text-foreground">{blog.title}</h2>
-                    <span className="text-muted-foreground text-sm transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest">{blog.date}</p>
+        <div className="bg-[#e9edd6] rounded-md p-8">
+          <h1 className="text-4xl font-serif mb-2 text-foreground">blogs</h1>
+          <p className="text-muted-foreground mb-6">field observations & works-in-progress.</p>
+
+          <ol className="list-decimal list-inside space-y-4 font-serif text-lg">
+            {sortedBlogs.map((blog) => (
+              <li key={blog.slug}>
+                <button onClick={() => onSelectBlog(blog.slug)} className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 text-left">
+                  {blog.title}
                 </button>
-                {index < sortedBlogs.length - 1 && (
-                  <div className="h-px bg-border my-4" />
-                )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
 
         <Footer />

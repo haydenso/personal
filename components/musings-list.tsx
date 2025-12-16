@@ -17,7 +17,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
   const pinned = musings.filter(m => m.pinned)
   const rest = musings.filter(m => !m.pinned)
 
-  function renderMusingButton(musing: typeof musings[0]) {
+  function renderMusingButton(musing: typeof musings[0], idx: number) {
     const isSelected = selectedMusing === musing.slug
     const preview = musing.content
       .replace(/<[^>]*>/g, '')
@@ -32,7 +32,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
           "w-full text-left p-3 mb-1 rounded-lg transition-colors border-l-4",
           isSelected 
             ? "bg-[#ffd52e] border-[#ffd52e]" 
-            : "bg-transparent border-transparent hover:bg-orange-100"
+            : "bg-white border-transparent hover:bg-orange-100"
         )}
       >
         <div className="flex flex-col">
@@ -91,13 +91,13 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
           {pinned.length > 0 && (
             <>
               <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2 mt-4 font-mono">Pinned</div>
-              {pinned.map(renderMusingButton)}
+              {pinned.map((m, i) => renderMusingButton(m, i))}
             </>
           )}
           {rest.length > 0 && (
             <>
               <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2 mt-6 font-mono">Rest</div>
-              {rest.map(renderMusingButton)}
+              {rest.map((m, i) => renderMusingButton(m, pinned.length + i))}
             </>
           )}
         </div>

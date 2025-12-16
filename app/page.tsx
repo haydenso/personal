@@ -12,10 +12,12 @@ import { MusingsList } from "@/components/musings-list"
 import { BlogReader } from "@/components/blog-reader"
 import { MusingReader } from "@/components/musing-reader"
 import { Bookshelf } from "@/components/bookshelf"
+import { Gallery } from "@/components/gallery"
+import { Timeline } from "@/components/timeline"
 import { ContentPanel } from "@/components/content-panel"
 import { musings } from "@/content/musings"
 
-type Tab = "about" | "musings" | "blogs" | "bookshelf"
+type Tab = "about" | "musings" | "blogs" | "bookshelf" | "gallery" | "timeline"
 
 export default function PersonalWebsite() {
   const [activeTab, setActiveTab] = useState<Tab>("about")
@@ -156,6 +158,10 @@ export default function PersonalWebsite() {
         </>
       ) : activeTab === "bookshelf" ? (
         <Bookshelf />
+      ) : activeTab === "gallery" ? (
+        <Gallery />
+      ) : activeTab === "timeline" ? (
+        <Timeline />
       ) : (
         <main className="flex-1 px-8 md:px-16 max-w-6xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
@@ -277,18 +283,19 @@ export default function PersonalWebsite() {
             </div>
             
 
-            {/* Right column: Interests - 40% width on large screens */}
-            <div className="lg:w-[40%] lg:mt-0">
+            {/* Right column: Images + Interests - 40% width on large screens */}
+            <div className="lg:w-[40%] lg:mt-0 space-y-6">
               <InterestsSection />
-            </div>
-          </div>
-          
-          <ImagesRow images={[
+              <ImagesRow images={[
                 { src: "/about/about-1.jpg", alt: "Image 1" },
                 { src: "/about/about-2.jpg", alt: "Image 2" },
                 { src: "/about/about-3.jpg", alt: "Image 3" },
                 { src: "/about/about-4.jpg", alt: "Image 4" }
               ]} />
+            </div>
+          </div>
+          
+          {/* images moved into the right column (see above) */}
           
           <Footer />
         </main>

@@ -16,7 +16,7 @@ export function Bookshelf() {
   return (
     <div className="flex-1 px-8 md:px-16 max-w-6xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
       <div>
-        <h1 className="text-4xl font-serif mb-8">Bookshelf</h1>
+        <h1 className="text-4xl font-serif mb-8">bookshelf - under construction!</h1>
         <p className="text-muted-foreground mb-8">
           {activeTab === "books"
             ? "A visual collection of books I've read or am reading."

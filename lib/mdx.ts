@@ -37,6 +37,21 @@ export function getBlogFiles() {
   return fs.readdirSync(blogsDirectory).filter((file) => file.endsWith(".mdx"))
 }
 
+// Helper to parse date strings like "December 17 2025" or "January 2025"
+function parseDate(dateStr: string): Date {
+  if (!dateStr) return new Date(0)
+  
+  const parts = dateStr.trim().split(/\s+/)
+  if (parts.length === 3) {
+    // Month Day Year
+    return new Date(`${parts[0]} ${parts[1]}, ${parts[2]}`)
+  } else if (parts.length === 2) {
+    // Month Year
+    return new Date(`${parts[0]} 1, ${parts[1]}`)
+  }
+  return new Date(0) // fallback
+}
+
 // Get all blogs metadata
 export function getAllBlogs(): BlogMetadata[] {
   const files = getBlogFiles()
@@ -55,7 +70,7 @@ export function getAllBlogs(): BlogMetadata[] {
     }
   })
 
-  return blogs.sort((a, b) => (a.date > b.date ? -1 : 1))
+  return blogs.sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
 }
 
 // Get a single blog by slug

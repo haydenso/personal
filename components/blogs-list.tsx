@@ -54,7 +54,7 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
           <h1 className="text-4xl font-serif mb-2 text-foreground">blogs</h1>
           <p className="text-muted-foreground mb-6">field observations & works-in-progress.</p>
 
-          <ol className="list-decimal list-inside space-y-4 font-serif text-lg">
+          <ol className="list-decimal list-inside space-y-4 font-serif text-md">
             {sortedBlogs.map((blog) => (
               <li key={blog.slug}>
                 <button onClick={() => onSelectBlog(blog.slug)} className="text-foreground hover:bg-[#FFD52E] underline decoration-dotted decoration-1 underline-offset-2 text-left">

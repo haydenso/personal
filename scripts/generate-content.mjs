@@ -16,22 +16,33 @@ function markdownToHtml(markdown) {
   }
 
   function processInlineMarkdown(text) {
-    // First escape HTML, then convert markdown links to HTML <a> tags
-    // We use a placeholder to protect link syntax during escaping
+    // First process bold and italic
+    let processedText = text
+    processedText = processedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    processedText = processedText.replace(/\*(.*?)\*/g, '<em>$1</em>')
+
+    // Then handle links
     const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g
     const links = []
     let match
 
     // Extract all links
-    while ((match = linkPattern.exec(text)) !== null) {
+    while ((match = linkPattern.exec(processedText)) !== null) {
       links.push({ text: match[1], url: match[2] })
     }
 
     // Replace links with placeholders
-    let processedText = text.replace(linkPattern, '___LINK___')
+    processedText = processedText.replace(linkPattern, '___LINK___')
 
-    // Escape HTML in the remaining text
+    // Escape HTML
     processedText = escapeHtml(processedText)
+
+    // Restore the HTML tags
+    processedText = processedText
+      .replace(/&lt;strong&gt;/g, '<strong>')
+      .replace(/&lt;\/strong&gt;/g, '</strong>')
+      .replace(/&lt;em&gt;/g, '<em>')
+      .replace(/&lt;\/em&gt;/g, '</em>')
 
     // Restore links as HTML
     links.forEach(({ text, url }) => {
@@ -76,10 +87,10 @@ function markdownToHtml(markdown) {
     if (/^>\s?/.test(line)) {
       const quote = []
       while (i < lines.length && /^>\s?/.test(lines[i])) {
-        quote.push(lines[i].replace(/^>\s?/, ""))
+        quote.push(processInlineMarkdown(lines[i].replace(/^>\s?/, "")))
         i++
       }
-      html.push(`<blockquote>${escapeHtml(quote.join("\n")).replace(/\n/g, "<br/>")}</blockquote>`)
+      html.push(`<blockquote>${quote.join("<br/>")}</blockquote>`)
       continue
     }
 
@@ -119,6 +130,21 @@ function markdownToHtml(markdown) {
   return html.join("\n")
 }
 
+// Helper to parse date strings like "December 17 2025" or "January 2025"
+function parseDate(dateStr) {
+  if (!dateStr) return new Date(0)
+  
+  const parts = dateStr.trim().split(/\s+/)
+  if (parts.length === 3) {
+    // Month Day Year
+    return new Date(`${parts[0]} ${parts[1]}, ${parts[2]}`)
+  } else if (parts.length === 2) {
+    // Month Year
+    return new Date(`${parts[0]} 1, ${parts[1]}`)
+  }
+  return new Date(0) // fallback
+}
+
 // Generate blogs content
 function generateBlogs() {
   const blogsDir = path.join(rootDir, "content/blogs")
@@ -138,6 +164,9 @@ function generateBlogs() {
       content: markdownToHtml(content),
     }
   })
+
+  // Sort blogs by date (latest first)
+  blogs.sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
 
   const output = `export interface Blog {
   slug: string

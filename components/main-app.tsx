@@ -162,6 +162,23 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     if (selectedMusing) setSelectedMusing(null)
   }, [isWideViewport, activeTab])
 
+  // Auto-select top musing when switching to musings tab on wide viewports
+  useEffect(() => {
+    if (activeTab !== 'musings') return
+    if (!isWideViewport) return
+    if (selectedMusing) return // Don't override if already selected
+
+    const sortedMusings = [...musings].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1
+      if (!a.pinned && b.pinned) return 1
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
+
+    if (sortedMusings.length > 0) {
+      setSelectedMusing(sortedMusings[0].slug)
+    }
+  }, [activeTab, isWideViewport, selectedMusing])
+
   return (
     <div className="flex h-screen overflow-hidden">
       <button
@@ -244,8 +261,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                     }}
                   >/currently/ - cofounder @ sidoai.org</p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
                     <li className="text-foreground"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about AI governance, RL environments and China</li>
-                    <li className="text-foreground"><a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading biographies, sherlock, history and engineering blogs</a></li>
                     <li className="text-foreground">studying cs + planets at hkust, politics at hku</li>
+                     <li className="text-foreground"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading biographies, sherlock, history and engineering blogs</a></li>
                   </ol>
                 </div>
 
@@ -260,9 +277,9 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       display: 'inline-block',
                     }}
                   >/previously/</p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground">i sold guns in the arctic for a summer. finished high school in Norway <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">(UWC)</a></li>
-                    <li className="text-foreground">technical: software engineering at <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Set Sail AI</a> and NLP research at <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a></li>
-                    <li className="text-foreground">non-technical: HK's foreign relations and trade (Brussels), <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">energy</a> private equity</li>
+                    <li className="text-foreground">sold guns in the arctic for a summer (polar bears!), did high school in <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Norway</a></li>
+                    <li className="text-foreground">technical: NLP research at <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a> and software engineering at <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Set Sail AI</a></li>
+                    <li className="text-foreground">non-technical: HK's foreign relations and trade (Brussels) and <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">energy</a> private equity</li>
                   </ol>
                 </div>
               </div>

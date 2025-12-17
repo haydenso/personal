@@ -42,7 +42,7 @@ export default function RootLayout({
           <meta name="apple-mobile-web-app-title" content="hayden's hq" />
           <meta name="theme-color" content="#FFD52E" />
       </head>
-      <body className={`${stixTwoText.variable} ${zalandoSans.variable} font-sans antialiased`}>
+      <body className={`${stixTwoText.variable} ${zalandoSans.variable} font-sans antialiased overflow-hidden`}>
         {children}
         <Analytics />
       </body>

@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import { ResizeHandle } from "./resize-handle"
 
 type Tab = "about" | "musings" | "blogs" | "bookshelf" | "gallery" | "timeline"
 
@@ -63,7 +62,7 @@ export function Sidebar({ activeTab, onTabChange, width, isDragging, onMouseDown
         ))}
       </nav>
 
-      <ResizeHandle onMouseDown={onMouseDown} isDragging={isDragging} />
+      {/* Sidebar is fixed width now; no resize handle */}
     </aside>
   )
 }

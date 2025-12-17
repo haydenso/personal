@@ -45,11 +45,11 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
     <div
       style={{ width: isWide ? `${width}px` : "100%" }}
       className={cn(
-        "relative overflow-y-auto shrink-0 border-r border-border",
+        "relative h-full overflow-y-auto shrink-0 border-r border-border",
         selectedBlog && "max-md:hidden",
       )}
     >
-      <div className="px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full">
+      <div className="px-4 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full items-center md:items-stretch">
         <div className="bg-[#FEEABF] rounded-md p-8">
           <h1 className="text-4xl font-serif mb-2 text-foreground">blogs</h1>
           <p className="text-muted-foreground mb-6">field observations & works-in-progress.</p>

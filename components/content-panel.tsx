@@ -8,7 +8,7 @@ interface ContentPanelProps {
 
 export function ContentPanel({ onClose, children }: ContentPanelProps) {
   return (
-    <main className="flex-1 p-8 md:p-16 max-w-3xl overflow-y-auto max-md:pt-20 relative">
+    <main className="flex-1 p-6 md:p-16 max-w-3xl overflow-y-auto min-h-0 max-md:pt-20 relative flex flex-col items-center md:items-stretch h-full">
       <div className="absolute top-4 right-4">
         <button
           onClick={onClose}

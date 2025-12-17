@@ -102,15 +102,17 @@ export function Bookshelf() {
             <div className="p-6">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h2 className="text-xl font-serif mb-1">
-                    {currentItems.find(item => item.slug === selectedItem)?.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground">
-                    {activeTab === "books"
-                      ? (currentItems.find(item => item.slug === selectedItem) as any)?.author
-                      : (currentItems.find(item => item.slug === selectedItem) as any)?.artist
-                    }, {currentItems.find(item => item.slug === selectedItem)?.lastUpdated || currentItems.find(item => item.slug === selectedItem)?.date}
-                  </p>
+                  {(() => {
+                    const selected = (currentItems as any[]).find((it: any) => it.slug === selectedItem) as any
+                    return (
+                      <>
+                        <h2 className="text-xl font-serif mb-1">{selected?.title}</h2>
+                        <p className="text-sm text-muted-foreground">
+                          {activeTab === "books" ? selected?.author : selected?.artist}, {selected?.lastUpdated || selected?.date}
+                        </p>
+                      </>
+                    )
+                  })()}
                 </div>
                 <button
                   onClick={() => setSelectedItem(null)}
@@ -126,7 +128,7 @@ export function Bookshelf() {
                 </label>
                 <div
                   className="text-sm text-muted-foreground prose prose-neutral dark:prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: currentItems.find(item => item.slug === selectedItem)?.content || 'No notes available.' }}
+                  dangerouslySetInnerHTML={{ __html: (currentItems as any[]).find((item: any) => item.slug === selectedItem)?.content || 'No notes available.' }}
                 />
               </div>
 

@@ -1,3 +1,6 @@
+"use client"
+
+import Image from "next/image"
 import { useState } from "react"
 
 interface ImagesRowProps {
@@ -43,6 +46,15 @@ export function ImagesRow({ images }: ImagesRowProps) {
     } else if (attempt === 3) {
       // Cache-bust the URL
       next = current.includes('?') ? `${current}&cb=1` : `${current}?cb=1`
+    } else if (attempt === 4) {
+      // If it's the 3rd image (index 2) try a smaller variant to avoid heavy loads
+      if (index === 2) {
+        const m = current.match(/^(.*)(\.(jpg|jpeg|png|webp|gif))$/i)
+        if (m) next = `${m[1]}-sm${m[2]}`
+        else next = current + '?small=1'
+      } else {
+        next = placeholder
+      }
     } else {
       // Fallback to placeholder
       next = placeholder
@@ -59,9 +71,9 @@ export function ImagesRow({ images }: ImagesRowProps) {
   }
 
   return (
-    <div className="grid grid-cols-4 gap-2 mt-4">
+    <div className="grid grid-cols-3 gap-2 mt-4">
       {images.map((image, index) => (
-        <div key={index} className="w-full overflow-hidden rounded-lg border border-border h-20 sm:h-24 md:h-28">
+        <div key={index} className="w-full overflow-hidden rounded-lg border border-border h-20 sm:h-24 md:h-28 relative">
           {image.href ? (
             <a
               href={image.href}
@@ -69,19 +81,28 @@ export function ImagesRow({ images }: ImagesRowProps) {
               rel="noopener noreferrer"
               className="block w-full h-full"
             >
-              <img
+              <Image
                 src={imageSrcs[index]}
                 alt={image.alt}
+                fill
+                sizes="(min-width: 768px) 200px, 25vw"
+                style={{ objectFit: 'cover' }}
                 onError={() => handleImageError(index)}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
+                loading="lazy"
+                decoding="async"
+                className="transition-transform duration-200 hover:scale-105"
               />
             </a>
           ) : (
-            <img
+            <Image
               src={imageSrcs[index]}
               alt={image.alt}
+              fill
+              sizes="(min-width: 768px) 200px, 25vw"
+              style={{ objectFit: 'cover' }}
               onError={() => handleImageError(index)}
-              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           )}
         </div>

@@ -45,7 +45,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   const derivedTab = deriveTabFromPath(pathname)
   const activeTab = pendingTab ?? derivedTab
 
-  const sidebar = useResizable({ initialWidth: 192, minWidth: 150, maxWidth: 400 })
+  // Lock sidebar to the minimum width and disable resizing by constraining min/max to the same value
+  const sidebar = useResizable({ initialWidth: 150, minWidth: 150, maxWidth: 150 })
   const blogsList = useResizable({
     initialWidth: 600,
     minWidth: 200,
@@ -162,7 +163,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   }, [isWideViewport, activeTab])
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen overflow-hidden">
       <button
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         className="fixed top-6 left-6 z-50 md:hidden bg-background border border-border rounded-lg p-2.5 hover:bg-muted shadow-sm"
@@ -271,7 +272,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                     <div className="font-serif mb-2">
                       <span style={{ color: '#000000', backgroundColor: '#FEEABF', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                       <button
                         onClick={() => { handleTabChange('musings'); setSelectedMusing(null); }}
                         aria-label="Open notes app"
@@ -306,7 +307,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                     </div>
                   </div>
 
-                <div className="flex items-center gap-4 pt-8 font-serif">
+                <div className="flex flex-wrap gap-4 pt-8 font-serif justify-center md:justify-start text-center">
             <span className="text-muted-foreground">contact:</span>
             <a
               href="https://www.linkedin.com/in/haydenso/"
@@ -359,8 +360,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
               <ImagesRow images={[
                 { src: "/about/about-1.jpg", alt: "Image 1" },
                 { src: "/about/about-2.jpg", alt: "Image 2" },
-                { src: "/about/about-3.jpg", alt: "Image 3" },
-                { src: "/about/about-4.jpg", alt: "Image 4" }
+                { src: "/about/about-3.jpg", alt: "Image 3" }
               ]} />
             </div>
           </div>

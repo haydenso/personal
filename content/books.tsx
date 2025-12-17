@@ -4,8 +4,6 @@ export interface Book {
   author: string
   date: string
   lastUpdated?: string
-  hasNotes: boolean
-  isReading: boolean
   pinned: boolean
   content: string
 }
@@ -17,8 +15,6 @@ export const books: Book[] = [
     "author": "Robert Hassan",
     "date": "2022",
     "lastUpdated": "10-26-2025",
-    "hasNotes": true,
-    "isReading": false,
     "pinned": false,
     "content": "Placeholder content for book"
   },
@@ -28,8 +24,6 @@ export const books: Book[] = [
     "author": "Unknown",
     "date": "2023",
     "lastUpdated": "10-26-2025",
-    "hasNotes": false,
-    "isReading": false,
     "pinned": false,
     "content": "Placeholder content for book"
   },
@@ -39,8 +33,6 @@ export const books: Book[] = [
     "author": "Unknown",
     "date": "2024",
     "lastUpdated": "10-26-2025",
-    "hasNotes": false,
-    "isReading": true,
     "pinned": false,
     "content": "Placeholder content for book"
   },
@@ -50,8 +42,6 @@ export const books: Book[] = [
     "author": "Unknown",
     "date": "2024",
     "lastUpdated": "10-26-2025",
-    "hasNotes": false,
-    "isReading": false,
     "pinned": false,
     "content": "Placeholder content for book"
   },
@@ -61,8 +51,6 @@ export const books: Book[] = [
     "author": "Unknown",
     "date": "2024",
     "lastUpdated": "10-26-2025",
-    "hasNotes": false,
-    "isReading": false,
     "pinned": false,
     "content": "Placeholder content for book"
   }

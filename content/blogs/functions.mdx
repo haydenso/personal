@@ -1,0 +1,165 @@
+---
+title: functions describe the world.
+date: January 2025
+---
+### read this on substack: [https://haydenso.substack.com/p/functions-describe-the-world](https://haydenso.substack.com/p/functions-describe-the-world)
+I haven't gotten my website to display latex equations properly...
+
+**preface:** I’m a big believe in mental models to first understand an idea, so here I’ve dumbed down the concepts (some might be ‘technically’ inaccurate), but the gist of it remains as a springboard for greater curiosity
+
+* * *
+
+ **Part I: Finding the Unknown**
+
+Even my 5 year old cousin in first grade has seen something like this:
+
+\\(2x = 4\\)
+
+At it’s core, _x_ is representing something. Maybe _x_ is the cost of an apple. Simple intuition tells us that we have **2** _ **x**_ or **2 apples** (the number in front of _x_ ) and the total price is $4, hence each apple must cost **$2.** But it also works if x is oranges. Or kiwis. 
+
+Now we take one step further:
+
+\\(x+y=4\\)
+
+This is simple addition. An immediate answer might be _**x=2**_ **and** _ **y=2**_ , hence the equations works since 2+2=4. But we see _**x=1**_ **and** _ **y=3**_ also works. _**x=0.0001**_ **and** _ **y=3.9999**_ too! What is going on???
+
+ **Obviously, there is an infinite amount of ways to solve it, so we obvious have to rely on one (of** _ **x**_ **or** _ **y**_ **) to get the other. Let’s decide we will provide an x to expect some y.**
+
+\\(1 + y = 4, \text{hence } y = 3\\)
+
+It’s obvious that for some **input (** or we call it a **variable) x** , we get some **output (answer) y.** A nicer way to write this can be:
+
+\\(y=4-x\\)
+
+In other words we can describe this as **y is a function of x.** Another way I like to think about the word function is that y **depends** on x. Whatever _x_ we plug into our function _f( )_ , we get a _y._
+
+\\(f(x) = y\\)
+
+* * *
+
+ **Part II: Where most people stop**
+
+Now you understand functions. And variables (our ‘x’). But rarely things in reality only depend on one thing, _only x_. Life is complex and it depends on many many factors. 
+
+Let’s say you wanna predict **how tired you are after a run.** It might depend on variables such as:
+
+  * How much you ran in km/miles (x), 
+
+  * How much you slept in hours (t) 
+
+  * How much rice you’ve eaten before in kg (z). 
+
+
+
+
+Imagine to find out it is as simple as adding it all up all the numbers, which we can say **to find how tired you will be, it is a function of the x, t and z described above** :
+
+\\(\text{tiredness score} = f(x,t,z) = x + t +z\\)
+
+While that might be useful, you might realise, no actually, to identify how tired I am, what matters more is how fast I run actually. Also how fast I am accelerating is also important. 
+
+But to find how fast I am running (speed), that **depends on how many kms I am running.** And to determine how fast I am accelerating, **that depends on my speed**?!!
+
+ **So not only do I have multiple variables x, t and z, now I have variables where it is a function that depend on other functions, which depend on even MORE variables?**
+
+Stick with me, it’ll make more sense. This is where calculus is brought in. I won’t try to even explain what calculus is or confuse you with the actual calculations themselves, but you just have to know this:
+
+ **Calculus is like a guide to how to extract more information from an equation, which is split into two types: Derivative and Integrals.**
+
+  *  **Derivatives: how fast the speed is changing (acceleration)**
+
+  *  **Integrals: how far we have driven (distance)**
+
+
+
+
+In simple words:
+
+  * ‘Regular’ calculus: We have some X and it depends on some Y
+
+  * Multivariable calculus: you start having X, Y, Z and all possibly a bunch of greek symbols that make it look more scary than it is (σ, τ, υ, φ, χ, ψ, ω)
+
+  * Differential equations: we have X, Y, Z and functions that depend on other functions or variables.
+
+
+
+
+High school and most first-year universities kind of stop at here. But the fun and application starts.
+
+As [Thomas Garrity](https://en.wikipedia.org/wiki/Thomas_A._Garrity) (who I’ve kindly borrowed for this essay’s title) puts it:
+
+> Everything is describe by functions.
+> 
+> The sound of my voice. Function.
+> 
+> The light in your eyes. Functions.
+> 
+> Different areas of mathematics study different kinds of functions. 
+> 
+> BUT IT’S ALL FUNCTIONS. 
+
+* * *
+
+**Part III: Functions to describe the world**
+
+We’ve gone over what you kind of need to grasp from our **how tired you are after a run.**
+
+While the equations might look wildly different, primarily due to them having different variables (and oh boy do mathematicians like using a range of greek symbols), if you look carefully, the following is kind of in every equation:
+
+\\(\frac{\partial Y}{\partial t} , \nabla, \frac{dY}{dt}\\)
+
+This is what we were talking about when we talked about rate of change (or ‘gradients’ more specifically). They are all **differential equations**.
+
+ **Interested in finance?** The ‘billion-dollar’ Black-Scholes Equation (used for options pricing) - see it as an extension of pricing the stock market as you understand it.
+
+\\( \frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2} \frac{\partial^{2} \mathrm C}{\partial \mathrm C^2} \+ \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ = \mathrm r \mathrm C \\)
+
+ **Interested in the weather and planets? Interested in boats, planes or rockets?** To know this, we wanna know how water or air behaves using the Navier-Stokes equations.
+
+\\(\rho \left( \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} \right) = -\nabla p + \mu \nabla^2 \mathbf{v} + \mathbf{f} ] [ \nabla \cdot \mathbf{v} = 0\\)
+
+ **Interested in telecommunications (wifi, mobile data)?** Here is part of the Maxwell Equations:
+
+\\( \quad \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \epsilon_0 \frac{\partial \mathbf{E}}{\partial t} \\)
+
+ **Interested in how humans behave and social systems? How about how fast rumours spread?** We can model the speed of it spreading using the SIR model.
+
+\\(\frac{dS}{dt} = -\beta S I, \quad \frac{dI}{dt} = \beta S I - \gamma I, \quad \frac{dR}{dt} = \gamma I\\)
+
+ **Interested in economics?** Here is the textbook Solow–Swan model, describing long run economic growth.
+
+\\(\frac{dK}{dt} = s Y - \delta K\\)
+
+What you have to realise is that at some point, these equations become so complex you cannot just solve it by hand anymore. We need to somehow convert it into computer language so we can get a computer to ‘solve it for us’. 
+
+But we have to realise not all of them are necessarily solvable, so what we can do is sort of approximate an answer that is good enough for us to use.
+
+ **That’s the whole field of numerical methods and using code to approximate solutions that are useful for us. Differential equation solvers are basically competent coders, which makes them valuable no matter domain they end up in.**
+
+It’s exactly why hedge funds like Citadel and Jane Street hire so many physicist who spent their whole career solving niche astrophysical fluid dynamic equations - you can hire them and retrain to solve different numerical problems instead.
+
+ **Fundamentally, the methods you used to solve them are similar to an extent.**
+
+Now if you stop back for a second and think, you can start seeing the world as a series of changes depending on each other. Maybe one thing depends on one other thing (calculus) or maybe one thing depends on many other things (multivariable). It is all about finding a way to model nature accurately.
+
+* * *
+
+ **(Extra) Part IV: Is this Artificial Intelligence then?**
+
+Not quite, but the input-output mental model remains. 
+
+All the above equations I showed you fundamentally takes some input and provide some output, but some person (or renaissance period polymath) must have decided that the equation must look like that. No one just wakes up and decide the fluid equations to be in that very form.
+
+Here comes AI (or more specifically neural networks & deep learning)! 
+
+Traditionally, we try to write the equation out that should be solved for an output. But let’s say hey, we don’t actually need a equation since the output (answer) is what really matters to us. **What if we can give a computer lots of examples (data) and it finds some pattern for us?**
+
+This is what these ‘AI systems’ are essentially doing. It takes in lots of data (hence, big data) and does some black magic to learn patterns and insights we humans cannot see and then provides a useful predictive output.
+
+But as you can see, the issue is that since we only get an output, we don’t know how the AI has actually learned, nor can we ensure the output we get is what we want or safe. That’s what people mean when AI is actually just a black box. Also why I think interpretability is a direction worth spending time on.
+
+* * *
+
+Footnotes:
+
+This essay was kind of inspired after a similar conversation occurring a few times with friends studying across various STEM fields. I figured if this idea was novel to them, to those in the social/humanities, it might be of interest too.

@@ -83,17 +83,14 @@ title: "Book Title"
 author: "Author Name"
 year: 2024
 lastUpdated: "Month Year"
-isReading: true
-hasNotes: true
 ---
 
 Your book notes and thoughts go here...
 ```
 
 **Frontmatter Options:**
-- `isReading: true` - Shows in "Now reading" section
-- `isReading: false` - Shows in "On my shelf" section
-- `hasNotes: false` - Hides the note icon (defaults to true if content exists)
+- `lastUpdated` - Optional readable last-updated string
+- `pinned: true` - Pin this item to the top of the list
 
 ## Development
 

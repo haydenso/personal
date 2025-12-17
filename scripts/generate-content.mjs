@@ -170,8 +170,6 @@ function generateMusings() {
     const author = data.author || ""
     const date = data.date || ""
     const lastUpdated = data.lastUpdated
-    const hasNotes = data.hasNotes ?? (mdxContent.trim().length > 0)
-    const isReading = data.isReading ?? false
     const pinned = data.pinned ?? false
     const content = markdownToHtml(mdxContent)
 
@@ -181,8 +179,6 @@ function generateMusings() {
       author,
       date,
       ...(lastUpdated && { lastUpdated }),
-      hasNotes,
-      isReading,
       pinned,
       content,
     }
@@ -194,8 +190,6 @@ function generateMusings() {
   author: string
   date: string
   lastUpdated?: string
-  hasNotes: boolean
-  isReading: boolean
   pinned: boolean
   content: string
 }

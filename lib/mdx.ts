@@ -22,8 +22,6 @@ export interface MusingMetadata {
   author: string
   date: string
   lastUpdated?: string
-  hasNotes: boolean
-  isReading: boolean
   pinned: boolean
 }
 
@@ -102,9 +100,8 @@ export function getAllMusings(): MusingMetadata[] {
       author: data.author || "",
       date: data.date || "",
       lastUpdated: data.lastUpdated,
-      hasNotes: data.hasNotes ?? (content.trim().length > 0),
-      isReading: data.isReading ?? false,
       pinned: data.pinned ?? false,
+      // note: hasNotes and isReading were removed; any required behavior should be derived from content or other fields
     }
   })
 
@@ -123,8 +120,6 @@ export function getMusingBySlug(slug: string): MusingWithContent | null {
       author: data.author || "",
       date: data.date || "",
       lastUpdated: data.lastUpdated,
-      hasNotes: data.hasNotes ?? (content.trim().length > 0),
-      isReading: data.isReading ?? false,
       pinned: data.pinned ?? false,
       content,
     }

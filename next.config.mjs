@@ -9,6 +9,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/scmp/:path*',
+        destination: 'https://haydenso.github.io/scmp/:path*',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig

@@ -21,6 +21,9 @@ export function MusingReader({ slug, onBack }: MusingReaderProps) {
               <span>Notes</span>
             </button>
           )}
+          <span className="uppercase text-xs font-mono text-muted-foreground">{musing.category}</span>
+        </div>
+        <div className="flex items-center gap-3">
           <span>Aa</span>
           <span>☰</span>
         </div>

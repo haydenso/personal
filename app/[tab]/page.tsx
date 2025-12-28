@@ -1,11 +1,12 @@
 import { MainApp, Tab } from "@/components/main-app"
 
 interface Params {
-  params: { tab?: string }
+  params: Promise<{ tab?: string }>
 }
 
-export default function TabPage({ params }: Params) {
-  const raw = params?.tab ?? ""
+export default async function TabPage({ params }: Params) {
+  const { tab: rawTab } = await params
+  const raw = rawTab ?? ""
   const tab = (raw as string).toLowerCase()
 
   const allowed: Tab[] = ["about", "musings", "blogs", "bookshelf", "gallery", "timeline"]

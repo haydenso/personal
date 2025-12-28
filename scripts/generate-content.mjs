@@ -194,21 +194,25 @@ function generateMusings() {
     const fileContents = fs.readFileSync(fullPath, "utf8")
     const { data, content: mdxContent } = matter(fileContents)
 
-    // Read metadata from frontmatter with defaults
-    const title = data.title || slug
+    // Read metadata from frontmatter with defaults (allow explicit slug and category)
+    const fileSlug = data.slug || slug
+    const title = data.title || fileSlug
     const author = data.author || ""
     const date = data.date || ""
     const lastUpdated = data.lastUpdated
     const pinned = data.pinned ?? false
+    const rawCategory = data.category
+    const category = typeof rawCategory === 'string' ? rawCategory : (rawCategory ? String(rawCategory) : 'uncategorized')
     const content = markdownToHtml(mdxContent)
 
     return {
-      slug,
+      slug: fileSlug,
       title,
       author,
       date,
       ...(lastUpdated && { lastUpdated }),
       pinned,
+      category,
       content,
     }
   })
@@ -220,6 +224,7 @@ function generateMusings() {
   date: string
   lastUpdated?: string
   pinned: boolean
+  category: string
   content: string
 }
 

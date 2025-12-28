@@ -17,6 +17,7 @@ import { Gallery } from "@/components/gallery"
 import { Timeline } from "@/components/timeline"
 import { ContentPanel } from "@/components/content-panel"
 import { musings } from "@/content/musings"
+import { blogs } from "@/content/blogs"
 
 export type Tab = "about" | "musings" | "blogs" | "bookshelf" | "gallery" | "timeline"
 
@@ -30,6 +31,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   const [pendingTab, setPendingTab] = useState<Tab | null>(null)
   const [selectedBlog, setSelectedBlog] = useState<string | null>(null)
   const [selectedMusing, setSelectedMusing] = useState<string | null>(null)
+  const [selectedMusingCategory, setSelectedMusingCategory] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const router = useRouter()
@@ -106,7 +108,44 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     const allowed: Tab[] = ["about", "musings", "blogs", "bookshelf", "gallery", "timeline"]
     const tab: Tab = seg === '' ? 'about' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'about')
     if (pendingTab === tab) setPendingTab(null)
+
+    // Parse musings deep link: /musings/:category/:slug
+    const musingsMatch = pathname.match(/^\/musings\/([^\/]+)\/([^\/]+)(?:\/|$)/)
+    if (musingsMatch) {
+      const [, category, slug] = musingsMatch
+      setSelectedMusingCategory(category)
+      setSelectedMusing(slug)
+      return
+    }
+
+    // If pathname is not musings, clear category (but preserve selectedMusing until user closes)
+    if (tab !== 'musings') {
+      setSelectedMusingCategory(null)
+    }
   }, [pathname, pendingTab])
+
+  // Sync browser history popstate so pushState/popState updates (from MusingsList) are reflected in the UI
+  useEffect(() => {
+    const handler = () => {
+      const path = typeof window !== 'undefined' ? window.location.pathname : pathname
+      const musingsMatch = path.match(/^\/musings\/([^\/]+)\/([^\/]+)(?:\/|$)/)
+      if (musingsMatch) {
+        const [, category, slug] = musingsMatch
+        setSelectedMusingCategory(category)
+        setSelectedMusing(slug)
+        setPendingTab('musings')
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('popstate', handler)
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('popstate', handler)
+      }
+    }
+  }, [])
 
   // Only auto-select the first item on initial page load (deep link), not on client navigation
   const initialMountRef = useRef(true)
@@ -133,21 +172,25 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     }
 
     // If the initial path is blogs, auto-open the most recent blog
-    if (derivedTab === 'blogs' && !selectedBlog) {
-      ;(async () => {
-        const m = await import('@/content/blogs')
-        const sorted = [...m.blogs].sort((a: any, b: any) => {
-          const [am, ad, ay] = a.date.split('-').map(Number)
-          const [bm, bd, by] = b.date.split('-').map(Number)
-          return new Date(by, bm - 1, bd).getTime() - new Date(ay, am - 1, ad).getTime()
-        })
-
-        if (sorted.length > 0) setSelectedBlog(sorted[0].slug)
-      })()
+    if (derivedTab === 'blogs' && !selectedBlog && blogs.length > 0) {
+      // Import blogs synchronously - it's already in the bundle
+      const sorted = [...blogs].sort((a, b) => {
+        const parseDate = (dateStr: string) => {
+          const [monthDay, year] = dateStr.split(' ')
+          const months: Record<string, number> = {
+            'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+            'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+          }
+          const [month, day] = monthDay.split(' ')
+          return new Date(parseInt(year), months[month] || 0, parseInt(day) || 1).getTime()
+        }
+        return parseDate(b.date) - parseDate(a.date)
+      })
+      if (sorted.length > 0) setSelectedBlog(sorted[0].slug)
     }
 
     initialMountRef.current = false
-  }, [])
+  }, [isWideViewport, derivedTab])
 
   // Close selected blog/musing on narrow viewports
   useEffect(() => {
@@ -217,7 +260,9 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
         <>
           <MusingsList
             selectedMusing={selectedMusing}
-            onSelectMusing={setSelectedMusing}
+            selectedCategory={selectedMusingCategory || undefined}
+            onSelectMusing={(s) => { setSelectedMusing(s) }}
+            onSelectCategory={(c) => { setSelectedMusingCategory(c) }}
             width={musingsList.width}
             isDragging={musingsList.isDragging}
             onMouseDown={musingsList.handleMouseDown}

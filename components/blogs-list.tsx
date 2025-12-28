@@ -1,8 +1,9 @@
+import Link from "next/link"
 import { blogs } from "@/content/blogs"
 import { cn } from "@/lib/utils"
 import { ResizeHandle } from "./resize-handle"
 import { Footer } from "./footer"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 
 interface BlogsListProps {
   selectedBlog: string | null
@@ -10,17 +11,6 @@ interface BlogsListProps {
   width: number
   isDragging: boolean
   onMouseDown: (e: React.MouseEvent) => void
-}
-
-// Helper function to parse date string (MM-DD-YYYY) and return comparable timestamp
-function parseBlogDate(dateString: string): number {
-  const [month, day, year] = dateString.split('-').map(Number)
-  return new Date(year, month - 1, day).getTime()
-}
-
-// Sort blogs in reverse chronological order (newest first)
-function sortBlogsByDate() {
-  return [...blogs].sort((a, b) => parseBlogDate(b.date) - parseBlogDate(a.date))
 }
 
 export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMouseDown }: BlogsListProps) {
@@ -40,7 +30,21 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
     }
   }, [])
 
-  const sortedBlogs = sortBlogsByDate()
+  // Memoize sorted blogs to avoid re-sorting on every render
+  const sortedBlogs = useMemo(() => {
+    const parseDate = (dateStr: string) => {
+      const [monthDay, year] = dateStr.split(' ')
+      const months: Record<string, number> = {
+        'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+        'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+      }
+      const parts = monthDay.split(' ')
+      const month = months[parts[0]] || 0
+      const day = parseInt(parts[1]) || 1
+      return new Date(parseInt(year), month, day).getTime()
+    }
+    return [...blogs].sort((a, b) => parseDate(b.date) - parseDate(a.date))
+  }, [])
   return (
     <div
       style={{ width: isWide ? `${width}px` : "100%" }}
@@ -57,9 +61,9 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
           <ol className="list-decimal list-inside space-y-4 font-serif text-md">
             {sortedBlogs.map((blog) => (
               <li key={blog.slug}>
-                <button onClick={() => onSelectBlog(blog.slug)} className="text-foreground hover:bg-[#FFD52E] underline decoration-dotted decoration-1 underline-offset-2 text-left">
+                <Link href={`/blogs/${blog.slug}`} className="text-foreground hover:bg-[#FFD52E] underline decoration-dotted decoration-1 underline-offset-2 text-left block">
                   {blog.title}
-                </button>
+                </Link>
               </li>
             ))}
           </ol>

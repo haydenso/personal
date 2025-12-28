@@ -20,7 +20,10 @@ const icons = {
 const links: Record<string, string> = {
   "natural language processing + biomedical informatics (pre-chatGPT era)": "https://drive.google.com/file/d/1Xr-8Z91jExkxQy-vdI-OulSgSKUE85Qa/view?usp=sharing",
   "agent-based simulation of airplane boarding": "https://arxiv.org/abs/2410.17870",
-  "interpretability research on hurricane prediction": "https://www.kaggle.com/code/haydso/hurricanesae"
+  "interpretability research on hurricane prediction": "https://www.kaggle.com/code/haydso/hurricanesae",
+    "on China and AI governance": "https://haydenso.com/blogs",
+    "my thesis on AI adoption and rollups": "https://haydenso.com/blogs",
+    "the career chameleon": "https://haydenso.com/blogs",
 };
 
 export function InterestsSection() {

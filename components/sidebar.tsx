@@ -1,18 +1,33 @@
+"use client"
+
+import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 type Tab = "about" | "musings" | "blogs" | "bookshelf" | "gallery" | "timeline"
 
 interface SidebarProps {
   activeTab: Tab
-  onTabChange: (tab: Tab) => void
+  onTabChange?: (tab: Tab) => void
   width: number
-  isDragging: boolean
-  onMouseDown: (e: React.MouseEvent) => void
-  mobileMenuOpen: boolean
+  isDragging?: boolean
+  onMouseDown?: (e: React.MouseEvent) => void
+  mobileMenuOpen?: boolean
 }
 
-export function Sidebar({ activeTab, onTabChange, width, isDragging, onMouseDown, mobileMenuOpen }: SidebarProps) {
+export function Sidebar({ activeTab, onTabChange, width, isDragging = false, onMouseDown, mobileMenuOpen = false }: SidebarProps) {
+  const router = useRouter()
   const tabs: Tab[] = ["about", "musings", "blogs", "bookshelf", "gallery", "timeline"]
+
+  const handleTabClick = (tab: Tab) => {
+    if (onTabChange) return onTabChange(tab)
+    // fallback: navigate using router if no handler was provided (server-rendered layouts)
+    const path = tab === 'about' ? '/' : `/${tab}`
+    try {
+      router.push(path)
+    } catch (e) {
+      if (typeof window !== 'undefined') window.location.pathname = path
+    }
+  }
 
   return (
     <aside
@@ -51,7 +66,7 @@ export function Sidebar({ activeTab, onTabChange, width, isDragging, onMouseDown
         {tabs.map((tab) => (
           <button
             key={tab}
-            onClick={() => onTabChange(tab)}
+            onClick={() => handleTabClick(tab)}
             className={cn(
               "text-left py-1 transition-colors uppercase tracking-widest text-xs",
               activeTab === tab ? "text-foreground" : "text-foreground/40 hover:text-foreground/70",

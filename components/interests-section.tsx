@@ -17,6 +17,12 @@ const icons = {
   "technical projects": "●"
 }
 
+const links: Record<string, string> = {
+  "natural language processing + biomedical informatics (pre-chatGPT era)": "https://drive.google.com/file/d/1Xr-8Z91jExkxQy-vdI-OulSgSKUE85Qa/view?usp=sharing",
+  "agent-based simulation of airplane boarding": "https://arxiv.org/abs/2410.17870",
+  "interpretability research on hurricane prediction": "https://www.kaggle.com/code/haydso/hurricanesae"
+};
+
 export function InterestsSection() {
   return (
     <div className="grid grid-cols-1 gap-6 mt-20">
@@ -35,7 +41,7 @@ export function InterestsSection() {
                 <li key={index} className="text-sm text-foreground leading-relaxed font-serif relative pl-4">
                   <span className="absolute left-0 top-1.5 w-1 h-1 bg-current rounded-full opacity-60"></span>
                   <a
-                    href="https://example.com"
+                    href={links[item] || 'https://example.com'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"

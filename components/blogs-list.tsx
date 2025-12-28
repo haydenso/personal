@@ -49,7 +49,7 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
     <div
       style={{ width: isWide ? `${width}px` : "100%" }}
       className={cn(
-        "relative h-full overflow-y-auto shrink-0 border-r border-border",
+        "relative h-full overflow-y-auto shrink-0",
         selectedBlog && "max-md:hidden",
       )}
     >
@@ -61,7 +61,7 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
           <ol className="list-decimal list-inside space-y-4 font-serif text-md">
             {sortedBlogs.map((blog) => (
               <li key={blog.slug}>
-                <Link href={`/blogs/${blog.slug}`} className="text-foreground hover:bg-[#FFD52E] underline decoration-dotted decoration-1 underline-offset-2 text-left block">
+                <Link href={`/blogs/${blog.slug}`} className="text-foreground underline hover:text-foreground/80 hover:font-semibold">
                   {blog.title}
                 </Link>
               </li>

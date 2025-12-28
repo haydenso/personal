@@ -21,9 +21,9 @@ const categoryColors: Record<string, string> = {
   'notes': '#9333ea', // purple
   'misc': '#eab308', // yellow
   'ai': '#3b82f6', // blue
-  'tech': '#10b981', // green
-  'politics': '#ef4444', // red
-  'philosophy': '#8b5cf6', // violet
+  'software': '#10b981', // green
+  'china': '#ef4444', // red
+  'life/human condition': '#8b5cf6', // violet
   'uncategorized': '#6b7280', // gray
 }
 
@@ -44,7 +44,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
     categoryMap.get(cat)!.push(m)
   })
   
-  const categories = Array.from(categoryMap.keys()).sort()
+  const categories = Array.from(categoryMap.keys()).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
   
   // Track which categories are expanded (start all expanded)
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
@@ -189,7 +189,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
                         className="w-2 h-2 rounded-full flex-shrink-0" 
                         style={{ backgroundColor: color }}
                       />
-                      <span className="font-medium capitalize text-sm">{category}</span>
+                      <span className="font-medium text-sm">{category.toLowerCase()}</span>
                     </div>
                     <span className="text-xs text-muted-foreground">{categoryMusings.length}</span>
                   </button>

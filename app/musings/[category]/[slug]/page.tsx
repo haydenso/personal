@@ -22,8 +22,8 @@ export default async function MusingFullPage({ params }: Props) {
       </Link>
 
       {/* Content box */}
-      <div className="min-h-screen md:min-h-0 pt-20 px-4 pb-4 md:pt-0 md:px-0 md:pb-0">
-        <div className="flex flex-col min-h-[calc(100vh-6rem)] md:min-h-screen bg-white rounded-xl md:rounded-none shadow-lg md:shadow-none overflow-hidden">
+      <div className="h-screen md:min-h-0 pt-20 px-4 pb-4 md:pt-0 md:px-0 md:pb-0">
+        <div className="flex flex-col h-[calc(100vh-6rem)] md:min-h-screen bg-white rounded-xl md:rounded-none shadow-lg md:shadow-none overflow-hidden">
           {/* Toolbar */}
           <div className="bg-[#f9f9f9] h-11 flex items-center justify-between px-4 border-b border-[#e5e5e5] text-sm text-[#666]">
             <div className="flex items-center gap-3">

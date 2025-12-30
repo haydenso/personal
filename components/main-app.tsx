@@ -288,7 +288,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                 <div className="flex items-center gap-4 pb-6">
                   <img src="/face/logo.png" alt="logo" className="w-12 h-12 rounded-md object-cover" />
                   <div>
-                    <h1 className="text-3xl font-serif mb-2">hey there, i'm hayden!</h1>
+                    <h1 className="text-3xl font-serif mb-2">hey, i'm hayden!</h1>
                     <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
                   </div>
                 </div>
@@ -296,7 +296,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                 <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
                 <div>
                   <p
-                    className="font-serif pt-1.5 mb-2"
+                    className="font-serif pt-1.5 mb-2 text-[15px]"
                     style={{
                       color: '#000000',
                       backgroundColor: '#FEEABF',
@@ -304,16 +304,16 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       borderRadius: '0.125rem',
                       display: 'inline-block',
                     }}
-                  >/currently/ - cofounder @ sidoai.org</p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about AI governance, RL environments and China</li>
-                    <li className="text-foreground">studying cs + planets at hkust, politics at hku</li>
-                     <li className="text-foreground"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading biographies, sherlock, history and engineering blogs</a></li>
+                  >/currently/ - starting <a href="https://sidoai.org/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">sidoai.org</a></p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
+                    <li className="text-foreground text-sm"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about AI governance, RL environments and China</li>
+                    <li className="text-foreground text-sm">studying cs + planets at hkust, politics at hku</li>
+                     <li className="text-foreground text-sm"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading biographies, sherlock, history and engineering blogs</a></li>
                   </ol>
                 </div>
 
                 <div>
                   <p
-                    className="font-serif pt-1.5 mb-2"
+                    className="font-serif pt-1.5 mb-2 text-[15px]"
                     style={{
                       color: '#000000',
                       backgroundColor: '#FEEABF',
@@ -322,16 +322,16 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       display: 'inline-block',
                     }}
                   >/previously/</p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground">sold guns in the arctic for a summer (polar bears!), did high school in <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Norway</a></li>
-                    <li className="text-foreground">technical: NLP research at <a href="https://medicine.yale.edu/biomedical-informatics-data-science/" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a> and software engineering at <a href="https://chatbot.com.hk" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Set Sail AI</a></li>
-                    <li className="text-foreground">hybrid: AI adoption/policy on district governance and tech strategy consulting</li>
-                    <li className="text-foreground">non-technical: HK's foreign relations and trade (Brussels) and <a href="https://www.cip.com/" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">energy</a> private equity</li>                  </ol>
+                    <li className="text-foreground text-sm">sold guns in the arctic for a summer (polar bears!), did high school in <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Norway</a></li>
+                    <li className="text-foreground text-sm">technical: NLP research at <a href="https://medicine.yale.edu/biomedical-informatics-data-science/" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a> and software engineering at <a href="https://chatbot.com.hk" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Set Sail AI</a></li>
+                    <li className="text-foreground text-sm">hybrid: tech strategy consulting and <a href="https://en.wikipedia.org/wiki/Administrative_Officer_(Hong_Kong)" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">district governance</a> + AI adoption</li>
+                    <li className="text-foreground text-sm">non-technical: HK's foreign relations and trade (Brussels) and <a href="https://www.cip.com/" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">energy</a> private equity</li>                  </ol>
                 </div>
               </div>
 
                   {/* Peek into quick links (sticky note buttons) */}
                   <div className="mt-6">
-                    <div className="font-serif mb-2">
+                    <div className="font-serif text-[15px] mb-2">
                       <span style={{ color: '#000000', backgroundColor: '#FEEABF', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
                     </div>
                     <div className="flex flex-wrap gap-3 justify-center md:justify-start">

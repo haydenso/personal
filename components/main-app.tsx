@@ -15,11 +15,12 @@ import { MusingReader } from "@/components/musing-reader"
 import { Bookshelf } from "@/components/bookshelf"
 import { Gallery } from "@/components/gallery"
 import { Timeline } from "@/components/timeline"
+import { Projects } from "@/components/projects"
 import { ContentPanel } from "@/components/content-panel"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
 
-export type Tab = "about" | "musings" | "blogs" | "bookshelf" | "gallery" | "timeline"
+export type Tab = "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
 interface MainAppProps {
   initialTab?: Tab
@@ -40,7 +41,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   const deriveTabFromPath = (path?: string | null): Tab => {
     if (!path) return initialTab
     const seg = path.split('/')[1] || ''
-    const allowed: Tab[] = ["about", "musings", "blogs", "bookshelf", "gallery", "timeline"]
+    const allowed: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
     return seg === '' ? 'about' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'about')
   }
 
@@ -105,7 +106,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   useEffect(() => {
     if (!pathname) return
     const seg = pathname.split('/')[1] || ''
-    const allowed: Tab[] = ["about", "musings", "blogs", "bookshelf", "gallery", "timeline"]
+    const allowed: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
     const tab: Tab = seg === '' ? 'about' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'about')
     if (pendingTab === tab) setPendingTab(null)
 
@@ -226,7 +227,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     <div className="flex h-screen overflow-hidden">
       <button
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="fixed top-6 left-6 z-50 md:hidden bg-background border border-border rounded-lg p-2.5 hover:bg-muted shadow-sm"
+        className="fixed top-6 left-6 z-50 md:hidden bg-[#FFF8E7] border border-[#e5d5b5] rounded-lg p-2.5 hover:bg-[#FEEABF] shadow-sm"
         aria-label="Toggle menu"
       >
         {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -273,6 +274,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
             </ContentPanel>
           )}
         </>
+      ) : activeTab === "projects" ? (
+        <Projects />
       ) : activeTab === "bookshelf" ? (
         <Bookshelf />
       ) : activeTab === "gallery" ? (
@@ -280,8 +283,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
       ) : activeTab === "timeline" ? (
         <Timeline />
       ) : (
-        <main className="flex-1 px-8 md:px-16 max-w-6xl overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <main className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+          <div className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row gap-12 lg:gap-16">
             {/* Left column: Bio and images - 60% width on large screens */}
             <div className="lg:w-[60%] space-y-8">
               <div>
@@ -366,6 +369,14 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       >
                         gallery
                       </button>
+
+                      <button
+                        onClick={() => { handleTabChange('projects'); }}
+                        aria-label="Open projects"
+                        className="inline-block border border-dotted border-[#FFD52E] text-[#b36b00] px-3 py-2 rounded-md transform rotate-1 hover:bg-[#fff6db] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                      >
+                        projects
+                      </button>
                     </div>
                   </div>
 
@@ -429,7 +440,9 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
           
           {/* images moved into the right column (see above) */}
           
-          <Footer />
+          <div className="max-w-6xl mx-auto w-full">
+            <Footer />
+          </div>
         </main>
       )}
 

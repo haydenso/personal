@@ -53,8 +53,8 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
         selectedBlog && "max-md:hidden",
       )}
     >
-      <div className="px-4 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full items-center md:items-stretch">
-        <div className="bg-[#FEEABF] rounded-md p-8">
+      <div className="px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full md:items-stretch">
+        <div className="px-4 md:px-0">
           <h1 className="text-4xl font-serif mb-2 text-foreground">blogs</h1>
           <p className="text-muted-foreground mb-6">field observations & works-in-progress.</p>
 
@@ -64,6 +64,10 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
                 <Link href={`/blogs/${blog.slug}`} className="text-foreground underline hover:text-foreground/80 hover:font-semibold">
                   {blog.title}
                 </Link>
+                <span className="text-muted-foreground text-sm ml-2">— {blog.date}</span>
+                {blog.excerpt && (
+                  <p className="text-muted-foreground text-sm mt-1 ml-6">{blog.excerpt}</p>
+                )}
               </li>
             ))}
           </ol>

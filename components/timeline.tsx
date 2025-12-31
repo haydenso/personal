@@ -21,8 +21,8 @@ export function Timeline() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <main className="flex-1 px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl overflow-y-auto">
-      <div>
+    <main className="flex-1 px-6 md:px-16 pt-28 md:pt-16 pb-0 overflow-y-auto">
+      <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-serif mb-8">timeline - under construction!</h1>
         <p className="text-muted-foreground mb-8">i optimistically aim to do monthly updates, but probably more like quarterly. inspired by <a className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid" href="https://selvaradov.net/">rohan</a></p>
 

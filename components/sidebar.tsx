@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 
-type Tab = "about" | "musings" | "blogs" | "bookshelf" | "gallery" | "timeline"
+type Tab = "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
 interface SidebarProps {
   activeTab: Tab
@@ -16,7 +16,7 @@ interface SidebarProps {
 
 export function Sidebar({ activeTab, onTabChange, width, isDragging = false, onMouseDown, mobileMenuOpen = false }: SidebarProps) {
   const router = useRouter()
-  const tabs: Tab[] = ["about", "musings", "blogs", "bookshelf", "gallery", "timeline"]
+  const tabs: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
 
   const handleTabClick = (tab: Tab) => {
     if (onTabChange) return onTabChange(tab)

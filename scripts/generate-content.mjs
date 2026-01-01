@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const rootDir = path.join(__dirname, "..")
 
-// Minimal Markdown → HTML converter
+// Enhanced Markdown → HTML converter that handles colors, highlights, and all formatting
 function markdownToHtml(markdown) {
   const lines = markdown.replace(/\r\n?/g, "\n").split("\n")
 
@@ -20,6 +20,12 @@ function markdownToHtml(markdown) {
     let processedText = text
     processedText = processedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     processedText = processedText.replace(/\*(.*?)\*/g, '<em>$1</em>')
+
+    // Handle strikethrough
+    processedText = processedText.replace(/~~(.*?)~~/g, '<del>$1</del>')
+
+    // Handle inline code
+    processedText = processedText.replace(/`([^`]+)`/g, '<code>$1</code>')
 
     // Then handle links
     const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g
@@ -34,8 +40,25 @@ function markdownToHtml(markdown) {
     // Replace links with placeholders
     processedText = processedText.replace(linkPattern, '___LINK___')
 
-    // Escape HTML
+    // Escape HTML but preserve our custom tags
+    processedText = processedText
+      .replace(/<mark>/g, '___MARK_START___')
+      .replace(/<\/mark>/g, '___MARK_END___')
+      .replace(/<span style="[^"]*color:[^"]*">/g, '___SPAN_START___')
+      .replace(/<\/span>/g, '___SPAN_END___')
+      .replace(/<u>/g, '___U_START___')
+      .replace(/<\/u>/g, '___U_END___')
+
     processedText = escapeHtml(processedText)
+
+    // Restore our custom tags
+    processedText = processedText
+      .replace(/___MARK_START___/g, '<mark>')
+      .replace(/___MARK_END___/g, '</mark>')
+      .replace(/___SPAN_START___/g, '<span style="color: red">') // Default to red, can be customized
+      .replace(/___SPAN_END___/g, '</span>')
+      .replace(/___U_START___/g, '<u>')
+      .replace(/___U_END___/g, '</u>')
 
     // Restore the HTML tags
     processedText = processedText
@@ -43,6 +66,10 @@ function markdownToHtml(markdown) {
       .replace(/&lt;\/strong&gt;/g, '</strong>')
       .replace(/&lt;em&gt;/g, '<em>')
       .replace(/&lt;\/em&gt;/g, '</em>')
+      .replace(/&lt;del&gt;/g, '<del>')
+      .replace(/&lt;\/del&gt;/g, '</del>')
+      .replace(/&lt;code&gt;/g, '<code>')
+      .replace(/&lt;\/code&gt;/g, '</code>')
 
     // Restore links as HTML
     links.forEach(({ text, url }) => {
@@ -63,6 +90,7 @@ function markdownToHtml(markdown) {
       continue
     }
 
+    // Code blocks
     if (/^```/.test(line)) {
       const code = []
       i++
@@ -75,7 +103,8 @@ function markdownToHtml(markdown) {
       continue
     }
 
-    const heading = line.match(/^(#{1,6})\s+(.*)$/)
+    // Headings - improved regex to handle spaces properly
+    const heading = line.match(/^(\#{1,6})\s+(.+)$/)
     if (heading) {
       const level = heading[1].length
       const text = processInlineMarkdown(heading[2])
@@ -84,6 +113,7 @@ function markdownToHtml(markdown) {
       continue
     }
 
+    // Blockquotes
     if (/^>\s?/.test(line)) {
       const quote = []
       while (i < lines.length && /^>\s?/.test(lines[i])) {
@@ -94,6 +124,7 @@ function markdownToHtml(markdown) {
       continue
     }
 
+    // Unordered lists
     if (/^[-*]\s+/.test(line)) {
       const items = []
       while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
@@ -105,6 +136,7 @@ function markdownToHtml(markdown) {
       continue
     }
 
+    // Ordered lists
     if (/^\d+\.\s+/.test(line)) {
       const items = []
       while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
@@ -116,10 +148,53 @@ function markdownToHtml(markdown) {
       continue
     }
 
+    // Horizontal rules
+    if (/^---+$/.test(line)) {
+      html.push('<hr/>')
+      i++
+      continue
+    }
+
+    // Tables
+    if (/^\|.*\|$/.test(line)) {
+      const table = []
+      // Header row
+      table.push(lines[i])
+      i++
+
+      // Separator row
+      if (i < lines.length && /^\|[\s\-\|:]+\|$/.test(lines[i])) {
+        table.push(lines[i])
+        i++
+      }
+
+      // Data rows
+      while (i < lines.length && /^\|.*\|$/.test(lines[i])) {
+        table.push(lines[i])
+        i++
+      }
+
+      // Convert table to HTML
+      const tableHtml = table.map(row => {
+        const cells = row.split('|').slice(1, -1).map(cell => cell.trim())
+        if (table.indexOf(row) === 0) {
+          return `<tr>${cells.map(cell => `<th>${processInlineMarkdown(cell)}</th>`).join('')}</tr>`
+        } else if (table.indexOf(row) === 1) {
+          return '' // Skip separator
+        } else {
+          return `<tr>${cells.map(cell => `<td>${processInlineMarkdown(cell)}</td>`).join('')}</tr>`
+        }
+      }).filter(row => row).join('')
+
+      html.push(`<table>${tableHtml}</table>`)
+      continue
+    }
+
+    // Regular paragraphs
     const para = [line]
     i++
     while (i < lines.length && !/^\s*$/.test(lines[i])) {
-      if (/^(?:```|#{1,6}\s|>\s|[-*]\s|\d+\.\s)/.test(lines[i])) break
+      if (/^(?:```|#{1,6}\s|>\s|[-*]\s|\d+\.\s|^\|.*\|$)/.test(lines[i])) break
       para.push(lines[i])
       i++
     }
@@ -133,7 +208,7 @@ function markdownToHtml(markdown) {
 // Helper to parse date strings like "December 17 2025" or "January 2025"
 function parseDate(dateStr) {
   if (!dateStr) return new Date(0)
-  
+
   const parts = dateStr.trim().split(/\s+/)
   if (parts.length === 3) {
     // Month Day Year

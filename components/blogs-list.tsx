@@ -13,6 +13,20 @@ interface BlogsListProps {
   onMouseDown: (e: React.MouseEvent) => void
 }
 
+const interests = [
+  "twilight, the series and time of day; middle school reading",
+  "lim poetry; art by statistical, stochastic machines",
+  "midnight conversation; wholesome nostalgic gossip",
+  "3am walks in boston winter; too cold for comfort, enough to keep moving",
+  '"tell me your life story in four minutes"; whatever you find beautiful',
+  "the anthropocene reviewed, shipping out; witty observation and warm voices",
+  "shard theory, assembly theory; grand ambitious theories of everything",
+  "poetry, vibes decomposition; concepts as vectors spaces",
+  "the swiss alps; mountain climbing",
+  "freedom, flourishing",
+  "simplicity, specificity, spontaneity"
+]
+
 export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMouseDown }: BlogsListProps) {
   // Start false on the server to avoid hydration mismatch; update on client in effect
   const [isWide, setIsWide] = useState<boolean>(false)
@@ -45,32 +59,76 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
     }
     return [...blogs].sort((a, b) => parseDate(b.date) - parseDate(a.date))
   }, [])
-  return (
-    <div
-      style={{ width: isWide ? `${width}px` : "100%" }}
-      className={cn(
-        "relative h-full overflow-y-auto shrink-0",
-        selectedBlog && "max-md:hidden",
-      )}
-    >
-      <div className="px-8 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full md:items-stretch">
-        <div className="px-4 md:px-0">
-          <h1 className="text-4xl font-serif mb-2 text-foreground">blogs</h1>
-          <p className="text-muted-foreground mb-6">field observations & works-in-progress.</p>
 
-          <ol className="list-decimal list-inside space-y-4 font-serif text-md">
-            {sortedBlogs.map((blog) => (
-              <li key={blog.slug}>
-                <Link href={`/blogs/${blog.slug}`} className="text-foreground underline hover:text-foreground/80 hover:font-semibold">
-                  {blog.title}
+  // Format date to YYYY-MM-DD format (handles "September 15 2025")
+  const formatDate = (dateStr: string) => {
+    const months: Record<string, string> = {
+      'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05', 'June': '06',
+      'July': '07', 'August': '08', 'September': '09', 'October': '10', 'November': '11', 'December': '12'
+    }
+
+    const parts = dateStr.trim().split(/\s+/)
+    // Expect formats like: [MonthName, Day, Year]
+    if (parts.length >= 3) {
+      const monthName = parts[0]
+      const day = parts[1].padStart(2, '0')
+      const year = parts[2]
+      const month = months[monthName] || '01'
+      return `${year}-${month}-${day}`
+    }
+
+    // Fallback: try to parse with Date
+    const d = new Date(dateStr)
+    if (!isNaN(d.getTime())) {
+      const y = String(d.getFullYear())
+      const m = String(d.getMonth() + 1).padStart(2, '0')
+      const day = String(d.getDate()).padStart(2, '0')
+      return `${y}-${m}-${day}`
+    }
+
+    // As a last resort, return the original string
+    return dateStr
+  }
+
+  return (
+    <div className="flex-1 overflow-y-auto pt-28 md:pt-16 flex flex-col min-h-screen pb-0">
+      <div className="px-6 md:px-16 flex-1 w-full max-w-2xl mx-auto">        
+        <div className="space-y-8">
+          {/* Header */}
+          <div>
+            <h1 className="text-4xl font-serif mb-2">blogs</h1>
+            <p className="text-muted-foreground mb-6">field observations & works-in-progress.</p>
+          </div>
+
+          <div className="flex justify-center gap-3 text-muted-foreground/40">
+            <span className="text-xl">✦</span>
+            <span className="text-xl">✦</span>
+            <span className="text-xl">✦</span>
+          </div>
+
+          {/* Blog Posts */}
+          <div className="space-y-4">
+            <p className="text-muted-foreground italic font-serif">
+              i write substack-type pieces here, check out musings for my personal wiki or  projects for full work logs.
+            </p>
+            
+            <div className="space-y-4">
+              {sortedBlogs.map((blog) => (
+                <Link 
+                  key={blog.slug} 
+                  href={`/blogs/${blog.slug}`}
+                  className="grid grid-cols-[6.5rem_1fr] gap-6 group hover:opacity-70 transition-opacity"
+                >
+                  <span className="text-muted-foreground/60 font-mono text-sm tabular-nums">
+                    {formatDate(blog.date)}
+                  </span>
+                  <span className="text-foreground font-serif text-base leading-relaxed group-hover:underline">
+                    {blog.title}
+                  </span>
                 </Link>
-                <span className="text-muted-foreground text-sm ml-2">— {blog.date}</span>
-                {blog.excerpt && (
-                  <p className="text-muted-foreground text-sm mt-1 ml-6">{blog.excerpt}</p>
-                )}
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+          </div>
         </div>
 
         <Footer />

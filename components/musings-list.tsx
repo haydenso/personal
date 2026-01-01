@@ -159,7 +159,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
         selectedMusing && "max-md:hidden",
       )}
     >
-      <div className="px-6 md:px-16 pt-28 md:pt-16 pb-0 max-w-3xl flex flex-col justify-between min-h-full md:items-stretch">
+      <div className="px-6 md:px-16 pt-28 md:pt-16 pb-0 w-full max-w-3xl md:mx-auto flex flex-col justify-between min-h-full md:items-stretch">
         <div className="flex-1">
           <h1 className="text-4xl font-serif mb-2">musings</h1>
           <p className="text-muted-foreground mb-6">a peek into my notes app</p>

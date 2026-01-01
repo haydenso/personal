@@ -37,7 +37,7 @@ export function MusingReader({ slug, onBack }: MusingReaderProps) {
             {musing.lastUpdated && ` • Last updated ${musing.lastUpdated}`}
           </div>
           <div 
-            className="note-body text-sm leading-relaxed text-[#333] prose prose-neutral dark:prose-invert max-w-none"
+            className="note-body text-sm leading-relaxed text-[#333] prose-musings prose-neutral dark:prose-invert max-w-none"
             dangerouslySetInnerHTML={{ __html: musing.content }} 
           />
         </article>

@@ -1,6 +1,6 @@
 @layer base {
   .prose {
-    @apply text-foreground;
+    @apply text-foreground font-serif;
   }
 
   .prose h1 {
@@ -12,11 +12,11 @@
   }
 
   .prose h3 {
-    @apply text-xl font-medium mb-2 mt-4;
+    @apply text-xl font-serif mb-2 mt-4;
   }
 
   .prose p {
-    @apply mb-4 leading-relaxed;
+    @apply mb-4 leading-relaxed font-serif;
   }
 
   .prose a {
@@ -42,7 +42,7 @@
   }
 
   .prose li {
-    @apply mb-2;
+    @apply mb-2 font-serif;
   }
 
   .prose ol > li::marker {
@@ -62,14 +62,97 @@
   }
 
   .prose code {
-    @apply bg-muted px-1.5 py-0.5 rounded text-sm;
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
   }
 
   .prose pre {
-    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4;
+    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4 font-mono;
   }
 
   .prose blockquote {
-    @apply border-l-4 border-border pl-4 italic my-4;
+    @apply border-l-4 border-border pl-4 italic my-4 font-serif;
+  }
+
+  .prose strong {
+    @apply font-serif font-bold;
+  }
+
+  .prose em {
+    @apply font-serif italic;
+  }
+
+  /* Musings use sans-serif font */
+  .prose-musings {
+    @apply text-foreground font-sans;
+  }
+
+  .prose-musings h1 {
+    @apply text-3xl font-sans font-bold mb-4 mt-8;
+  }
+
+  .prose-musings h2 {
+    @apply text-2xl font-sans font-bold mb-3 mt-6;
+  }
+
+  .prose-musings h3 {
+    @apply text-xl font-sans font-bold mb-2 mt-4;
+  }
+
+  .prose-musings p {
+    @apply mb-4 leading-relaxed font-sans;
+  }
+
+  .prose-musings a {
+    @apply text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all;
+  }
+
+  .prose-musings a:hover {
+    @apply opacity-100 decoration-solid;
+  }
+
+  .prose-musings ul,
+  .prose-musings ol {
+    @apply mb-4 ml-8;
+  }
+
+  .prose-musings ul {
+    list-style-type: "➢ ";
+  }
+  
+  .prose-musings ul > li::marker {
+    color: var(--muted-foreground);
+    font-size: 0.85em;
+  }
+
+  .prose-musings li {
+    @apply mb-2 font-sans;
+  }
+
+  .prose-musings ol > li::marker {
+    color: var(--muted-foreground);
+    font-size: 0.85em;
+    font-weight: 400;
+    margin-right: 1em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .prose-musings code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose-musings pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4 font-mono;
+  }
+
+  .prose-musings blockquote {
+    @apply border-l-4 border-border pl-4 italic my-4 font-sans;
+  }
+
+  .prose-musings strong {
+    @apply font-sans font-bold;
+  }
+
+  .prose-musings em {
+    @apply font-sans italic;
   }
 }

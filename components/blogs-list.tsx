@@ -47,15 +47,16 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
   // Memoize sorted blogs to avoid re-sorting on every render
   const sortedBlogs = useMemo(() => {
     const parseDate = (dateStr: string) => {
-      const [monthDay, year] = dateStr.split(' ')
+      const parts = dateStr.trim().split(/\s+/)
       const months: Record<string, number> = {
         'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
         'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
       }
-      const parts = monthDay.split(' ')
+      // Expect format: "Month Day Year" (e.g., "January 1 2026")
       const month = months[parts[0]] || 0
       const day = parseInt(parts[1]) || 1
-      return new Date(parseInt(year), month, day).getTime()
+      const year = parseInt(parts[2]) || new Date().getFullYear()
+      return new Date(year, month, day).getTime()
     }
     return [...blogs].sort((a, b) => parseDate(b.date) - parseDate(a.date))
   }, [])

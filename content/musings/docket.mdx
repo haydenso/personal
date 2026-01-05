@@ -8,4 +8,559 @@ lastUpdated: 12-17-2025
 pinned: true
 ---
 ### read my list of open questions/docket of musings
-[https://haydenso.substack.com/p/212ea3d8-3bc0-4304-bd61-6bfbdf56a882](https://haydenso.substack.com/p/212ea3d8-3bc0-4304-bd61-6bfbdf56a882)
+> [https://haydenso.substack.com/p/212ea3d8-3bc0-4304-bd61-6bfbdf56a882](https://haydenso.substack.com/p/212ea3d8-3bc0-4304-bd61-6bfbdf56a882)
+> **read on substack for better experience, fixing layout**
+
+A mega consolidated brain dump. Some are ideas I would personally want to work on and some are general musings/would be cools. (Inspired by [*Dwarkesh*](https://substack.com/home/post/p-161809078), [*Patrick*](https://patrickcollison.com/questions), [*Gwern*](https://gwern.net/question#bad-microwave-tea))  
+
+table of contents:  
+
+1. open research interests (ai/ml, earth systems, finance, policy)  
+
+2. deep/hard tech (defense, robotics, infrastructure, climate)  
+
+3. software (b2b, consumer, micro saas)  
+
+4. general/misc (skills, investing)  
+
+open research interests:  
+ai/ml in earth + planetary systems  
+
+* mechanistic interpretability of ML weather models (more broadly physical sciences)  
+  can we extract meaningful insights (knowledge/physics) from neural networks in the physical sciences?  
+
+  * experiment with toy/smaller transformer-based weather prediction models  
+
+  * sparse neutal network ideas?  
+
+  * seems to mostly be research on transformers - transformers-based models  
+
+    * links: [*Dario Amodei*](https://www.darioamodei.com/post/the-urgency-of-interpretability#what-we-can-do), [*Neel Nanda*](https://www.neelnanda.io/mechanistic-interpretability/prereqs)  
+
+    * Neel Nanda puts its it: “I do not see this as a f*cked up non-interpretable black-box”  
+
+  * for LLMs —> cognition.  
+
+  * for applied physics problems —> physics equations that govern it  
+
+    * [*General ideas*](https://www.sciencedirect.com/science/article/pii/S1352231024004722) of how to approach the problem  
+
+* inference + test-time compute ideas on weather prediction models?  
+
+  * particularly transformer based  
+
+* approaches to optimising and builder better weather prediction models  
+
+  * human-data dual system approach: [*JAMES commentary*](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL116465?trk=feed_main-feed-card_feed-article-content)  
+
+  * Transformer-based: [*Windbourne's Weather Mesh*](https://arxiv.org/pdf/2503.22235v1)  
+
+  * [*large weather models (LWM) github repo*](https://github.com/jaychempan/Awesome-LWMs)  
+
+    * Ocean wave forecasting, Marine weather models, Aviation weather models?  
+
+    * finetuning for data sparse regions?  
+
+  * less bluring?  
+
+* running through various so-called ‘scenarios/timelines’ of the earth as synthetic data for training this models  
+
+  * incorporating these apocalyptic situations into the models?  
+
+* synthetic data (data upscale/downscale) - [*good paper*](https://arxiv.org/pdf/2408.09627) of ideas  
+
+  * reconstruction in space (spatial interpolation)  
+
+    * Africa weather problem  
+
+  * reconstruction in time (temporal interpolation)  
+
+  * reconstruction of scales (downscaling, superresolution)  
+
+  * reconstruction as a probabilistic problem  
+
+* learning to weather the weather  
+
+  * [*https://merlinlabs.com/autonomous-navigation/*](https://merlinlabs.com/autonomous-navigation/) —> primer on how to achieve autonomous navigation // imitation learning  
+
+* data ‘cleanliness’ - cleaning up weather data sets using neural networks  
+
+  * [*LLM for captioning remote sensing data*](https://ml-for-rs.github.io/iclr2025/camera_ready/papers/53.pdf#page=1.50)  
+
+* better understanding ice-sea dynamics in a computational/modelling perspective  
+
+  * ice-sea governor  
+
+* actionable Earth Observation insights from LLMs  
+
+  * Paper 1: [*https://arxiv.org/abs/2404.15500*](https://arxiv.org/abs/2404.15500)  
+
+  * Paper 2: [*https://arxiv.org/pdf/2504.04319*](https://arxiv.org/pdf/2504.04319) (has github repo for ai agent)  
+
+* time series prediction + remote sensing  
+
+  * [*Lightweight-transformer for remote sensing paper*](https://arxiv.org/pdf/2304.14065)  
+
+* thought: weather systems prediction as a boundary value problem  
+
+  * what does that tell us?  
+
+* applications visual language models in earth systems science?  
+
+* IceNet incremental research  
+
+  * <https://icenet.ai/#about-us>  
+
+   
+general ML, agents, alignment problems  
+
+* better understand the transfomer circuit work by Anthropic + Olah  
+
+  * [*2025 research*](https://transformer-circuits.pub/2025/attribution-graphs/methods.html)  
+
+  * [*Anthropic Blog*](https://transformer-circuits.pub/2021/framework/index.html), [*Neel Nanda Video Walkthrough*](https://www.youtube.com/watch?v=KV5gbOmHbjU\&ab_channel=NeelNanda)  
+
+* search engine embeddings via ‘next-link’ prediction instead of next-token prediction and then using some web search API  
+
+* adapting existing regulation: What modifications of existing regulation are needed to stably and safely integrate AI agents into society (Alan Chan)  
+
+* how to govern and signpost AI agents? AI agents safety?  
+
+  * while ‘AI agents’ is often used to refer to building web/saas, there’s a pretty interesting field of AI agents academic/frontier research  
+
+* general research topics in transfer learning/imitation learning  
+
+* parsimonious neural networks  
+
+  * Material/Nano science paper  
+
+* hnet research  
+
+  * best way for findign the ideal tokenizer a  
+
+* AI policy for hong kong  
+     
+
+applied ML/algo research  
+
+* Visual-langauge-action models for robotics  
+
+  * See the deep defense tech idea below  
+
+* Wine research  
+
+  * Using machine learning for grapevine phenological modelling —> wine futures/options trading?  
+
+* getting a better grasp of reinforcement learning  
+
+  * currently know near 0 on this topic  
+
+* COLREGS and HK traffic compliant autonomous boat systems  
+
+  * Colision avoidance  
+
+  * port operations  
+
+* optimising class allocation algorithms  
+
+  * [*Dartmouth Thesis*](https://home.dartmouth.edu/news/2025/03/choosing-classes-gets-boost-students-honors-thesis?utm_source=linkedin_photo\&utm_medium=social\&utm_campaign=sciences), [*More*](https://digitalcommons.dartmouth.edu/cgi/viewcontent.cgi?article=1046\&context=cs_senior_theses), [*Colab*](https://colab.research.google.com/drive/1Ap5hxkwH_7hry5ww4hecleQl1XXo8ETJ#scrollTo=PQWk-nUvtQLS)  
+
+* ideas in astro/planetary/space systems:  
+
+  * [*SpetraFM - finetuning models in astro*](https://arxiv.org/pdf/2411.04750)  
+
+* <https://www.visionofearth.org/wp-content/uploads/2019/07/Vision-of-Earth-Asteroid-Manipulation-Poster.pdf>  
+
+  * asteroid prediction  
+
+   
+finance/economics/policy/international relations  
+
+* correlation of weather patterns and commodities prices  
+
+  * commodity futures, commodity-linked stocks  
+
+    * overlaps of weather prediction and stock market predictions  
+
+  * general quantitative/financial market benefits with better weather prediction  
+
+  * inspired by Edurardo Saverin betting on oil via metereology  
+
+* HVAC, trade (plumbing etc.) and their role in private equity businesses  
+
+  * New IT systems/SAAS for HVAC (sell to the PE)  
+
+  * note to self: try to find that twitter thread  
+
+    * software: 650 billion  
+
+    * hvac: 500 billion in the US  
+
+* the mathematics and simulations of betting markets  
+
+  * are they more often right because people have money to their word  
+
+* should frontier AI companies stay private? (or IPO?)  
+
+  * societal/public investor pressure if there is mass ownership  
+
+  * can ‘dumb money’ change trajectory of AI progress?  
+
+  * similarities to the dotcom boom?  
+
+* Arctic (greenland, svalbard) defense, trading and strategic potential with the arctic ocean melting  
+
+  * opened new routes with climate change  
+
+* general topics in AI safety and control  
+
+  * [*Emil*](http://emilryd.com/) will know much more  
+
+* Hong Kong: policy for a tech ecosystem  
+
+  * Encourage agentic  
+
+  * No ghost startups  
+
+  * [*Architect of Prosperity: Sir John Cowperthwaite and the Making of Hong Kong*](https://www.amazon.com/Architect-Prosperity-John-Cowperthwaite-Making/dp/1907994696)  
+
+* better understand how energy markets work (e.g Denmark and Singapore)  
+
+  * ML overlap?  
+
+* better understand international relations  
+
+  * extends my exposure at the HKETO  
+
+* policy: what are towns giving up to have big tech build in their state/town  
+
+  * stargate and lower tax revenue  
+
+* gov graph visualisation:  
+
+  * <https://sfgov.civlab.org/>  
+
+  * <https://x.com/m_atoms/status/1869430358347002221>  
+
+* fast rise to powers and leadership  
+
+  * Peng Zhao of Citadel  
+
+  * Damola Adamolekun of Red Lobster (ex Goldman + TPG)  
+
+* Founding of saudi aramco  
+
+* Macrohistory  
+
+* Fall and rise of civilisaitons  
+
+   
+thoughts/sociology/(pseudo) philosophy  
+
+* better understand how to most optimally help society with sufficient physical involvement and personal satisfaction (effective altruism linkages)  
+
+* what does it mean to have taste?  
+
+  * taste of problems, taste of solutions  
+
+* cultural and aesthetic shallowness  
+
+* how effective people study and learn hard concepts  
+
+* solving market-driven problems vs fundamental problems  
+
+  * market-driven problems are gaps that present themselves because of a marketplace and supply vs demand  
+
+  * fundamental problems are inks of curiosity  
+
+    * problems driven for scientific understanding  
+
+    * problems driven by moral standards and virtue  
+
+      * though definition can be a little wishy-washy  
+
+    * problems that don’t yield immediate primary economic value but can be foundations for downstream economic opportunity  
+
+       
+
+One way I like to find ideas is to go on conferences/workshops (e.g latest ICLR/ICML) and see the long/short papers and use it as a spring board for ideas of topics I am interested in. Another good way to learn are via conference workshop tutorials or equivalent for practical step by step guides for cool research ideas.  
+deep/hard technology:  
+Defense/robotics/autonomy:  
+(Mostly inspired by interest of what Palmer Luckey is doing with Anduril)  
+
+* visual-Language-Action (VLA) for Robotics  
+
+  * Coordination of  
+
+  * Huggingface’s OpenVLA model?  
+
+  * [*Scout AI*](http://scoutco.ai/)  
+
+* autonomous boats/sea gliders  
+
+  * Modularity in design for construction  
+
+  * Interesting ones: [*Saronic*](http://saronic.com/)  
+
+  * Ways to optimise:  
+
+    * Get sharper turns using extra wings?  
+
+* underwater drones  
+
+  * <https://x.com/ruima/status/1998482875029815726?s=12>  
+
+* GPS-free autonomous navigations  
+
+* thought: how to build a Hong Kong hard tech government contracting system  
+
+* maritime autonomy:  
+
+  * <https://www.orca-ai.io/> (70mil series B)  
+
+* robotic pacer for the running track  
+
+  * calibrated for the track  
+
+  * integrate with your heart rate  
+
+  * object detection for other people in your track but continues the pace  
+       
+
+   
+Infrastructure  
+
+* underwater data centers  
+
+  * Increase water usage  
+
+  * Inspired by Highlander and [*this YC startup*](https://networkocean.io/)  
+
+* infrastructure projects in the developing global south  
+
+* data centers next to oil drilling platforms  
+
+  * like crusoe,  
+
+    * in Kazkahstan? Indonesia?  
+
+    * Is anyone doing this in China?  
+
+    * Compute (GPU) is location agnostic compared to cloud computing (internet)  
+
+* data centers in space?  
+
+  * Starcloud  
+
+* drones to clean windows of highrise buildings  
+
+  * trains etc,.  
+       
+
+Earth + Climate (taming nature…)  
+
+* constellation of weather balloons:  
+
+  * Windbourne systems  
+
+  * particularly SEA/typhoon regions or low data African regions  
+
+  * hardware problem + software problem  
+
+  * balloons have greater  
+
+  * Sorcerer  
+
+* deep sea + earth exploration  
+
+  * Untapped resources  
+
+* Cloud seeding  
+
+  * rainmaker  
+
+  * Anti-ice drones  
+
+  * Anti-ice boats?  
+
+  * Aeolus labs  
+
+* Subsea intelligence  
+
+  * [*https://www.krakenrobotics.com/wp-content/uploads/2025/09/Kraken-Robotics-Sept-2025-Website.pdf*](https://www.krakenrobotics.com/wp-content/uploads/2025/09/Kraken-Robotics-Sept-2025-Website.pdf)  
+
+  * Kraken robotics  
+       
+
+software (b2b and consumer)  
+
+* agentic social search system: Search for finding people academics/finance/lawyers (networking/cold-emailing)  
+
+  * Holmes AI  
+
+  * vectorising  
+
+* dayrooms: app built for birthdays and allow you to record a quick message without awkward messages  
+
+  * Good old CRUD app (proabably build with Expo)  
+
+* a tool to help academics find and preprocess their code better  
+
+  * start with oceanography domain and maybe like era5 analysis  
+
+    * complicated to know what you want, where to get it  
+
+    * one stop place to download and preprocess that data you want  
+
+    * like a standard for preprocessing dat?  
+
+  * ai driven data preprocessing prompt  
+
+  * inspire by that bio guy with biology open data  
+
+* web search  
+
+  * what [*exa.ai*](http://exa.ai) are doing with teh next link prediction  
+
+* better interface to store questions + do questions (e.g past papers)  
+
+* General: bridging American SaaS into a Cantonese/Chinese version and UI  
+
+  1. [*granola.ai*](http://granola.ai)  
+
+* society simulations  
+
+  * What Devansh over at Decision Labs are doing  
+
+* something to do with apartment/housing/property market in Hong Kong  
+
+* evals (like [*soren.ai*](http://soren.ai))  
+
+* reinforcement learning environments  
+
+* expert data source  
+
+* ai engine optimisation (the prompting company)  
+
+* ai-first companies  
+
+  * design: <https://www.semiotic.so/>  
+
+  * investment bank: ai first investment bank <https://offdeal.io/>  
+
+    * they have some nice stats on SMEs in America  
+
+  * market research: <https://www.diligencesquared.com/>  
+
+* ai in pe: <https://www.zarnaai.com/>  
+
+* physical intelligence  
+
+* trade compliance  
+
+  * trava (YC) - [*https://www.usetrava.com/*](https://www.usetrava.com/)  
+
+  * focussed on HK/Singapore markets.  
+       
+
+high value skills:  
+
+* starting an AI safety + consulting NGO for Hong Kong  
+
+  * go into companies to talk about their pain points  
+
+  * individual sessions on how to boost  
+
+    * partner with companies??  
+
+  * pro  
+
+* organising events + communities  
+
+* podcasts as a way to talk to people  
+
+  * get better at researching people  
+
+  * get better at asking questions + conversing  
+
+* starting a ai safety / solidfying the EA club at HKUST  
+
+miscellaneous topics of interest:  
+
+* explore the space economy and what opportunities there are  
+
+* the chinese tech ecosystem (Miracle Plus), Shenzhen (tech+manufacturing) and how the companies got to where they are (tencent, baidu pinduoduo, xiaohongshu)  
+
+* investing/market directions:  
+
+  * robotics and autonomous vehicles  
+
+  * quantum computing  
+
+  * ocean tech + robotics  
+
+  * deep sea mining  
+
+  * nuclear and uranium (particularly in growth economies)  
+
+  * satellite / space (asts, rklb, lunr)  
+
+  * defense as a whole / cybersecurity  
+
+  * global warning-caused shipping changes (greenland + arctic)  
+
+  * vertical supply chain of semiconductors/chip manufacturing  
+
+* bear cases of tech trends (bear case of tsmc, bear case of nvidia etc.)  
+
+* ai alignment tips: <https://rohinshah.com/faq-career-advice-for-ai-alignment-researchers/>  
+
+Programming/CS/Electronics skills:  
+
+* truly and more intuitively understand advanced topics in Machine Learning - not just implementation, but the mathematical intuition behind the algorithms  
+  (link to useful resources I wanna go through - on Notion)  
+
+  1. [*Illustrated Transformer*](https://jalammar.github.io/illustrated-transformer/)  
+
+  2. [*transformer for SWE*](https://blog.nelhage.com/post/transformers-for-software-engineers/)  
+
+  3. [*distill.pub*](http://distill.pub) (best resource!)  
+
+* go through neel nanda’s mech interp basics:  
+
+  * [*barebones pre-reqs*](https://www.neelnanda.io/mechanistic-interpretability/prereqs)  
+       
+
+* do some Leetcode (All of Neetcode 150)  
+
+* robotics and missile systems  
+
+  * Electronics: power systems, circuits and build your own board/microcontroller, sensors & actuators  
+
+    * [*First circuits*](https://learn.sparkfun.com/tutorials/what-is-a-circuit), [*Ohm's Law*](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law), [*multimeter usage*](https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter), [*breadboarding*](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard), [*LEDs*](https://learn.sparkfun.com/tutorials/light-emitting-diodes-leds)  
+
+  * Mechanics: CAD, materials science (briefly), 3d printing and basic mechanical engineering principles  
+
+    * [*https://www.amazon.com/Shigleys-Mechanical-Engineering-Design-McGraw-Hill/dp/0073398209*](https://www.amazon.com/Shigleys-Mechanical-Engineering-Design-McGraw-Hill/dp/0073398209)  
+
+  * Software side: vision, robotics operating system, algorithm design  
+
+  * Aerodynamics (more for rocketry): basics of lift, drag, thrust and weight  
+
+    * structural design  
+
+    * stress, strain and material failure  
+
+    * NASA’s guide to aeronautics+aerodyanmics  
+
+      * [*https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/learn-about-aerodynamics/*](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/learn-about-aerodynamics/)  
+
+Footnotes:  
+I will probably update this consistently with new ideas.  
+I think if you pick a really hard research problem, try to solve it in <8 weeks, blog everything, shoot videos, ship good oss code and repeat it.  
+you can get hired by a big lab in ~1 year.  
+(twitter)  
+1 Like  
+© 2026 Hayden So · [Privacy](https://substack.com/privacy) ∙ [Terms](https://substack.com/tos) ∙ [Collection notice](https://substack.com/ccpa#personal-data-collected)  
+[Start your Substack](https://your.substack.com/publish)[Get the app](https://substack.com/app/app-store-redirect?utm_campaign=app-marketing\&utm_content=web-footer-button)  
+[*Substack*](https://substack.com/) is the home for great culture  

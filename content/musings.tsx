@@ -11,6 +11,16 @@ export interface Musing {
 
 export const musings: Musing[] = [
   {
+    "slug": "things",
+    "title": "things i want to write about",
+    "author": "Hayden",
+    "date": "2026",
+    "lastUpdated": "01-05-2026",
+    "pinned": false,
+    "category": "uncategorized",
+    "content": ""
+  },
+  {
     "slug": "china-ai",
     "title": "notes on China and AI governance",
     "author": "Hayden",

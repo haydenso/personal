@@ -122,7 +122,7 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
                   <span className="text-muted-foreground/60 font-mono text-sm tabular-nums">
                     {formatDate(blog.date)}
                   </span>
-                  <span className="text-foreground font-serif text-base leading-relaxed group-hover:underline">
+                  <span className="font-serif text-base leading-relaxed group-hover:underline" style={{ color: 'oklch(0.4 0.22 25)' }}>
                     {blog.title}
                   </span>
                 </Link>

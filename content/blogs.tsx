@@ -9,17 +9,17 @@ export interface Blog {
 export const blogs: Blog[] = [
   {
     "slug": "rollup-rl",
-    "title": "AI Rollups, RL and SMBs",
+    "title": "ai rollups, rl and smbs",
     "date": "January 1 2026",
     "excerpt": "",
-    "content": "<p>TBA</p>"
+    "content": "<h3>my thesis on ai rollups, reinforcement learning environments and small-medium enterprises</h3>"
   },
   {
     "slug": "chinaai",
     "title": "a collection of AI governance and china research ideas",
     "date": "December 20 2025",
     "excerpt": "",
-    "content": "<p>Adding here.</p>"
+    "content": "<p>Migrating here...</p>"
   },
   {
     "slug": "chinamaim",

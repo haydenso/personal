@@ -1,6 +1,7 @@
 @layer base {
   .prose {
     @apply text-foreground font-serif;
+    text-align: justify;
   }
 
   .prose h1 {
@@ -16,7 +17,8 @@
   }
 
   .prose p {
-    @apply mb-4 leading-relaxed font-serif;
+    @apply mb-6 font-serif;
+    line-height: 1.8;
   }
 
   .prose a {
@@ -84,6 +86,7 @@
   /* Musings use sans-serif font */
   .prose-musings {
     @apply text-foreground font-sans;
+    text-align: justify;
   }
 
   .prose-musings h1 {

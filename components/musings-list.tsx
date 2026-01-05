@@ -24,7 +24,7 @@ const categoryColors: Record<string, string> = {
   'software': '#10b981', // green
   'china': '#ef4444', // red
   'life/human condition': '#8b5cf6', // violet
-  'uncategorized': '#6b7280', // gray
+  'finance': '#9333ea', // gray
 }
 
 function getCategoryColor(category: string): string {

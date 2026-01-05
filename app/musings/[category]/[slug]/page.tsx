@@ -41,7 +41,7 @@ export default async function MusingFullPage({ params }: Props) {
           </div>
 
           {/* Content */}
-          <div className="flex-1 px-4 md:px-12 py-6 md:py-8 overflow-y-auto bg-white">
+          <div className="flex-1 md:px-12 py-6 md:py-8 overflow-y-auto bg-white" style={{ paddingLeft: 'max(7vw, 1rem)', paddingRight: 'max(7vw, 1rem)' }}>
             <article className="max-w-none mx-auto w-full" style={{ maxWidth: 'min(72ch, 100%)' }}>
               <div className="note-time text-sm text-[#888] mb-6 md:mb-8">
                 {musing.date}

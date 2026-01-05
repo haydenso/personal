@@ -6,8 +6,9 @@ import { fileURLToPath } from "url"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Use absolute paths to the website content directory
-const contentDir = path.join(process.env.HOME, "website", "haydenso.com", "content")
+// Use relative paths from the script location
+const projectRoot = path.join(__dirname, "..")
+const contentDir = path.join(projectRoot, "content")
 const blogsDir = path.join(contentDir, "blogs")
 const musingsDir = path.join(contentDir, "musings")
 

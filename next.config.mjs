@@ -17,6 +17,57 @@ const nextConfig = {
         destination: 'https://haydenso.github.io/scmp/:path*',
         permanent: true,
       },
+      // Blog shortlinks - redirect /slug to /blogs/slug
+      {
+        source: '/ChinaAI',
+        destination: '/blogs/chinaai',
+        permanent: false,
+      },
+      {
+        source: '/chinaai',
+        destination: '/blogs/chinaai',
+        permanent: false,
+      },
+      {
+        source: '/ChinaMAIM',
+        destination: '/blogs/chinamaim',
+        permanent: false,
+      },
+      {
+        source: '/chinamaim',
+        destination: '/blogs/chinamaim',
+        permanent: false,
+      },
+      {
+        source: '/rollups-rl',
+        destination: '/blogs/rollup-rl',
+        permanent: false,
+      },
+      {
+        source: '/rollup-rl',
+        destination: '/blogs/rollup-rl',
+        permanent: false,
+      },
+      {
+        source: '/functions',
+        destination: '/blogs/functions',
+        permanent: false,
+      },
+      {
+        source: '/players',
+        destination: '/blogs/players',
+        permanent: false,
+      },
+      {
+        source: '/compass',
+        destination: '/blogs/compass',
+        permanent: false,
+      },
+      {
+        source: '/swings',
+        destination: '/blogs/swings',
+        permanent: false,
+      },
     ]
   },
 }

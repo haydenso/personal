@@ -5,7 +5,11 @@ import { fileURLToPath } from "url"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const rootDir = path.join(__dirname, "..")
+
+// Use absolute paths to the website content directory
+const contentDir = path.join(process.env.HOME, "website", "haydenso.com", "content")
+const blogsDir = path.join(contentDir, "blogs")
+const musingsDir = path.join(contentDir, "musings")
 
 // Enhanced Markdown → HTML converter that handles colors, highlights, and all formatting
 function markdownToHtml(markdown) {
@@ -205,24 +209,63 @@ function markdownToHtml(markdown) {
   return html.join("\n")
 }
 
-// Helper to parse date strings like "December 17 2025" or "January 2025"
+// Helper to parse date strings like "December 17, 2025", "2025-12-20", "12-29-2025", or "January 2025"
 function parseDate(dateStr) {
   if (!dateStr) return new Date(0)
 
-  const parts = dateStr.trim().split(/\s+/)
-  if (parts.length === 3) {
-    // Month Day Year
-    return new Date(`${parts[0]} ${parts[1]}, ${parts[2]}`)
+  // Try parsing as ISO date first (YYYY-MM-DD, YYYY-MM, or YYYY)
+  const isoMatch = dateStr.match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/)
+  if (isoMatch) {
+    const year = isoMatch[1]
+    const month = isoMatch[2] || '01'
+    const day = isoMatch[3] || '01'
+    return new Date(`${year}-${month}-${day}`)
+  }
+
+  // Try parsing as MM-DD-YYYY format
+  const usMatch = dateStr.match(/^(\d{2})-(\d{2})-(\d{4})$/)
+  if (usMatch) {
+    const month = usMatch[1]
+    const day = usMatch[2]
+    const year = usMatch[3]
+    return new Date(`${year}-${month}-${day}`)
+  }
+
+  // Remove commas and extra spaces, normalize
+  const cleaned = dateStr.replace(/,/g, '').replace(/\s+/g, ' ').trim()
+  const parts = cleaned.split(' ')
+
+  if (parts.length >= 3) {
+    // Try different formats: "Month Day Year" or "Day Month Year"
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const monthIndex = monthNames.findIndex(m => m.toLowerCase() === parts[0].toLowerCase())
+
+    if (monthIndex !== -1) {
+      // Month first: "December 31 2024"
+      return new Date(`${parts[0]} ${parts[1]}, ${parts[2]}`)
+    } else {
+      // Try day first: "31 December 2024"
+      const dayMonthIndex = monthNames.findIndex(m => m.toLowerCase() === parts[1].toLowerCase())
+      if (dayMonthIndex !== -1) {
+        return new Date(`${parts[1]} ${parts[0]}, ${parts[2]}`)
+      }
+    }
   } else if (parts.length === 2) {
     // Month Year
     return new Date(`${parts[0]} 1, ${parts[1]}`)
   }
+
+  // Try parsing as ISO date or other formats
+  const parsed = new Date(dateStr)
+  if (!isNaN(parsed.getTime())) {
+    return parsed
+  }
+
   return new Date(0) // fallback
 }
 
 // Generate blogs content
 function generateBlogs() {
-  const blogsDir = path.join(rootDir, "content/blogs")
   const files = fs.readdirSync(blogsDir).filter((f) => f.endsWith(".mdx"))
 
   const blogs = files.map((filename) => {
@@ -254,13 +297,12 @@ function generateBlogs() {
 export const blogs: Blog[] = ${JSON.stringify(blogs, null, 2)}
 `
 
-  fs.writeFileSync(path.join(rootDir, "content/blogs.tsx"), output)
+  fs.writeFileSync(path.join(contentDir, "blogs.tsx"), output)
   console.log(`✓ Generated content for ${blogs.length} blogs`)
 }
 
 // Generate musings content
 function generateMusings() {
-  const musingsDir = path.join(rootDir, "content/musings")
   const files = fs.readdirSync(musingsDir).filter((f) => f.endsWith(".mdx"))
 
   const musings = files.map((filename) => {
@@ -292,6 +334,13 @@ function generateMusings() {
     }
   })
 
+  // Sort musings by lastUpdated or date (latest first)
+  musings.sort((a, b) => {
+    const dateA = parseDate(a.lastUpdated || a.date)
+    const dateB = parseDate(b.lastUpdated || b.date)
+    return dateB.getTime() - dateA.getTime()
+  })
+
   const output = `export interface Musing {
   slug: string
   title: string
@@ -306,7 +355,7 @@ function generateMusings() {
 export const musings: Musing[] = ${JSON.stringify(musings, null, 2)}
 `
 
-  fs.writeFileSync(path.join(rootDir, "content/musings.tsx"), output)
+  fs.writeFileSync(path.join(contentDir, "musings.tsx"), output)
   console.log(`✓ Generated content for ${musings.length} musings`)
 }
 

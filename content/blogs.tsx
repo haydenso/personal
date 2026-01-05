@@ -8,6 +8,27 @@ export interface Blog {
 
 export const blogs: Blog[] = [
   {
+    "slug": "rollup-rl",
+    "title": "AI Rollups, RL and SMBs",
+    "date": "January 1 2026",
+    "excerpt": "",
+    "content": "<p>TBA</p>"
+  },
+  {
+    "slug": "chinaai",
+    "title": "a collection of AI governance and china research ideas",
+    "date": "December 20 2025",
+    "excerpt": "",
+    "content": "<p>Adding here.</p>"
+  },
+  {
+    "slug": "chinamaim",
+    "title": "on China and MAIM",
+    "date": "December 1 2025",
+    "excerpt": "",
+    "content": "<p><em>written as an exercise to practise my quick takes from a prompt with limited research. i aim to write a more polished version sometime soon.</em></p>\n<p>I’ve learnt two things about understanding China: they love and operate on their proverbs and understanding the leadership/elite theory is more important than understanding their political system. <strong>Will they pursue MAIM-style sabotage?</strong> My short answer: <strong>No.</strong></p>\n<p><strong>\"the Party commands the gun, and the gun must never be allowed to command the Party \",</strong> Mao. Xi is more like Mao than Deng, Hu or Jiang in a sense that we return to a strongman rule over collective leadership; some China-watchers believe Xi's words are seen as policy. And Xi is quite ideological. Xi would not let his personal rule and grip hold loose to anyone or anything (ASI). If we look at recent Chinese politburo study sessions, China increasingly sees AI as a tool for ideological purposes and a support condition for regime survival. “Algorithmic sovereignty” as they put it. They’ll much rather both have ASI serving their own respective ideological purpose than no one have ASI. The Xi era prides itself in not being isolated, rather self-reliant with cooperation (i.e the Belt and Road initiative). Xi is cognizant of the failed wolf-warrior era and his political survival is his main priority, and sabotaging/MAIM-style conflict is anything but that. Xi will likely purge anyone who believes otherwise (as he has with the military leadership recently).</p>\n<p><strong>China does not operate and never will operate on a zero-sum game basis.</strong> Xi mentions avoiding the Thucydides trap on many many occasions and if we look at the 15th 5-year plan, the rhetoric is that China has an increasing focus on domestic affairs and self-reliance. Stability above all remains a hallmark on domestic and foreign policy. Understanding China is rather paradoxical: I believe China would rather invest time in making better chips than to sabotage the US. China might intimidate and do smaller scale orchestrated attacks but a full blown MAIM style sabotage on US’s entire AI apparatus seems unlikely. The same reason leadership from the top is heavily pushing for a Shanghai based World Artificial Intelligence Cooperation Organization (WAICO), they'd like to set the terms and strongarm a collaborative deal rather than do direct acts of aggression.</p>\n<p><strong>Hiding data centers.</strong> Like the alleged Singapore/NVIDIA chip smuggling operations, China (or anyone) can get pretty good at hiding their data centers, like rebranding industrial factories or a sophisticated computer network. Chinese leadership operates on a belief that if they can do something, others (like the US) most likely could too. China would not risk the infeasibility and consequences of a failed MAIM sabotage attempt.</p>\n<p><strong>No guns and butter tradeoff to AI.</strong> Nuclear deterrence works because with nuclear bombs there is an inherent guns and butter trade off, more defense spending means less on . AI is not the same, better AI = better ‘butter’ (consumption, welfare). With AI, especially with China’s adoption strategy (“new productive forces”) to boost GDP/fix domestic economic problems over direct frontier competition, I further do not see them seeing the need to sabotage because China cares about how it looks internally a lot. China operates on a deep belief that win-win is possible and they have the bargaining chips to bring negotiations to the table.</p>\n<p>On a slightly more slight speculative and philosophical note, in a sense American foreign policy is guided on dominance and dynamism. China has been through a century of humiliation, which is still a core in Chinese leadership philosophy on humility. China plays a pretty long game when it comes to national strategy and I don’t think they will feel particularly threatened with the US being (as it already is) leading on ASI. In a sense, Chinese leadership operates in a sense they will always catch-up and win. The US and China play different games.</p>\n<hr/>\n<p>I’m very fortunate to study and learn China/CCP’s technocracy and leadership under Prof. Li Cheng (HKU CCCW Founding Director, former Director of John L. Thornton China Center at Brookings Institution). He has been great for inspiring me to think more independently.</p>"
+  },
+  {
     "slug": "functions",
     "title": "functions describe the world.",
     "date": "September 15 2025",

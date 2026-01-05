@@ -68,7 +68,7 @@ export function Bookshelf() {
                     e.currentTarget.nextElementSibling!.classList.remove('hidden')
                   }}
                 />
-                <div className="w-full h-full bg-gradient-to-br from-muted-foreground/20 to-muted-foreground/10 flex items-center justify-center hidden">
+                <div className="w-full h-full bg-gradient-to-br from-muted-foreground/20 to-muted-foreground/10 items-center justify-center hidden">
                   <div className="text-center p-4">
                     <div className="text-xs text-muted-foreground mb-2">Cover</div>
                     <div className="text-sm font-medium text-foreground line-clamp-3">

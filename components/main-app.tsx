@@ -57,7 +57,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     offsetX: sidebar.width,
   })
   const musingsList = useResizable({
-    initialWidth: 600,
+    initialWidth: 420,
     minWidth: 200,
     maxWidth: 600,
     offsetX: sidebar.width,

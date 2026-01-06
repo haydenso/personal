@@ -4,7 +4,7 @@ date: September 15 2025
 ---
 > read this onsubstack: [https://haydenso.substack.com/p/functions-describe-the-world](https://haydenso.substack.com/p/functions-describe-the-world)
 
-> **I haven't gotten my website to display latex equations properly...**
+I haven't gotten my website to display latex equations properly...
 
 **preface:** I’m a big believe in mental models to first understand an idea, so here I’ve dumbed down the concepts (some might be ‘technically’ inaccurate), but the gist of it remains as a springboard for greater curiosity
 
@@ -26,15 +26,15 @@ This is simple addition. An immediate answer might be _**x=2**_ **and** _ **y=2*
 
  **Obviously, there is an infinite amount of ways to solve it, so we obvious have to rely on one (of** _ **x**_ **or** _ **y**_ **) to get the other. Let’s decide we will provide an x to expect some y.**
 
-$1 + y = 4, \text{hence } y = 3$
+\\(1 + y = 4, \text{hence } y = 3\\)
 
 It’s obvious that for some **input (** or we call it a **variable) x** , we get some **output (answer) y.** A nicer way to write this can be:
 
-$y=4-x$
+\\(y=4-x\\)
 
 In other words we can describe this as **y is a function of x.** Another way I like to think about the word function is that y **depends** on x. Whatever _x_ we plug into our function _f( )_ , we get a _y._
 
-$f(x) = y$
+\\(f(x) = y\\)
 
 * * *
 
@@ -55,7 +55,7 @@ Let’s say you wanna predict **how tired you are after a run.** It might depend
 
 Imagine to find out it is as simple as adding it all up all the numbers, which we can say **to find how tired you will be, it is a function of the x, t and z described above** :
 
-$\text{tiredness score} = f(x,t,z) = x + t +z$
+\\(\text{tiredness score} = f(x,t,z) = x + t +z\\)
 
 While that might be useful, you might realise, no actually, to identify how tired I am, what matters more is how fast I run actually. Also how fast I am accelerating is also important. 
 
@@ -107,29 +107,29 @@ We’ve gone over what you kind of need to grasp from our **how tired you are af
 
 While the equations might look wildly different, primarily due to them having different variables (and oh boy do mathematicians like using a range of greek symbols), if you look carefully, the following is kind of in every equation:
 
-$\frac{\partial Y}{\partial t} , \nabla, \frac{dY}{dt}$
+\\(\frac{\partial Y}{\partial t} , \nabla, \frac{dY}{dt}\\)
 
 This is what we were talking about when we talked about rate of change (or ‘gradients’ more specifically). They are all **differential equations**.
 
  **Interested in finance?** The ‘billion-dollar’ Black-Scholes Equation (used for options pricing) - see it as an extension of pricing the stock market as you understand it.
 
-$ \frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2} \frac{\partial^{2} \mathrm C}{\partial \mathrm C^2} \+ \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ = \mathrm r \mathrm C $
+\\( \frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2} \frac{\partial^{2} \mathrm C}{\partial \mathrm C^2} \+ \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ = \mathrm r \mathrm C \\)
 
  **Interested in the weather and planets? Interested in boats, planes or rockets?** To know this, we wanna know how water or air behaves using the Navier-Stokes equations.
 
-$\rho \left( \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} \right) = -\nabla p + \mu \nabla^2 \mathbf{v} + \mathbf{f} ] [ \nabla \cdot \mathbf{v} = 0$
+\\(\rho \left( \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} \right) = -\nabla p + \mu \nabla^2 \mathbf{v} + \mathbf{f} ] [ \nabla \cdot \mathbf{v} = 0\\)
 
  **Interested in telecommunications (wifi, mobile data)?** Here is part of the Maxwell Equations:
 
-$ \quad \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \epsilon_0 \frac{\partial \mathbf{E}}{\partial t} $
+\\( \quad \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \epsilon_0 \frac{\partial \mathbf{E}}{\partial t} \\)
 
  **Interested in how humans behave and social systems? How about how fast rumours spread?** We can model the speed of it spreading using the SIR model.
 
-$\frac{dS}{dt} = -\beta S I, \quad \frac{dI}{dt} = \beta S I - \gamma I, \quad \frac{dR}{dt} = \gamma I$
+\\(\frac{dS}{dt} = -\beta S I, \quad \frac{dI}{dt} = \beta S I - \gamma I, \quad \frac{dR}{dt} = \gamma I\\)
 
  **Interested in economics?** Here is the textbook Solow–Swan model, describing long run economic growth.
 
-$\frac{dK}{dt} = s Y - \delta K$
+\\(\frac{dK}{dt} = s Y - \delta K\\)
 
 What you have to realise is that at some point, these equations become so complex you cannot just solve it by hand anymore. We need to somehow convert it into computer language so we can get a computer to ‘solve it for us’. 
 

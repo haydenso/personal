@@ -16,19 +16,23 @@ interface MusingsListProps {
   onSelectCategory?: (category: string) => void
 }
 
-// Color mapping for categories
-const categoryColors: Record<string, string> = {
-  'notes': '#9333ea', // purple
-  'misc': '#eab308', // yellow
-  'ai': '#3b82f6', // blue
-  'software': '#10b981', // green
-  'china': '#ef4444', // red
-  'life/human condition': '#8b5cf6', // violet
-  'finance': '#9333ea', // gray
+// Color and order mapping for categories
+const categoryConfig: Record<string, { color: string; order: number }> = {
+  'notes': { color: '#9333ea', order: 1 }, // purple
+  'ai': { color: '#3b82f6', order: 2 }, // blue
+  'software': { color: '#10b981', order: 3 }, // green
+  'china': { color: '#ef4444', order: 4 }, // red
+  'finance': { color: '#9333ea', order: 5 }, // purple
+  'life': { color: '#8b5cf6', order: 6 }, // violet
+  'misc': { color: '#eab308', order: 7 }, // yellow
 }
 
 function getCategoryColor(category: string): string {
-  return categoryColors[category] || categoryColors['uncategorized']
+  return categoryConfig[category]?.color || '#6b7280'
+}
+
+function getCategoryOrder(category: string): number {
+  return categoryConfig[category]?.order || 999
 }
 
 export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging, onMouseDown, selectedCategory: selectedCategoryProp, onSelectCategory }: MusingsListProps) {
@@ -46,7 +50,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
       categoryMap.get(cat)!.push(m)
     })
     
-    const categories = Array.from(categoryMap.keys()).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    const categories = Array.from(categoryMap.keys()).sort((a, b) => getCategoryOrder(a) - getCategoryOrder(b))
     
     return { pinned, categoryMap, categories }
   }, [])

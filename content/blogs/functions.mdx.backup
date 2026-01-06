@@ -4,7 +4,7 @@ date: September 15 2025
 ---
 > read this onsubstack: [https://haydenso.substack.com/p/functions-describe-the-world](https://haydenso.substack.com/p/functions-describe-the-world)
 
-> **I haven't gotten my website to display latex equations properly...**
+I haven't gotten my website to display latex equations properly...
 
 **preface:** I’m a big believe in mental models to first understand an idea, so here I’ve dumbed down the concepts (some might be ‘technically’ inaccurate), but the gist of it remains as a springboard for greater curiosity
 
@@ -34,7 +34,7 @@ $y=4-x$
 
 In other words we can describe this as **y is a function of x.** Another way I like to think about the word function is that y **depends** on x. Whatever _x_ we plug into our function _f( )_ , we get a _y._
 
-$f(x) = y$
+\\(f(x) = y\\)
 
 * * *
 
@@ -55,7 +55,7 @@ Let’s say you wanna predict **how tired you are after a run.** It might depend
 
 Imagine to find out it is as simple as adding it all up all the numbers, which we can say **to find how tired you will be, it is a function of the x, t and z described above** :
 
-$\text{tiredness score} = f(x,t,z) = x + t +z$
+\\(\text{tiredness score} = f(x,t,z) = x + t +z\\)
 
 While that might be useful, you might realise, no actually, to identify how tired I am, what matters more is how fast I run actually. Also how fast I am accelerating is also important. 
 
@@ -117,7 +117,7 @@ $ \frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathr
 
  **Interested in the weather and planets? Interested in boats, planes or rockets?** To know this, we wanna know how water or air behaves using the Navier-Stokes equations.
 
-$\rho \left( \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} \right) = -\nabla p + \mu \nabla^2 \mathbf{v} + \mathbf{f} ] [ \nabla \cdot \mathbf{v} = 0$
+\\(\rho \left( \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} \right) = -\nabla p + \mu \nabla^2 \mathbf{v} + \mathbf{f} ] [ \nabla \cdot \mathbf{v} = 0\\)
 
  **Interested in telecommunications (wifi, mobile data)?** Here is part of the Maxwell Equations:
 

@@ -72,7 +72,15 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-border pl-4 italic my-4 font-serif;
+    @apply border-l-4 border-border pl-4 italic font-serif;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose hr {
+    @apply border-border;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .prose strong {
@@ -148,7 +156,15 @@
   }
 
   .prose-musings blockquote {
-    @apply border-l-4 border-border pl-4 italic my-4 font-sans;
+    @apply border-l-4 border-border pl-4 italic font-sans;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-musings hr {
+    @apply border-border;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .prose-musings strong {

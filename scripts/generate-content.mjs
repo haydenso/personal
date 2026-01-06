@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { fileURLToPath } from "url"
+import katex from "katex"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -21,8 +22,53 @@ function markdownToHtml(markdown) {
   }
 
   function processInlineMarkdown(text) {
-    // First process bold and italic
+    // First handle LaTeX math (both inline and display)
     let processedText = text
+    const katexPlaceholders = []
+    
+    // Handle display math \\[...\\] or $$...$$
+    processedText = processedText.replace(/\\\[(.*?)\\\]/gs, (match, latex) => {
+      try {
+        const rendered = katex.renderToString(latex, { displayMode: true, throwOnError: false })
+        katexPlaceholders.push(rendered)
+        return `___KATEX_${katexPlaceholders.length - 1}___`
+      } catch (e) {
+        return match
+      }
+    })
+    
+    processedText = processedText.replace(/\$\$(.*?)\$\$/gs, (match, latex) => {
+      try {
+        const rendered = katex.renderToString(latex, { displayMode: true, throwOnError: false })
+        katexPlaceholders.push(rendered)
+        return `___KATEX_${katexPlaceholders.length - 1}___`
+      } catch (e) {
+        return match
+      }
+    })
+    
+    // Handle inline math \\(...\\) or $...$
+    processedText = processedText.replace(/\\\((.*?)\\\)/g, (match, latex) => {
+      try {
+        const rendered = katex.renderToString(latex, { displayMode: false, throwOnError: false })
+        katexPlaceholders.push(rendered)
+        return `___KATEX_${katexPlaceholders.length - 1}___`
+      } catch (e) {
+        return match
+      }
+    })
+    
+    processedText = processedText.replace(/\$([^\$]+)\$/g, (match, latex) => {
+      try {
+        const rendered = katex.renderToString(latex, { displayMode: false, throwOnError: false })
+        katexPlaceholders.push(rendered)
+        return `___KATEX_${katexPlaceholders.length - 1}___`
+      } catch (e) {
+        return match
+      }
+    })
+    
+    // Then process bold and italic
     processedText = processedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     processedText = processedText.replace(/\*(.*?)\*/g, '<em>$1</em>')
 
@@ -80,6 +126,11 @@ function markdownToHtml(markdown) {
     links.forEach(({ text, url }) => {
       processedText = processedText.replace('___LINK___',
         `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`)
+    })
+
+    // Restore KaTeX rendered HTML
+    katexPlaceholders.forEach((html, index) => {
+      processedText = processedText.replace(`___KATEX_${index}___`, html)
     })
 
     return processedText

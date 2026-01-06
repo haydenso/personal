@@ -58,7 +58,8 @@ function markdownToHtml(markdown) {
       }
     })
     
-    processedText = processedText.replace(/\$([^\$]+)\$/g, (match, latex) => {
+    // Handle inline math $...$ (only if contains letters or LaTeX commands, not just numbers)
+    processedText = processedText.replace(/\$([^\$]*[a-zA-Z\\][^\$]*)\$/g, (match, latex) => {
       try {
         const rendered = katex.renderToString(latex, { displayMode: false, throwOnError: false })
         katexPlaceholders.push(rendered)

@@ -5,7 +5,6 @@ const interests = [
   "continual learning in token space and LLMs",  "intraday energy markets and commodities trading",
   "US-China relations",
   "Chinese elite politics and theory",
-  "effective altruism",
   "watching brainrot (anthropology i swear)",
   "weather prediction (ML vs numerical)",
   "post-training + RL environments > pretraining",

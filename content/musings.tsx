@@ -11,6 +11,16 @@ export interface Musing {
 
 export const musings: Musing[] = [
   {
+    "slug": "aesthetic",
+    "title": "my aesthetic",
+    "author": "Hayden",
+    "date": "2026",
+    "lastUpdated": "01-09-2026",
+    "pinned": false,
+    "category": "misc",
+    "content": "<blockquote>i've been quite interested in finding what aesthetics/styles i like and the relevant artists, designers or architects within the field.</blockquote>\n<p><strong>historical:</strong> the aesthetics of ancient greece, the roman empire and republic</p>\n<ul><li>Thomas Cole's Rome paintings</li></ul>\n<p><strong>futurism:</strong></p>\n<ul><li>robert mccall</li></ul>\n<p>(there is a whole wiki on space artists: https://en.wikipedia.org/wiki/List_of_space_artists)</p>\n<p><strong>product: </strong>- Dieter Rams</p>\n<ul><li>Achille Castiglioni</li></ul>\n<p>other avenues:</p>\n<ul><li>a curated pinterest board has been quite useful for UI </li><li>johannes' moodboard: https://x.com/johannes_hage/status/1624377827532447751/photo/1</li></ul>"
+  },
+  {
     "slug": "bars",
     "title": "professor giving talks at bars",
     "author": "Hayden",

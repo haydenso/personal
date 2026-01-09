@@ -71,9 +71,9 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     offsetX: sidebar.width,
   })
   const musingsList = useResizable({
-    initialWidth: 420,
-    minWidth: 200,
-    maxWidth: 600,
+    initialWidth: 500,
+    minWidth: 300,
+    maxWidth: 800,
     offsetX: sidebar.width,
   })
 
@@ -173,16 +173,24 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
       return
     }
 
-    // If the initial path is musings, auto-open the most recent musing
+    // If the initial path is musings, auto-open the first pinned musing (or most recent if no pinned)
     if (derivedTab === 'musings' && !selectedMusing) {
       const sortedMusings = [...musings].sort((a, b) => {
+        // Pinned musings first
         if (a.pinned && !b.pinned) return -1
         if (!a.pinned && b.pinned) return 1
-        return new Date(b.date).getTime() - new Date(a.date).getTime()
+        // Within same pinned status, sort by lastUpdated (newest first), fallback to date
+        const dateA = a.lastUpdated || a.date
+        const dateB = b.lastUpdated || b.date
+        return new Date(dateB).getTime() - new Date(dateA).getTime()
       })
 
       if (sortedMusings.length > 0) {
-        setSelectedMusing(sortedMusings[0].slug)
+        const firstMusing = sortedMusings[0]
+        setSelectedMusing(firstMusing.slug)
+        // Update URL to reflect the selected musing
+        const href = `/musings/${firstMusing.category || 'uncategorized'}/${firstMusing.slug}`
+        window.history.replaceState({}, '', href)
       }
     }
 
@@ -227,13 +235,21 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     if (selectedMusing) return // Don't override if already selected
 
     const sortedMusings = [...musings].sort((a, b) => {
+      // Pinned musings first
       if (a.pinned && !b.pinned) return -1
       if (!a.pinned && b.pinned) return 1
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
+      // Within same pinned status, sort by lastUpdated (newest first), fallback to date
+      const dateA = a.lastUpdated || a.date
+      const dateB = b.lastUpdated || b.date
+      return new Date(dateB).getTime() - new Date(dateA).getTime()
     })
 
     if (sortedMusings.length > 0) {
-      setSelectedMusing(sortedMusings[0].slug)
+      const firstMusing = sortedMusings[0]
+      setSelectedMusing(firstMusing.slug)
+      // Update URL to reflect the selected musing
+      const href = `/musings/${firstMusing.category || 'uncategorized'}/${firstMusing.slug}`
+      window.history.replaceState({}, '', href)
     }
   }, [activeTab, isWideViewport, selectedMusing])
 

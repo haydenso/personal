@@ -58,7 +58,7 @@ export const musings: Musing[] = [
     "lastUpdated": "01-06-2026",
     "pinned": false,
     "category": "finance",
-    "content": "<p>private companies/startups i wanna write a thesis on:</p>\n<p>@PrimeIntellect</p>\n<p>@ExaAILabs</p>\n<p>@WindBorneWx</p>\n<p>@SilurianAI</p>\n<p>@RainmakerCorp</p>\n<p>@aeolus_labs</p>\n<p>@MechanizeWork</p>\n<p>The General Intelligence Company of New York (https://www.generalintelligencecompany.com/)</p>\n<p>The Interaction Company of California, Inc.</p>\n<p>Boardy (https://www.linkedin.com/company/boardy/)</p>\n<p>Companies doing AI search optimization (e.g https://trymeridian.com/)</p>"
+    "content": "<p>private companies/startups i wanna write a thesis on:</p>\n<ol><li>Prime Intellect</li><li>Exa AI</li><li>WindBorne Systems </li><li>Silurian AI</li><li>Rainmaker Corp</li><li>Aeolus_labs</li><li>Mechanize Work</li><li>The General Intelligence Company of New York (https://www.generalintelligencecompany.com/)</li><li>The Interaction Company of California, Inc.</li><li>Boardy (https://www.linkedin.com/company/boardy/)</li><li>Companies doing SEO for AI / AI search optimization (e.g https://trymeridian.com/)</li><li>Browserbase (especially with their new 'learn by showing' feature)</li></ol>"
   },
   {
     "slug": "things",

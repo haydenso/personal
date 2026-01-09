@@ -22,6 +22,19 @@ import { blogs } from "@/content/blogs"
 
 export type Tab = "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
+const interests = [
+  "Chinese elite politics and political economy",
+  "multi-agent collaboration and agent infrastructure",
+  "continual learning in token space and RL x alignment problems",
+  "intraday energy markets and commodities trading",
+  "watching brainrot (it's anthropology i swear)",
+  "weather prediction (ML vs numerical)",
+  "laufey and olivia dean",
+  "sherlock holmes and crime investigations",
+  "the economics of warfare",
+  "progress studies, formation of states (Singapore & LKY), state capacity libertarianism and supply side progressivism",
+]
+
 interface MainAppProps {
   initialTab?: Tab
 }
@@ -34,6 +47,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   const [selectedMusing, setSelectedMusing] = useState<string | null>(null)
   const [selectedMusingCategory, setSelectedMusingCategory] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [interestsExpanded, setInterestsExpanded] = useState(false)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -296,10 +310,10 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   </div>
                 </div>
               <div className="space-y-4">
-                <p className="text-muted-foreground font-serif">member of non-technical technical staff</p>
+                <p className="text-muted-foreground font-serif">too technical to be non-technical, too non-technical to be technical</p>
                 <div>
                   <p
-                    className="font-serif pt-1.5 mb-2 text-[15px]"
+                    className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
                     style={{
                       color: '#000000',
                       backgroundColor: '#FEEABF',
@@ -310,13 +324,40 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   >/currently/ - starting <a href="https://sidoai.org/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">sidoai.org</a></p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
                     <li className="text-foreground text-sm"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about RL environments, AI adoption and China</li>
                     <li className="text-foreground text-sm">studying cs + planets at hkust, politics at hku</li>
-                     <li className="text-foreground text-sm"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading sherlock and engineering blogs</a>, listening to laufey</li>
+                    <li className="text-foreground text-sm"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading sherlock and engineering blogs</a>, listening to laufey</li>
+                    <li className="text-foreground text-sm">
+                      <button 
+                        onClick={() => setInterestsExpanded(!interestsExpanded)}
+                        className="inline-flex items-center gap-1 text-foreground hover:opacity-70 transition-opacity"
+                        aria-label="Toggle interests"
+                      >
+                        <span>interested in (reveal)</span>
+                        <svg 
+                          className={`w-3 h-3 transition-transform ${interestsExpanded ? 'rotate-180' : ''}`}
+                          fill="none" 
+                          strokeWidth="2.5" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </li>
                   </ol>
+                  {interestsExpanded && (
+                    <ol className="mt-3 space-y-1.5 list-decimal list-inside font-serif ml-4 text-sm text-muted-foreground italic">
+                      {interests.map((interest, index) => (
+                        <li key={index} className="leading-relaxed">
+                          {interest}
+                        </li>
+                      ))}
+                    </ol>
+                  )}
                 </div>
 
                 <div>
                   <p
-                    className="font-serif pt-1.5 mb-2 text-[15px]"
+                    className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
                     style={{
                       color: '#000000',
                       backgroundColor: '#FEEABF',
@@ -333,7 +374,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
               </div>
 
                   {/* Peek into quick links (sticky note buttons) */}
-                  <div className="mt-6">
+                  <div className="pt-3 mt-6">
                     <div className="font-serif text-[15px] mb-2">
                       <span style={{ color: '#000000', backgroundColor: '#FEEABF', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
                     </div>

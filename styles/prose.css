@@ -23,6 +23,8 @@
 
   .prose a {
     @apply text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .prose a:hover {
@@ -94,7 +96,7 @@
   /* Musings use sans-serif font */
   .prose-musings {
     @apply text-foreground font-sans;
-    text-align: justify;
+    text-align: left;
   }
 
   .prose-musings h1 {
@@ -115,6 +117,8 @@
 
   .prose-musings a {
     @apply text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .prose-musings a:hover {

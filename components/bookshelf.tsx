@@ -10,17 +10,18 @@ export function Bookshelf() {
   const [activeTab, setActiveTab] = useState<Tab>("books")
   const [selectedItem, setSelectedItem] = useState<string | null>(null)
 
+  // Books are already filtered for hidden ones
   const currentItems = activeTab === "books" ? books : albums
   const imagePath = activeTab === "books" ? "books" : "music"
 
   return (
     <div className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
       <div className="max-w-6xl mx-auto w-full">
-        <h1 className="text-4xl font-serif mb-8">bookshelf - under construction!</h1>
+        <h1 className="text-4xl font-serif mb-8">bookshelf</h1>
         <p className="text-muted-foreground mb-8">
           {activeTab === "books"
-            ? "A visual collection of books I've read or am reading."
-            : "A visual collection of albums I've listened to or am listening to."
+            ? "my books since childhood. powered by my Goodreads RSS feed (so cool this is open)"
+            : "my music on repeat "
           }
         </p>
 
@@ -57,7 +58,10 @@ export function Bookshelf() {
               className="group cursor-pointer"
               onClick={() => setSelectedItem(item.slug)}
             >
-              <div className="aspect-[3/4] bg-muted rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div className={cn(
+                "bg-muted overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded",
+                activeTab === "books" ? "aspect-[3/4]" : "aspect-square"
+              )}>
                 <img
                   src={`/${imagePath}/${item.slug}.jpg`}
                   alt={`Cover of ${item.title}`}
@@ -81,10 +85,10 @@ export function Bookshelf() {
                 </div>
               </div>
               <div className="mt-2 text-center">
-                <h3 className="text-sm font-medium text-foreground line-clamp-2">
+                <h3 className="text-base font-serif font-medium text-foreground line-clamp-2">
                   {item.title}
                 </h3>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-sm font-serif text-muted-foreground">
                   {activeTab === "books" ? (item as any).author : (item as any).artist}, {item.lastUpdated || item.date}
                 </p>
               </div>

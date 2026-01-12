@@ -1,0 +1,64 @@
+---
+title: messy notes on RLMs and RevOps
+date: January 11 2026
+---
+In an attempt to make my weekend rabbit holes *productive*, I’ve distilled the ramblings as *laymanly* as possible. Thats said, some technical terms cannot be recursively abstracted any further after 2-3 depths. A series of messy notes on the holes I fell:
+
+1. ***What’s up with Recursive Language Models (RLMs)***
+These great blogs I consumed in descending order of technicality: [Alex Mackenzie](https://mack.work/blog/recursive-language-models), [Arjun](https://www.k-a.in/RLM.html) [Alex Zhang](https://alexzhang13.github.io/blog/2025/rlm/), [Prime Intellect](https://www.primeintellect.ai/blog/rlm#summary-and-conclusion) and of course the [Arxiv](https://arxiv.org/abs/2512.24601)
+
+2. ***The engineer-ification GTM/Revenue/Operator type roles***
+xAI now has a team of CS students (basically) doing hiring called [Talent Engineering](https://job-boards.greenhouse.io/xai/jobs/4956005007). OpenAI has a team of engineer optimising internal ops and workflows called [Leverage Engineering](https://www.linkedin.com/posts/glen-worthington_leverage-engineering-as-the-name-implies-activity-7197344769218338816-uWr4/). Clay has long pioneered [GTM Engineering](https://www.clay.com/blog/gtm-engineering) (growth + revops by engineers).
+
+### I. Notes on RLMs
+**a whirlwind tour of the architecture:**
+- I’m watching Suits, so a law analogy is pretty helpful: A lawyer is expected to have studied the foundations of the law, however if he’s working on a fraud case, he’s not going to go over M&A textbooks (unless you’re Mike Ross)
+  - His existing law school training (pre-training) makes his a good lawyer, his specialisation (post-training) gives him domain experience/tacit knowledge on what to do. But when working on a case, he is going to decide what to restudy/dig deeper and only reference the relevant material/textbooks. Because overloading other stuff will likely make him forget (context rot)
+- The RLM paradigm is essentially the act of logically deducing what textbooks and materials are most relevant for the case at hand. 
+- Let’s say you find the right textbook, instead of reading page by page and then deciding on your answer, you might peek at the table of contents and only read the relevant chapter. This is essentially what RLMs with Python REPLs are doing.
+- The problem RLMs are trying to solve is the problem of context rot (assigning significance to the wrong things when there is so much info). Shorter context means 
+- The core idea is that RLMs program their way through the context; in the case of Alex’s paper, access to the context as a variable and using Python to wiggle it’s way through on what’s useful
+- To me, the two most interesting LLM optmization problems are: search (find the right data) and context (prevent context rot); RLMs seem to hit two birds with one stone 
+- For some cases, the RLM trajectory is longer than the size of the context window
+- I was initially wrapping my head around was how is this different to just good tool use or choosing the right MCP via Agents — but then I realised this really was just about keeping and hoarding space in the context window, so if anything a cleaner context window can make the agentic framework perform even better
+- If this work as ideally, a lot of context window managing techniques can be revisited and re-engineered (Manus AI's Peak has a pretty good blog detailing current [context engineering](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) techniques)
+
+**the economics and cost of tokens:**
+I’m bullish in a true optimized compute marketplace, the cost of tokens (and hereby intelligence) will dimish towards the cost of electricity. 
+
+In Arjun blog, he writes:
+> *Attention is expensive; databases are cheap. Treat context like data, not like attention state.*
+
+- Attention is expensive in a compute sense but also expensive in a performance sense.
+- Alex explicitly says that RLMs isn’t targetting cost for now, rather just pure performance gains
+- You have papers like [Cure the Bill, Keep the Turns: Affordable Multi-Turn Search RL](https://agate-slipper-ef0.notion.site/Cut-the-Bill-Keep-the-Turns-Affordable-Multi-Turn-Search-RL-003f78214a4d451fb06f453d084e666c)and [Prompt Chaching](https://ngrok.com/blog/prompt-caching/) that go pretty in depth on cost management via turning to RL scaffolding and KV caches.
+- Modern knowledge work really is just knowing what buttons to click and what words to type 
+
+
+### II. Engineering Revenue Intelligence
+Commoditization of software makes personalisation and unstructured data is no longer a problem:
+- By nature (whether correlation or causation), engineers are on average better at automating their existing work (especailly the 10x engineers/researchers) than the non technical folks
+- You wanna build fast 0-1 experiments across all walks of operations
+- Follow up and chasing people is 10x easier now
+- For the same reason, I see GTM stacks and Revenue operations to be more of an engineering problem, and more specifically a context problem. This essay on the [GTM Engineering](https://substack.com/home/post/p-173714626)evolution seems to agree
+- Engineers can be house both in RevOps and Growth teams (or a hybrid)
+- Different companies might have different heuristics/ways of doing good research. Just writing down the steps of how one does it can be pretty high leverage. Manual research can be pretty automated.
+- I think with the traditional revops folks there’s a curse of knowledge situation. many are stuck in: oh salesforce is supposed to work a certain way or we can only do sales after x,y,z. similarly they operate heavily on 6-7 step frameworks.
+- Bro, just get the revenue to go brrrrrrrrrrr
+- Transisitoning from founder-led calls: Trying to replicate what works/what doesn’t, what questions are asked and sort of building a bot 
+- There are cool case studies on [Notion, Anthropic, Ramp and Rippling](https://www.clay.com/blog/gtm-engineering) here (just to name a few)
+- Sometimes it’s not worth waiting for an official API drop when you can probably spend half a day doing this 
+
+On X, there have been a surge of [Context Graph](https://x.com/shensi_/status/2010394567279841350?s=46)type pieces and one of the repeated problem is the idea of ‘What to get’ and ‘What NOT to get’ for mass adoption to work. RLMs is like a perfect fix for this.
+> RevOps is a context problem.
+- The core of Revenue Operations is having **one source of truth** and proper **data hygeine**. However finding where that truth is can be a problem, RLMs can be useful here for having an absolute ground truth since it excels at ‘finding the needle’ and then ‘mapping relationships between the needles’ (arjun)
+- RLMs make modularisation a priority (with individual context windows)
+- Parts of a RevOps system should be modualrised since it is about coordination between sales, marketing and product teams.
+- Pairing RLMs with continual learning frameworks seem to be the future (a pretty blanket statement I realised, but ideal.)
+
+---
+extra reading list:
+[RevOps 101](https://revenuewizards.com/blog/how-to-implement-revenue-operations), [Best Practises](https://improvitz.com/revenue-operations-best-practices-for-saas-startups-without-dedicated-engineers/), [Browserbase GTM](https://www.browserbase.com/industry/gtm), [Index Venture’s GTM](https://www.indexventures.com/scaling-through-chaos/scaling-your-gtm-team), [Stripe's GTM](https://stripe.com/en-hk/resources/more/new-revenue-streams-for-enterprise-businesses), [AI GTM Stack](https://knowyourgrowth.substack.com/p/building-your-ai-gtm-stack), [Test-time Compute](https://huggingface.co/blog/Kseniase/testtimecompute), Kristin McDonald (VC, ex-Point72) writes really good GTM/RevOps on substack, [GTM Engineering & RevOps](https://www.clay.com/blog/gtm-engineering)
+
+---
+side thought, two things: I really like the clarity of Dwarkesh’s thoughts and the ability of Henrik Klarsson to construct bullet points. I want to write like them.

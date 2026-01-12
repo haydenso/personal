@@ -79,10 +79,23 @@ function markdownToHtml(markdown) {
     // Handle inline code
     processedText = processedText.replace(/`([^`]+)`/g, '<code>$1</code>')
 
+    // Handle images first (before links, since images also use []())
+    const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)(?:<!--\s*({[^}]+})\s*-->)?/g
+    const images = []
+    let match
+    
+    // Extract all images
+    while ((match = imagePattern.exec(processedText)) !== null) {
+      const attrs = match[3] ? JSON.parse(match[3]) : {}
+      images.push({ alt: match[1], url: match[2], attrs })
+    }
+    
+    // Replace images with placeholders
+    processedText = processedText.replace(imagePattern, '___IMAGE___')
+
     // Then handle links
     const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g
     const links = []
-    let match
 
     // Extract all links
     while ((match = linkPattern.exec(processedText)) !== null) {
@@ -122,6 +135,13 @@ function markdownToHtml(markdown) {
       .replace(/&lt;\/del&gt;/g, '</del>')
       .replace(/&lt;code&gt;/g, '<code>')
       .replace(/&lt;\/code&gt;/g, '</code>')
+
+    // Restore images as HTML
+    images.forEach(({ alt, url, attrs }) => {
+      const widthAttr = attrs.width ? ` width="${attrs.width}"` : ''
+      processedText = processedText.replace('___IMAGE___',
+        `<img src="${url}" alt="${alt}"${widthAttr} />`)
+    })
 
     // Restore links as HTML
     links.forEach(({ text, url }) => {

@@ -153,22 +153,41 @@ export function markdownToHtml(markdown: string): string {
   }
 
   function processInlineMarkdown(text: string): string {
-    // First escape HTML, then convert markdown links to HTML <a> tags
-    // We use a placeholder to protect link syntax during escaping
+    // First escape HTML, then convert markdown links and images to HTML
+    // We use placeholders to protect link/image syntax during escaping
     const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g
+    const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)(?:<!--\s*({[^}]+})\s*-->)?/g
     const links: Array<{ text: string; url: string }> = []
+    const images: Array<{ alt: string; url: string; attrs?: string }> = []
     let match
 
+    // Extract all images first (before links, since images also have []())
+    while ((match = imagePattern.exec(text)) !== null) {
+      const attrs = match[3] ? JSON.parse(match[3]) : {}
+      images.push({ alt: match[1], url: match[2], attrs: JSON.stringify(attrs) })
+    }
+
+    // Replace images with placeholders
+    let processedText = text.replace(imagePattern, '___IMAGE___')
+
     // Extract all links
-    while ((match = linkPattern.exec(text)) !== null) {
+    while ((match = linkPattern.exec(processedText)) !== null) {
       links.push({ text: match[1], url: match[2] })
     }
 
     // Replace links with placeholders
-    let processedText = text.replace(linkPattern, '___LINK___')
+    processedText = processedText.replace(linkPattern, '___LINK___')
 
     // Escape HTML in the remaining text
     processedText = escapeHtml(processedText)
+
+    // Restore images as HTML
+    images.forEach(({ alt, url, attrs }) => {
+      const parsedAttrs = attrs ? JSON.parse(attrs) : {}
+      const widthAttr = parsedAttrs.width ? ` width="${parsedAttrs.width}"` : ''
+      processedText = processedText.replace('___IMAGE___',
+        `<img src="${url}" alt="${alt}"${widthAttr} />`)
+    })
 
     // Restore links as HTML
     links.forEach(({ text, url }) => {

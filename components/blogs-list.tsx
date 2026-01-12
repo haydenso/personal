@@ -58,7 +58,12 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
       const year = parseInt(parts[2]) || new Date().getFullYear()
       return new Date(year, month, day).getTime()
     }
-    return [...blogs].sort((a, b) => parseDate(b.date) - parseDate(a.date))
+    // List of blog slugs to hide from the list
+    const hiddenSlugs = ['chinamaim', 'chinaai']
+    
+    return [...blogs]
+      .filter(blog => !hiddenSlugs.includes(blog.slug))
+      .sort((a, b) => parseDate(b.date) - parseDate(a.date))
   }, [])
 
   // Format date to YYYY-MM-DD format (handles "September 15 2025")

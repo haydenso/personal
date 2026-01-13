@@ -55,17 +55,17 @@ There were some interesting features that Claude was also pretty good at helping
 
 ### automating the book and music updates [haydenso.com/bookshelf](https://haydenso.com/bookshelf) to my notes app
 
-I also wanted for the longest time to have this bookshelf page that reflected my reviews on good notes, as well as having my most listened to Spotify music/audio soundtracks on my website.
+I also wanted for the longest time to have this bookshelf page that reflected my reviews on Goodreads, as well as having my most listened to Spotify music/audio soundtracks on my website.
 
 Initially I wanted to try to use AppleScript again, however I realized that for cases like this, sometimes the API is pretty easy to use. 
 
-For Goodreads, I realized that good notes actually exposes a pretty nice RSS endpoint that formats all the books of read added in sequential data order as well as the reviews. And also includes the JPEG image for the book cover that I can then use some simple LLM calling to clean up and download the image and then put it in the relevant folders and HTML files for my website.
+For Goodreads, I realized that they actually exposes a pretty nice RSS endpoint that formats all the books of read added in sequential data order as well as the reviews. And also includes the JPEG image for the book cover that I can then use some simple LLM calling to clean up and download the image and then put it in the relevant folders and HTML files for my website.
 
-![](/about/bookshelf.png)<!-- {"width":505} -->
+![](/about/music.png)<!-- {"width":505} -->
 
 For Spotify. Spotify has a pretty nice dev API that exposes the top 15 songs pretty periodically. All I had to do was build a simple bash script that called the API and pushed some code to change the list which existed in my website. And then use the name and some separate spotify Python library to download the cover of the Spotify soundtrack, which then stores the images in the relevant public folder.
 
-![](/about/music.png)<!-- {"width":505} -->
+![](/about/bookshelf.png)<!-- {"width":505} -->
 
 Claude pretty much one shot at all of this once I wrote out specific ways I wanted this to be implemented, which made it quite easy.
 

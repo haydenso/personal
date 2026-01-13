@@ -201,27 +201,114 @@ function markdownToHtml(markdown) {
       continue
     }
 
-    // Unordered lists
-    if (/^[-*]\s+/.test(line)) {
-      const items = []
-      while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
-        const itemText = processInlineMarkdown(lines[i].replace(/^[-*]\s+/, ""))
-        items.push(`<li>${itemText}</li>`)
-        i++
+    // Unordered lists (with nesting support)
+    if (/^(\s*)[-*]\s+/.test(line)) {
+      function parseList(startIndex, baseIndent = 0) {
+        const items = []
+        let j = startIndex
+        
+        while (j < lines.length) {
+          const currentLine = lines[j]
+          const match = currentLine.match(/^(\s*)[-*]\s+(.+)$/)
+          if (!match) break
+          
+          const indent = match[1].length
+          const content = match[2]
+          
+          // If indent is less than base, we're done with this level
+          if (indent < baseIndent) break
+          
+          // Only process if indent matches base
+          if (indent !== baseIndent) break
+          
+          const itemText = processInlineMarkdown(content)
+          j++
+          
+          // Check if next line is a nested list
+          if (j < lines.length) {
+            const nextMatch = lines[j].match(/^(\s*)[-*]\s+/)
+            if (nextMatch && nextMatch[1].length > indent) {
+              // Parse nested list
+              const nestedResult = parseList(j, nextMatch[1].length)
+              items.push(`<li>${itemText}${nestedResult.html}</li>`)
+              j = nestedResult.endIndex
+            } else {
+              items.push(`<li>${itemText}</li>`)
+            }
+          } else {
+            items.push(`<li>${itemText}</li>`)
+          }
+        }
+        
+        return {
+          html: items.length > 0 ? `<ul>${items.join('')}</ul>` : '',
+          endIndex: j
+        }
       }
-      html.push(`<ul>${items.join("")}</ul>`)
+      
+      const result = parseList(i, line.match(/^(\s*)[-*]\s+/)[1].length)
+      if (result.html) html.push(result.html)
+      i = result.endIndex
       continue
     }
 
-    // Ordered lists
-    if (/^\d+\.\s+/.test(line)) {
-      const items = []
-      while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
-        const itemText = processInlineMarkdown(lines[i].replace(/^\d+\.\s+/, ""))
-        items.push(`<li>${itemText}</li>`)
-        i++
+    // Ordered lists (with nesting support)
+    if (/^(\s*)\d+\.\s+/.test(line)) {
+      function parseOrderedList(startIndex, baseIndent = 0) {
+        const items = []
+        let j = startIndex
+        
+        while (j < lines.length) {
+          const currentLine = lines[j]
+          const match = currentLine.match(/^(\s*)\d+\.\s+(.+)$/)
+          if (!match) break
+          
+          const indent = match[1].length
+          const content = match[2]
+          
+          if (indent < baseIndent) break
+          
+          // Only process if indent matches base
+          if (indent !== baseIndent) break
+          
+          const itemText = processInlineMarkdown(content)
+          j++
+          
+          // Check for nested list (either ordered or unordered)
+          if (j < lines.length) {
+            const nextMatch = lines[j].match(/^(\s*)(\d+\.|-|\*)\s+/)
+            if (nextMatch && nextMatch[1].length > indent) {
+              const nestedIndent = nextMatch[1].length
+              let nestedHtml
+              
+              if (nextMatch[2].match(/\d+\./)) {
+                const nestedResult = parseOrderedList(j, nestedIndent)
+                nestedHtml = nestedResult.html
+                j = nestedResult.endIndex
+              } else {
+                const nestedResult = parseList(j, nestedIndent)
+                nestedHtml = nestedResult.html
+                j = nestedResult.endIndex
+              }
+              
+              items.push(`<li>${itemText}${nestedHtml}</li>`)
+            } else {
+              items.push(`<li>${itemText}</li>`)
+            }
+          } else {
+            items.push(`<li>${itemText}</li>`)
+          }
+        }
+        
+        return {
+          html: items.length > 0 ? `<ol>${items.join('')}</ol>` : '',
+          endIndex: j
+        }
       }
-      html.push(`<ol>${items.join("")}</ol>`)
+      
+      const result = parseOrderedList(i, line.match(/^(\s*)\d+\.\s+/)[1].length)
+      if (result.html) html.push(result.html)
+      i = result.endIndex
       continue
     }
 

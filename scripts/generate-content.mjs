@@ -201,27 +201,112 @@ function markdownToHtml(markdown) {
       continue
     }
 
-    // Unordered lists
-    if (/^[-*]\s+/.test(line)) {
-      const items = []
-      while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
-        const itemText = processInlineMarkdown(lines[i].replace(/^[-*]\s+/, ""))
-        items.push(`<li>${itemText}</li>`)
-        i++
+    // Unordered lists with nesting support
+    if (/^(\s*)[-*]\s+/.test(line)) {
+      function parseNestedList(startIndex, baseIndent = 0) {
+        const items = []
+        let j = startIndex
+        
+        while (j < lines.length) {
+          const listMatch = lines[j].match(/^(\s*)[-*]\s+(.*)$/)
+          if (!listMatch) break
+          
+          const indent = listMatch[1].length
+          const content = listMatch[2]
+          
+          // If this item is less indented than base, we're done with this level
+          if (indent < baseIndent) break
+          
+          // If this item matches our indent level, it's a sibling
+          if (indent === baseIndent) {
+            const itemText = processInlineMarkdown(content)
+            j++
+            
+            // Check if next line is a nested list
+            if (j < lines.length) {
+              const nextMatch = lines[j].match(/^(\s*)[-*]\s+/)
+              if (nextMatch && nextMatch[1].length > indent) {
+                const nestedResult = parseNestedList(j, nextMatch[1].length)
+                items.push(`<li>${itemText}${nestedResult.html}</li>`)
+                j = nestedResult.nextIndex
+              } else {
+                items.push(`<li>${itemText}</li>`)
+              }
+            } else {
+              items.push(`<li>${itemText}</li>`)
+            }
+          } else {
+            // This shouldn't happen if we're parsing correctly
+            break
+          }
+        }
+        
+        return {
+          html: `<ul>${items.join('')}</ul>`,
+          nextIndex: j
+        }
       }
-      html.push(`<ul>${items.join("")}</ul>`)
+      
+      const result = parseNestedList(i, line.match(/^(\s*)[-*]\s+/)[1].length)
+      html.push(result.html)
+      i = result.nextIndex
       continue
     }
 
-    // Ordered lists
-    if (/^\d+\.\s+/.test(line)) {
-      const items = []
-      while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
-        const itemText = processInlineMarkdown(lines[i].replace(/^\d+\.\s+/, ""))
-        items.push(`<li>${itemText}</li>`)
-        i++
+    // Ordered lists with nesting support
+    if (/^(\s*)\d+\.\s+/.test(line)) {
+      function parseNestedOrderedList(startIndex, baseIndent = 0) {
+        const items = []
+        let j = startIndex
+        
+        while (j < lines.length) {
+          const listMatch = lines[j].match(/^(\s*)\d+\.\s+(.*)$/)
+          if (!listMatch) break
+          
+          const indent = listMatch[1].length
+          const content = listMatch[2]
+          
+          // If this item is less indented than base, we're done with this level
+          if (indent < baseIndent) break
+          
+          // If this item matches our indent level, it's a sibling
+          if (indent === baseIndent) {
+            const itemText = processInlineMarkdown(content)
+            j++
+            
+            // Check if next line is a nested list (ordered or unordered)
+            if (j < lines.length) {
+              const nextOrderedMatch = lines[j].match(/^(\s*)\d+\.\s+/)
+              const nextUnorderedMatch = lines[j].match(/^(\s*)[-*]\s+/)
+              
+              if (nextOrderedMatch && nextOrderedMatch[1].length > indent) {
+                const nestedResult = parseNestedOrderedList(j, nextOrderedMatch[1].length)
+                items.push(`<li>${itemText}${nestedResult.html}</li>`)
+                j = nestedResult.nextIndex
+              } else if (nextUnorderedMatch && nextUnorderedMatch[1].length > indent) {
+                const nestedResult = parseNestedList(j, nextUnorderedMatch[1].length)
+                items.push(`<li>${itemText}${nestedResult.html}</li>`)
+                j = nestedResult.nextIndex
+              } else {
+                items.push(`<li>${itemText}</li>`)
+              }
+            } else {
+              items.push(`<li>${itemText}</li>`)
+            }
+          } else {
+            break
+          }
+        }
+        
+        return {
+          html: `<ol>${items.join('')}</ol>`,
+          nextIndex: j
+        }
       }
-      html.push(`<ol>${items.join("")}</ol>`)
+      
+      const result = parseNestedOrderedList(i, line.match(/^(\s*)\d+\.\s+/)[1].length)
+      html.push(result.html)
+      i = result.nextIndex
       continue
     }
 

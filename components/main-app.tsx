@@ -326,7 +326,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   </div>
                 </div>
               <div className="space-y-4">
-                <p className="text-muted-foreground font-serif">too technical to be non-technical, too non-technical to be technical</p>
+                <p className="text-muted-foreground font-serif">non-technically technical and technically non-technical</p>
                 <div>
                   <p
                     className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
@@ -338,9 +338,9 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       display: 'inline-block',
                     }}
                   >/currently/ - starting <a href="https://sidoai.org/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">sidoai.org</a></p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground text-sm"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about RL environments, AI adoption and Growth</li>
+                    <li className="text-foreground text-sm"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about RL environments + AI, geopolitics and GTM</li>
                     <li className="text-foreground text-sm">studying cs + planets at hkust, politics at hku</li>
-                    <li className="text-foreground text-sm"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading sherlock and engineering blogs</a>, listening to laufey</li>
+                    <li className="text-foreground text-sm"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading sherlock and engineering blogs</a>, listening to laufey and dwarkesh</li>
                     <li className="text-foreground text-sm">
                       <button 
                         onClick={() => setInterestsExpanded(!interestsExpanded)}

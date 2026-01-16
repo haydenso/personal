@@ -25,9 +25,11 @@ storage
 
 The same can be said for compute. 
 
-Which gets me to my point: considering the nature of property markets, the next best alternative to the art of homebuilding is probably playing around with your personal website by building random cool plugins or workflows to make your life easier. I’ve been having a lot of fun on this front. Vercel + Github is your free apartment and Claude is your Ikea. And I want furniture for my website.
+Which gets me to my point: considering the nature of property markets, the next best alternative to the art of homebuilding is probably playing around with your personal website by building random cool plugins or workflows to make your life easier. I’ve been having a lot of fun on this front.
 
-The basically structure of my personal website is a NextJS app hosted on Vercel (set up with auto deploy connected to my Github repo). The blogs/musings are fed off as mdx file and other data are stored as json objects (see bookshelf). I woul
+Vercel + Github is your free apartment and Claude Code is your Ikea. And I want furniture for my website.
+
+The basically structure of my personal website is a NextJS app hosted on Vercel (set up with auto deploy connected to my Github repo). The blogs/musings are fed off as mdx file and other data are stored as json objects (see bookshelf). 
 
 ---
 ### automating [haydenso.com/musings](https://haydenso.com/musings/notes/docket) to connect to my apple notes app
@@ -35,9 +37,11 @@ The basically structure of my personal website is a NextJS app hosted on Vercel 
 
 ![](/about/musings.png)<!-- {"width":505} -->
 
-I’ve been wanting to write more and share my thoughts online. And traditionally, even though writing in VS code in markdown was not too bad, friction was pretty high. Alternatively I cool use a markdown editor and then paste it in. But I wanted to make this seamless. So I was like, hey, I’m gonna start writing in these short musings in the form of notes that I do anyway with my Apple notes app. Is there any way for me to automatically display that onto my website?
+I’ve been wanting to write more and share my thoughts online. There are two types on my website, my longer blogs that I write on substack and shorter list-of-lists or quick thoughts that I usually write up in my apple notes app on the fly. I call these musings.
 
-Initially I probably used three to four premium requests to build my own custom text or blog management system (CMS) via some custom UI in Next.js powered by some Python text editor module. The issue of that was a lot of good features of text editors were pretty hard (or time consuming to test + implement in a satisfactory way), such as having automatic bolding and italics and color and all sorts of features; it made it quite difficult to make my writing experience that good. And I want it to be fun to write.
+And traditionally, even though writing in VS code in markdown was not too bad, friction was pretty high. Alternatively I cool use a markdown editor and then paste it in. But I wanted to make this seamless. So I was like, hey, I’m gonna start writing in these short musings in the form of notes that I do anyway with my Apple notes app. Is there any way for me to automatically display that onto my website?
+
+Initially I probably used three to four premium requests to build my own custom text or blog management system (CMS) via some custom UI in Next.js powered by some Python text editor module. The issue of that was a lot of good features of text editors were pretty hard (or time consuming to test + implement in a satisfactory way), such as having automatic bolding and italics and color and all sorts of features; it made it quite difficult to make my writing experience that good. And I want it to be fun to write. I also lost a few musings and blogs because I forgot to press save (could've implement an auto save feature.)
 
 ![](/about/blog.png)<!-- {"width":505} -->
 
@@ -51,7 +55,13 @@ I ended up spending some time writing out a spec of how I wanted this whole syst
 
 **The solution.** So what I end up implementing was this Apple Scripts system where every time I create a note or edit a note in a specific folder, it executes this bash scripts that then extracts the relevant changed notes into a markdown format, which then is pushed to my folder where all my blogs are then hosted in a separate markdown file. And through this markdown file is then converted into HTML, which is then hosted alongside my website on Vercel. This means I skip all forms of authentication in API usage. 
 
-There were some interesting features that Claude was also pretty good at helping me figure out, which included having this hash so that it doesn’t update all the blogs and regenerates it every time. Save some efficiency as the number of blogs and usings expand and grow.
+**Unstructured to markdown.** Apple notes aren't saved in markdown, which made it a multi-prompt task to get it in the desired format. Currently bullet points, images, quotes, tables etc. work but getting code blocks or other fancier edits like colour probably require a little more testing.
+
+**Other considerations**. I had to play around were the idea that I also wanted categories (so I had to make a sub-folder system work) and also the idea I wanted pinned notes at the top. 
+
+**Different slug**. By default, the slug of the musing was the title but occasionally I want it to be shorter and more choppy (i.e one word) so I had to play around to get custom slugs to work (so I can share it with my friends too). The mdx files also have a frontmatter, the meta-data, that had last edit dates, tags, categories that require close coordination with the structure of my website deployment itself. However this can be quite easily modularised and I might make this a public template people can use for their own purposes. Go typescript and open source!!!
+
+There were some interesting features that Claude was also pretty good at helping me figure out, which included having this hash so that it doesn’t update all the blogs and regenerates it every time. Save some efficiency as the number of blogs and musings expand and grow.
 
 ### automating the book and music updates [haydenso.com/bookshelf](https://haydenso.com/bookshelf) to my notes app
 
@@ -59,11 +69,11 @@ I also wanted for the longest time to have this bookshelf page that reflected my
 
 Initially I wanted to try to use AppleScript again, however I realized that for cases like this, sometimes the API is pretty easy to use. 
 
-For Goodreads, I realized that they actually exposes a pretty nice RSS endpoint that formats all the books of read added in sequential data order as well as the reviews. And also includes the JPEG image for the book cover that I can then use some simple LLM calling to clean up and download the image and then put it in the relevant folders and HTML files for my website.
+For Goodreads, I realized that they actually exposes a pretty nice RSS endpoint that formats all the books of read added in sequential data order as well as the reviews. And also includes the JPEG image for the book cover that I can then use some simple LLM calling to clean up and download the image and then put it in the relevant folders and HTML files for my website. It now periodically checks my RSS feed or I can manually push it to get the latest reviews and book list. Figuring how I wanted the slug to look like as well as optimizing the image storage for first load was also quite fun to play around with.
 
 ![](/about/music.png)<!-- {"width":505} -->
 
-For Spotify. Spotify has a pretty nice dev API that exposes the top 15 songs pretty periodically. All I had to do was build a simple bash script that called the API and pushed some code to change the list which existed in my website. And then use the name and some separate spotify Python library to download the cover of the Spotify soundtrack, which then stores the images in the relevant public folder.
+For Spotify. Spotify has a pretty nice dev API that exposes the top 15 songs pretty periodically. All I had to do was build a simple bash script that called the API and pushed some code to change the list which existed in my website. And then use the name and some separate spotify Python library to download the cover of the Spotify soundtrack, which then stores the images in the relevant public folder. I think my spotify API is a little behind my absolute latest musing taste but that'll do for now. It'll be fun to add a live widget that shows what I am listening to in the future. You can get your spotify token at [Spotify Dev API](https://developer.spotify.com/console/get-current-user-top-artists-and-tracks/).
 
 ![](/about/bookshelf.png)<!-- {"width":505} -->
 

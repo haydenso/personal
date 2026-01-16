@@ -12,11 +12,6 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.1.38'],
   async redirects() {
     return [
-      {
-        source: '/scmp/:path*',
-        destination: 'https://haydenso.github.io/scmp/:path*',
-        permanent: true,
-      },
       // Blog shortlinks - redirect /slug to /blogs/slug
       {
         source: '/ChinaAI',

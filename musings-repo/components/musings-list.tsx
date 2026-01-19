@@ -1,0 +1,197 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+import { musings } from "@/content/musings"
+import { cn } from "@/lib/utils"
+import { ResizeHandle } from "./resize-handle"
+import { Footer } from "./footer"
+import { useEffect, useState, useMemo, useCallback } from "react"
+import { ChevronRight, ChevronDown } from "lucide-react"
+import { config, getCategoryColor, getCategoryOrder } from '@/config'
+
+interface MusingsListProps {
+  selectedMusing: string | null
+  onSelectMusing: (slug: string) => void
+  width: number
+  isDragging: boolean
+  onMouseDown: (e: React.MouseEvent) => void
+}
+
+export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging, onMouseDown }: MusingsListProps) {
+  const router = useRouter()
+  
+  const { pinned, categoryMap, categories } = useMemo(() => {
+    const pinned = musings.filter(m => m.pinned)
+    const unpinned = musings.filter(m => !m.pinned)
+    
+    const categoryMap = new Map<string, typeof musings>()
+    unpinned.forEach(m => {
+      const cat = m.category || config.defaultCategory
+      if (!categoryMap.has(cat)) categoryMap.set(cat, [])
+      categoryMap.get(cat)!.push(m)
+    })
+    
+    const categories = Array.from(categoryMap.keys()).sort((a, b) => getCategoryOrder(a) - getCategoryOrder(b))
+    
+    return { pinned, categoryMap, categories }
+  }, [])
+  
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
+    new Set(categories)
+  )
+  
+  const toggleCategory = useCallback((category: string) => {
+    setExpandedCategories(prev => {
+      const next = new Set(prev)
+      if (next.has(category)) {
+        next.delete(category)
+      } else {
+        next.add(category)
+      }
+      return next
+    })
+  }, [])
+
+  const handleMusingClick = useCallback((musing: typeof musings[0], e: React.MouseEvent) => {
+    const href = `/${musing.category || config.defaultCategory}/${musing.slug}`
+    
+    const isNarrow = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
+    if (isNarrow) {
+      e.preventDefault()
+      router.push(href)
+      return
+    }
+
+    e.preventDefault()
+    onSelectMusing(musing.slug)
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', href)
+      window.dispatchEvent(new PopStateEvent('popstate'))
+    }
+  }, [router, onSelectMusing])
+
+  function renderMusingButton(musing: typeof musings[0]) {
+    const isSelected = selectedMusing === musing.slug
+    const preview = musing.content
+      .replace(/<[^>]*>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .substring(0, 100) + (musing.content.length > 100 ? '...' : '')
+    const href = `/${musing.category || config.defaultCategory}/${musing.slug}`
+
+    return (
+      <a
+        key={musing.slug}
+        href={href}
+        onClick={(e) => handleMusingClick(musing, e)}
+        className={cn(
+          "w-full text-left p-4 mb-2 rounded-lg transition-colors border-l-4 block",
+          isSelected 
+            ? `border-[${config.ui.selectedColor}]` 
+            : "bg-white border-transparent hover:bg-orange-100"
+        )}
+        style={isSelected ? { backgroundColor: config.ui.selectedColor, borderColor: config.ui.selectedColor } : {}}
+      >
+        <div className="flex flex-col">
+          <div className="flex items-center justify-between mb-1">
+            <h3 className="text-sm font-semibold truncate text-foreground">
+              {musing.title}
+            </h3>
+          </div>
+          <p className="text-xs text-muted-foreground mb-1">
+            {musing.author} • {musing.date}
+          </p>
+          {preview && (
+            <p className="text-xs text-muted-foreground line-clamp-2">
+              {preview}
+            </p>
+          )}
+        </div>
+      </a>
+    )
+  }
+
+  const [isWide, setIsWide] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const mq = window.matchMedia("(min-width: 768px)")
+    const handler = () => setIsWide(mq.matches)
+    mq.addEventListener?.("change", handler)
+    mq.addListener?.(handler)
+    handler()
+    return () => {
+      mq.removeEventListener?.("change", handler)
+      mq.removeListener?.(handler)
+    }
+  }, [])
+
+  return (
+    <div
+      style={{ width: isWide ? `${width}px` : "100%" }}
+      className={cn(
+        "relative h-full overflow-y-auto shrink-0 border-r border-border",
+        selectedMusing && "max-md:hidden",
+      )}
+    >
+      <div className="px-6 md:px-16 pt-28 md:pt-16 pb-0 w-full max-w-3xl md:mx-auto flex flex-col justify-between min-h-full md:items-stretch">
+        <div className="flex-1">
+          <h1 className="text-4xl font-serif mb-2">{config.site.title}</h1>
+          <p className="text-muted-foreground mb-6">{config.site.description}</p>
+
+          {pinned.length > 0 && (
+            <>
+              <div className="text-xs uppercase tracking-wider text-muted-foreground mb-3 font-mono">Pinned</div>
+              {pinned.map((m) => renderMusingButton(m))}
+            </>
+          )}
+
+          <div className="text-xs uppercase tracking-wider text-muted-foreground mb-3 mt-6 font-mono">Rest</div>
+          <div className="space-y-1">
+            {categories.map(category => {
+              const categoryMusings = categoryMap.get(category) || []
+              const isExpanded = expandedCategories.has(category)
+              const color = getCategoryColor(category)
+              
+              return (
+                <div key={category} className="mb-2">
+                  <button
+                    onClick={() => toggleCategory(category)}
+                    className="w-full flex items-center justify-between px-3 py-2 hover:bg-gray-100 transition-colors text-left rounded-md"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      {isExpanded ? (
+                        <ChevronDown className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                      ) : (
+                        <ChevronRight className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                      )}
+                      <div 
+                        className="w-2 h-2 rounded-full flex-shrink-0" 
+                        style={{ backgroundColor: color }}
+                      />
+                      <span className="font-medium text-sm">{category.toLowerCase()}</span>
+                    </div>
+                    <span className="text-xs text-muted-foreground">{categoryMusings.length}</span>
+                  </button>
+                  
+                  {isExpanded && (
+                    <div className="mt-1">
+                      {categoryMusings
+                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                        .map(m => renderMusingButton(m))
+                      }
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <Footer />
+      </div>
+
+      {selectedMusing && <ResizeHandle onMouseDown={onMouseDown} isDragging={isDragging} />}
+    </div>
+  )
+}

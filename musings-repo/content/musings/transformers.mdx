@@ -1,0 +1,46 @@
+---
+title: Understanding Transformers
+author: Your Name
+date: January 10, 2025
+lastUpdated: January 12, 2025
+category: ai
+---
+
+# Understanding Transformers
+
+Quick notes on the transformer architecture and why it revolutionized AI.
+
+## Key Concepts
+
+### Self-Attention
+
+The core innovation: allowing the model to weigh the importance of different parts of the input.
+
+The attention formula:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+Where:
+- $Q$ = Query matrix
+- $K$ = Key matrix  
+- $V$ = Value matrix
+- $d_k$ = dimension of keys
+
+### Multi-Head Attention
+
+Instead of one attention mechanism, use multiple "heads" in parallel:
+
+$$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$$
+
+## Why It Works
+
+1. **Parallelization**: Unlike RNNs, transformers can process all positions simultaneously
+2. **Long-range dependencies**: Attention can connect any two positions directly
+3. **Scalability**: Architecture scales well with more data and compute
+
+## Resources
+
+- [Attention Is All You Need](https://arxiv.org/abs/1706.03762) - The original paper
+- [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/) - Great visual explanation
+
+The transformer architecture is the foundation for GPT, BERT, and most modern LLMs.

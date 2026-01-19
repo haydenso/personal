@@ -79,12 +79,11 @@
   }
 
   .prose-musings ul {
-    list-style-type: "➢ ";
+    list-style-type: disc;
   }
   
   .prose-musings ul > li::marker {
     color: hsl(var(--muted-foreground));
-    font-size: 0.85em;
   }
 
   .prose-musings li {

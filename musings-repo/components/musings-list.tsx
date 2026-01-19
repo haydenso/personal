@@ -87,10 +87,13 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
         className={cn(
           "w-full text-left p-4 mb-2 rounded-lg transition-colors border-l-4 block",
           isSelected 
-            ? `border-[${config.ui.selectedColor}]` 
+            ? "" 
             : "bg-white border-transparent hover:bg-orange-100"
         )}
-        style={isSelected ? { backgroundColor: config.ui.selectedColor, borderColor: config.ui.selectedColor } : {}}
+        style={isSelected ? { 
+          backgroundColor: config.ui.selectedColor, 
+          borderLeftColor: config.ui.selectedColor 
+        } : {}}
       >
         <div className="flex flex-col">
           <div className="flex items-center justify-between mb-1">

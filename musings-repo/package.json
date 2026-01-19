@@ -21,8 +21,7 @@
     "generate-musings": "node scripts/generate-musings.mjs",
     "dev": "npm run generate-musings && next dev",
     "build": "npm run generate-musings && next build",
-    "start": "next start",
-    "lint": "echo 'Linting skipped'"
+    "start": "next start"
   },
   "dependencies": {
     "clsx": "^2.1.1",

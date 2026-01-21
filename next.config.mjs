@@ -12,6 +12,11 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.1.38'],
   async redirects() {
     return [
+      {
+        source: '/rcn',
+        destination: '/blogs/rcn',
+        permanent: false,
+      },
       // Blog shortlinks - redirect /slug to /blogs/slug
       {
         source: '/ChinaAI',
@@ -35,11 +40,6 @@ const nextConfig = {
       },
       {
         source: '/rollups-rl',
-        destination: '/blogs/rollup-rl',
-        permanent: false,
-      },
-      {
-        source: '/rollup-rl',
         destination: '/blogs/rollup-rl',
         permanent: false,
       },

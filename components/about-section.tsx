@@ -51,7 +51,7 @@ export function AboutSection() {
       <div className="flex items-center gap-4 pt-4">
         <span className="text-muted-foreground">See also:</span>
         <a
-          href="https://github.com/haydsso"
+          href="https://github.com/haydenso"
           target="_blank"
           rel="noopener noreferrer"
           className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"

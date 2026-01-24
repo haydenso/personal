@@ -1,17 +1,25 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { JetBrains_Mono, STIX_Two_Text, Zalando_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import "katex/dist/katex.min.css"
 
-const zalandoSans = {
-  className: "zalando-sans",
+const zalandoSans = Zalando_Sans({
+  subsets: ["latin"],
   variable: "--font-sans",
-}
-const stixTwoText = {
-  className: "stix-two-text",
+  display: "swap",
+})
+const stixTwoText = STIX_Two_Text({
+  subsets: ["latin"],
   variable: "--font-serif",
-}
+  display: "swap",
+})
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "hayden's blueprint",
@@ -31,19 +39,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&family=Zalando+Sans:ital,wght@0,200..900;1,200..900&display=swap"
-          rel="stylesheet"
-        />
-          <link rel="shortcut icon" href="/face/favicon.ico" />
-          <link rel="icon" type="image/png" sizes="192x192" href="/face/favicon-192x192.png" />
-          <link rel="apple-touch-icon" sizes="192x192" href="/face/apple-touch-icon.png" />
-          <meta name="apple-mobile-web-app-title" content="hayden's blueprint" />
-          <meta name="theme-color" content="#FFD52E" />
+        <link rel="shortcut icon" href="/face/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/face/favicon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/face/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="hayden's blueprint" />
+        <meta name="theme-color" content="#FFD52E" />
       </head>
-      <body className={`${stixTwoText.variable} ${zalandoSans.variable} font-sans antialiased overflow-hidden`}>
+      <body className={`${stixTwoText.variable} ${zalandoSans.variable} ${jetBrainsMono.variable} font-sans antialiased overflow-hidden`}>
         {children}
         <Analytics />
       </body>

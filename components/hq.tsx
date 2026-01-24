@@ -1,34 +1,41 @@
+import Image from "next/image"
+
 export function HQ() {
   const linkClass = "text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
   const linkMutedClass = "text-[#A5D8FF] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid hover:opacity-100 opacity-80"
 
   return (
     <main
-      className="flex-1 px-10 md:px-45 overflow-y-auto pt-28 md:pt-16 flex flex-col min-h-screen pb-8"
+      className="flex-1 px-8 md:px-45 overflow-y-auto pt-20 md:pt-16 flex flex-col min-h-screen pb-8"
       style={{
-        backgroundImage: "linear-gradient(rgba(8, 110, 184, 10), rgba(8, 110, 184, 0.65)), url('/blueprint.jpg')",
+        backgroundColor: '#086EB8',
+        backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
         backgroundRepeat: 'no-repeat, repeat',
-        backgroundSize: 'auto, 420px',
+        backgroundSize: 'auto, 320px',
         backgroundPosition: 'center, top left',
         color: '#EBEFF4'
       }}
     >
       <div className="max-w-2xl mx-auto w-full">
         {/* Hero Image */}
-        <div className="mb-12">
-          <img
+        <div className="mb-6 md:mb-12">
+          <Image
             src="/hq.jpeg"
             alt="HQ"
+            width={919}
+            height={656}
+            priority
+            sizes="(max-width: 768px) 100vw, 640px"
             className="w-full h-auto"
           />
         </div>
 
         {/* Content */}
-        <div className="space-y-4 font-serif">
+        <div className="space-y-4 font-serif text-sm md:text-base">
           <div>
             <div className="flex justify-between gap-2">
               <div>
-                <h1 className="text-xl font-serif font-bold mb-1">hey, i'm hayden!</h1>
+                <h1 className="text-lg md:text-xl font-serif font-bold mb-1">hey, i'm hayden!</h1>
                 <p>
                   &gt; i flâneur, {" "}
                   <a
@@ -46,21 +53,28 @@ export function HQ() {
                   </a>
                 </p>
               </div>
-              <img src="/face/logo.png" alt="logo" className="w-13 h-13 rounded-md object-cover" />
+              <Image
+                src="/face/logo.png"
+                alt="logo"
+                width={48}
+                height={48}
+                sizes="(max-width: 768px) 48px, 56px"
+                className="w-12 h-12 md:w-14 md:h-14 rounded-md object-cover"
+              />
             </div>
           </div>
 
 
-            <div className="text-sm pb-3">
+            <div className="text-xs md:text-sm pb-3">
               <p className="font-bold">current shower thoughts: (1) RL, data and adoption, (2) politics of ai, (3) accelerating scientific discovery</p>
             </div>
 
           <div className="space-y-4">
-            <div className="mt-2 grid grid-cols-2 gap-6 text-sm pb-4 " >
+            <div className="mt-2 grid grid-cols-2 gap-6 text-xs md:text-sm pb-4">
               <div className="space-y-1">
                 <p className="text-xs tracking-[0.2em] text-[#EBEFF4]/70">writings</p>
                 <a href="/musings" className={`block ${linkClass}`}>
-                  <img src="/notes.webp" alt="" className="inline-block h-4 w-4 object-contain align-middle mr-2" aria-hidden="true" />
+                  <Image src="/notes.webp" alt="" width={16} height={16} className="inline-block h-4 w-4 object-contain align-middle mr-2" aria-hidden />
                   <span>peek my notes app</span>
                 </a>
                 <a href="/blogs" className={`block ${linkClass}`}>long-form essays</a>
@@ -75,15 +89,15 @@ export function HQ() {
             </div>
 
             <div>
-              <p className="pb-2 text-sm font-bold ">my first 20 years, i've:</p>
-              <ul className="space-y-2 ml-6 list-disc text-sm pb-3">
+              <p className="pb-2 text-xs md:text-sm font-bold">my first 20 years, i've:</p>
+              <ul className="space-y-2 ml-6 list-disc text-xs md:text-sm pb-3">
                     <li>sold guns in the arctic and led janitorial operations</li>
                 <li>dabbled in applied ai, private equity, consulting, academia and gov/policy</li>
                 <li>from/live in hong kong (hkust), did high school in norway (uwc!)</li>
               </ul>
             </div>
 
-            <div className="text-sm">
+            <div className="text-xs md:text-sm">
               im probably listening to {" "}
               <a
                 href="/bookshelf"

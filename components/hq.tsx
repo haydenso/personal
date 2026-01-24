@@ -59,18 +59,18 @@ export function HQ() {
             <div className="mt-2 grid grid-cols-2 gap-6 text-sm pb-4 " >
               <div className="space-y-1">
                 <p className="text-xs tracking-[0.2em] text-[#EBEFF4]/70">writings</p>
-                <a href="/musings" className={`block ${linkMutedClass}`}>
+                <a href="/musings" className={`block ${linkClass}`}>
                   <img src="/notes.webp" alt="" className="inline-block h-4 w-4 object-contain align-middle mr-2" aria-hidden="true" />
                   <span>peek my notes app</span>
                 </a>
-                <a href="/blogs" className={`block ${linkMutedClass}`}>long-form essays</a>
-                <a href="/rcn" className={`block ${linkMutedClass}`}>reflecting on high school</a>
+                <a href="/blogs" className={`block ${linkClass}`}>long-form essays</a>
+                <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
               </div>
               <div className="space-y-1">
                 <p className="text-xs  tracking-[0.2em] text-[#EBEFF4]/70">selected projects</p>
-                <a href="/github" className={`block ${linkMutedClass}`}>people searcher</a>
-                <a href="/github" className={`block ${linkMutedClass}`}>rl environments</a>
-                <a href="/blogs/ikea" className={`block ${linkMutedClass}`}>automations</a>
+                <a href="/github" className={`block ${linkClass}`}>people searcher</a>
+                <a href="/github" className={`block ${linkClass}`}>rl environments</a>
+                <a href="/blogs/ikea" className={`block ${linkClass}`}>automations</a>
               </div>
             </div>
 
@@ -78,7 +78,7 @@ export function HQ() {
               <p className="pb-2 text-sm font-bold ">my first 20 years, i've:</p>
               <ul className="space-y-2 ml-6 list-disc text-sm pb-3">
                     <li>sold guns in the arctic and led janitorial operations</li>
-                <li>dabbled in applied ai, private equity, consulting, academia and gov</li>
+                <li>dabbled in applied ai, private equity, consulting, academia and gov/policy</li>
                 <li>from/live in hong kong (hkust), did high school in norway (uwc!)</li>
               </ul>
             </div>

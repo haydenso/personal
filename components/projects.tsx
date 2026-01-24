@@ -20,7 +20,7 @@ export function Projects() {
           <div>
             <h1 className="text-4xl font-serif mb-2 text-foreground">projects</h1>
             <p className="text-muted-foreground mb-6">things i've built & am building.</p>
-            <p className="text-muted-foreground italic font-serif">my linkedin makes me seem less technical than i am. i swear i can code.</p>
+            <p className="text-muted-foreground italic font-serif">clawd and i go way back. did my first git commit at 14 y/o.</p>
           </div>
 
           <div className="flex justify-center gap-3 text-muted-foreground/40">

@@ -12,10 +12,16 @@ export default async function MusingFullPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-[#f5f5f0] md:bg-white">
+      <div
+        className="fixed top-0 left-0 right-0 z-40 h-28 md:hidden pointer-events-none backdrop-blur-md"
+        style={{
+          background: 'linear-gradient(180deg, rgba(224, 235, 252, 0.96) 0%, rgba(224, 235, 252, 0.75) 40%, rgba(224, 235, 252, 0.35) 70%, rgba(224, 235, 252, 0) 100%)'
+        }}
+      />
       {/* Hamburger menu for mobile */}
       <Link 
         href="/musings"
-        className="fixed top-6 left-6 z-50 md:hidden bg-white border border-border rounded-lg p-2.5 hover:bg-muted shadow-sm"
+        className="fixed top-6 left-6 z-50 md:hidden bg-[#E0EBFC] border border-[#A5D8FF] text-[#1D376B] rounded-lg p-2.5 hover:bg-[#CFE0F7] shadow-sm"
         aria-label="Back to menu"
       >
         <Menu className="w-5 h-5" />

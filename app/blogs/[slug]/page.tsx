@@ -9,6 +9,12 @@ export default async function BlogPage({ params }: Props) {
   const { slug } = await params
   return (
     <>
+      <div
+        className="fixed top-0 left-0 right-0 z-40 h-20 md:hidden pointer-events-none backdrop-blur-md"
+        style={{
+          background: 'linear-gradient(180deg, rgba(224, 235, 252, 0.96) 0%, rgba(224, 235, 252, 0.75) 40%, rgba(224, 235, 252, 0.35) 70%, rgba(224, 235, 252, 0) 100%)'
+        }}
+      />
       {/* Hamburger menu for mobile */}
       <Link 
         href="/blogs"

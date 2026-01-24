@@ -120,7 +120,7 @@ export function HQ() {
               >
                 flat whites
               </a>
-              , paul graham, all-in, long runs, retrofuturism and vagueposting (read the {""}
+              , paul graham, kill tony, all-in, long runs, retrofuturism and vagueposting (read the {""}
                             <a
                 href="/evolution"
                 target="_blank"

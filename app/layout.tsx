@@ -14,7 +14,7 @@ const stixTwoText = {
 }
 
 export const metadata: Metadata = {
-  title: "hayden's hq",
+  title: "hayden's blueprint",
   description: "personal website of hayden",
   generator: "v0.app",
   icons: {
@@ -40,7 +40,7 @@ export default function RootLayout({
           <link rel="shortcut icon" href="/face/favicon.ico" />
           <link rel="icon" type="image/png" sizes="192x192" href="/face/favicon-192x192.png" />
           <link rel="apple-touch-icon" sizes="192x192" href="/face/apple-touch-icon.png" />
-          <meta name="apple-mobile-web-app-title" content="hayden's hq" />
+          <meta name="apple-mobile-web-app-title" content="hayden's blueprint" />
           <meta name="theme-color" content="#FFD52E" />
       </head>
       <body className={`${stixTwoText.variable} ${zalandoSans.variable} font-sans antialiased overflow-hidden`}>

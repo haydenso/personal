@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 
-type Tab = "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
+type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
 interface SidebarProps {
   activeTab: Tab
@@ -16,12 +16,12 @@ interface SidebarProps {
 
 export function Sidebar({ activeTab, onTabChange, width, isDragging = false, onMouseDown, mobileMenuOpen = false }: SidebarProps) {
   const router = useRouter()
-  const tabs: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+  const tabs: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
 
   const handleTabClick = (tab: Tab) => {
     if (onTabChange) return onTabChange(tab)
     // fallback: navigate using router if no handler was provided (server-rendered layouts)
-    const path = tab === 'about' ? '/' : `/${tab}`
+    const path = tab === 'hq' ? '/' : `/${tab}`
     try {
       router.push(path)
     } catch (e) {
@@ -44,10 +44,14 @@ export function Sidebar({ activeTab, onTabChange, width, isDragging = false, onM
         <div
           className="w-full h-full relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #1C364E, #1C366E 50%, #1C364E)',
-            border: '1px solid #1C364E',
+            backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.65), rgba(8, 110, 184, 0.65)), url('/blueprint.jpg')",
+            backgroundColor: '#086EB8',
+            backgroundRepeat: 'no-repeat, repeat',
+            backgroundSize: 'auto, 420px',
+            backgroundPosition: 'center, top left',
+            border: '1px solid #086EB8',
             clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 12px), 0 100%)',
-            boxShadow: '2px 2px 6px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(0,0,0,0.2)',
+            boxShadow: '2px 2px 6px rgba(0,0,0,0.25), inset -1px -1px 2px rgba(0,0,0,0.15)',
           }}
         >
         </div>

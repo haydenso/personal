@@ -17,10 +17,11 @@ import { Gallery } from "@/components/gallery"
 import { Timeline } from "@/components/timeline"
 import { Projects } from "@/components/projects"
 import { ContentPanel } from "@/components/content-panel"
+import { HQ } from "@/components/hq"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
 
-export type Tab = "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
+export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
 const interests = [
   "Chinese elite politics and political economy",
@@ -39,7 +40,7 @@ interface MainAppProps {
   initialTab?: Tab
 }
 
-export function MainApp({ initialTab = "about" }: MainAppProps) {
+export function MainApp({ initialTab = "hq" }: MainAppProps) {
   // derive the current tab primarily from the URL (single source of truth)
   // use a short-lived `pendingTab` to reflect immediate UI after user tap
   const [pendingTab, setPendingTab] = useState<Tab | null>(null)
@@ -55,8 +56,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   const deriveTabFromPath = (path?: string | null): Tab => {
     if (!path) return initialTab
     const seg = path.split('/')[1] || ''
-    const allowed: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
-    return seg === '' ? 'about' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'about')
+    const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+    return seg === '' ? 'hq' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'hq')
   }
 
   const derivedTab = deriveTabFromPath(pathname)
@@ -91,7 +92,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     setMobileMenuOpen(false)
 
     // push URL path (let pathname drive the canonical state)
-    const path = tab === "about" ? "/" : `/${tab}`
+    const path = tab === "hq" ? "/" : `/${tab}`
     router.push(path)
 
     // clear pending tab if navigation doesn't settle within reasonable time
@@ -120,8 +121,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
   useEffect(() => {
     if (!pathname) return
     const seg = pathname.split('/')[1] || ''
-    const allowed: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
-    const tab: Tab = seg === '' ? 'about' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'about')
+    const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+    const tab: Tab = seg === '' ? 'hq' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'hq')
     if (pendingTab === tab) setPendingTab(null)
 
     // Parse musings deep link: /musings/:category/:slug
@@ -257,7 +258,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
     <div className="flex h-screen overflow-hidden">
       <button
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="fixed top-6 left-6 z-50 md:hidden bg-[#FFF8E7] border border-[#e5d5b5] rounded-lg p-2.5 hover:bg-[#FEEABF] shadow-sm"
+        className="fixed top-6 left-6 z-50 md:hidden bg-[#E0EBFC] border border-[#A5D8FF] text-[#1D376B] rounded-lg p-2.5 hover:bg-[#CFE0F7] shadow-sm"
         aria-label="Toggle menu"
       >
         {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -312,6 +313,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
         <Gallery />
       ) : activeTab === "timeline" ? (
         <Timeline />
+      ) : activeTab === "hq" ? (
+        <HQ />
       ) : (
         <main className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row gap-12 lg:gap-16">
@@ -319,9 +322,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
             <div className="lg:w-[60%] space-y-8">
               <div>
                 <div className="flex items-center gap-4 pb-6">
-                  <img src="/face/logo.png" alt="logo" className="w-12 h-12 rounded-md object-cover" />
                   <div>
-                    <h1 className="text-3xl font-serif mb-2">hey, i'm hayden!</h1>
                     <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
                   </div>
                 </div>
@@ -331,8 +332,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   <p
                     className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
                     style={{
-                      color: '#000000',
-                      backgroundColor: '#FEEABF',
+                      color: '#1D376B',
+                      backgroundColor: '#E0EBFC',
                       padding: '0 0.375rem',
                       borderRadius: '0.125rem',
                       display: 'inline-block',
@@ -375,8 +376,8 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   <p
                     className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
                     style={{
-                      color: '#000000',
-                      backgroundColor: '#FEEABF',
+                      color: '#1D376B',
+                      backgroundColor: '#E0EBFC',
                       padding: '0 0.375rem',
                       borderRadius: '0.125rem',
                       display: 'inline-block',
@@ -392,13 +393,13 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                   {/* Peek into quick links (sticky note buttons) */}
                   <div className="pt-3 mt-6">
                     <div className="font-serif text-[15px] mb-2">
-                      <span style={{ color: '#000000', backgroundColor: '#FEEABF', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
+                      <span style={{ color: '#1D376B', backgroundColor: '#E0EBFC', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
                     </div>
                     <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                       <button
                         onClick={() => { handleTabChange('musings'); setSelectedMusing(null); }}
                         aria-label="Open notes app"
-                        className="inline-block border border-dotted border-[#FFD52E] text-[#b36b00] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#fff6db] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                       >
                         notes app
                       </button>
@@ -406,7 +407,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       <button
                         onClick={() => { handleTabChange('blogs'); setSelectedBlog(null); }}
                         aria-label="Open writings"
-                        className="inline-block border border-dotted border-[#FFD52E] text-[#b36b00] px-3 py-2 rounded-md hover:bg-[#fff6db] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                       >
                         writings
                       </button>
@@ -414,7 +415,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       <button
                         onClick={() => { handleTabChange('bookshelf'); }}
                         aria-label="Open bookshelf"
-                        className="inline-block border border-dotted border-[#FFD52E] text-[#b36b00] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#fff6db] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                       >
                         bookshelf
                       </button>
@@ -422,7 +423,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       <button
                         onClick={() => { handleTabChange('gallery'); }}
                         aria-label="Open gallery"
-                        className="inline-block border border-dotted border-[#FFD52E] text-[#b36b00] px-3 py-2 rounded-md hover:bg-[#fff6db] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                       >
                         gallery
                       </button>
@@ -430,7 +431,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
                       <button
                         onClick={() => { handleTabChange('projects'); }}
                         aria-label="Open projects"
-                        className="inline-block border border-dotted border-[#FFD52E] text-[#b36b00] px-3 py-2 rounded-md transform rotate-1 hover:bg-[#fff6db] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                       >
                         projects
                       </button>
@@ -448,7 +449,7 @@ export function MainApp({ initialTab = "about" }: MainAppProps) {
               linkedin
             </a>
             <a
-              href="https://github.com/haydsso"
+              href="https://github.com/haydenso"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"

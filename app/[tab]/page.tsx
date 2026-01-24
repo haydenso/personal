@@ -9,8 +9,8 @@ export default async function TabPage({ params }: Params) {
   const raw = rawTab ?? ""
   const tab = (raw as string).toLowerCase()
 
-  const allowed: Tab[] = ["about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
-  const initialTab: Tab = (allowed.includes(tab as Tab) ? (tab as Tab) : "about")
+  const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+  const initialTab: Tab = (allowed.includes(tab as Tab) ? (tab as Tab) : "hq")
 
   return <MainApp initialTab={initialTab} />
 }

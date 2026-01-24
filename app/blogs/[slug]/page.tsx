@@ -12,7 +12,7 @@ export default async function BlogPage({ params }: Props) {
       {/* Hamburger menu for mobile */}
       <Link 
         href="/blogs"
-        className="fixed top-6 left-6 z-50 md:hidden bg-white border border-border rounded-lg p-2.5 hover:bg-muted"
+        className="fixed top-6 left-6 z-50 md:hidden bg-[#E0EBFC] border border-[#A5D8FF] text-[#1D376B] rounded-lg p-2.5 hover:bg-[#CFE0F7]"
         aria-label="Back to menu"
       >
         <Menu className="w-5 h-5" />

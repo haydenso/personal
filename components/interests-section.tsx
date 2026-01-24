@@ -32,7 +32,7 @@ export function InterestsSection() {
       {Object.entries(interestsData).map(([category, items]) => (
         <div key={category} className="border border-border rounded-md p-4">
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-lg" style={{ color: '#FFD52E' }}>{icons[category as keyof typeof icons]}</span>
+            <span className="text-lg" style={{ color: '#E0EBFC' }}>{icons[category as keyof typeof icons]}</span>
             <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
               {category}
             </h3>

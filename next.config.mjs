@@ -17,6 +17,41 @@ const nextConfig = {
         destination: '/blogs/rcn',
         permanent: false,
       },
+      {
+        source: '/github',
+        destination: 'https://github.com/haydenso',
+        permanent: false,
+      },
+      {
+        source: '/twitter',
+        destination: 'https://x.com/haydsso',
+        permanent: false,
+      },
+      {
+        source: '/x',
+        destination: 'https://x.com/haydsso',
+        permanent: false,
+      },
+      {
+        source: '/scholar',
+        destination: 'https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en',
+        permanent: false,
+      },
+      {
+        source: '/linkedin',
+        destination: 'https://www.linkedin.com/in/haydenso/',
+        permanent: false,
+      },
+      {
+        source: '/email',
+        destination: 'mailto:haydenso.hk@gmail.com',
+        permanent: false,
+      },
+      {
+        source: '/mail',
+        destination: 'mailto:haydenso.hk@gmail.com',
+        permanent: false,
+      },
       // Blog shortlinks - redirect /slug to /blogs/slug
       {
         source: '/ChinaAI',

@@ -30,7 +30,7 @@ export function HQ() {
               <div>
                 <h1 className="text-xl font-serif font-bold mb-1">hey, i'm hayden!</h1>
                 <p>
-                  &gt; i{" "}
+                  &gt; i flâneur, {" "}
                   <a
                     href="/musings"
                     className={linkClass}

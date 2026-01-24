@@ -59,7 +59,7 @@ export function HQ() {
                 width={48}
                 height={48}
                 sizes="(max-width: 768px) 48px, 56px"
-                className="w-12 h-12 md:w-14 md:h-14 rounded-md object-cover"
+                className="w-12 h-12 md:w-13 md:h-13 rounded-md object-cover"
               />
             </div>
           </div>

@@ -132,7 +132,7 @@ export function HQ() {
 
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4" >
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 mb-15" >
             <span className="text-muted-foreground" style={{ color: '#A5D8FF' }}>contacts!</span>
             <a
               href="https://www.linkedin.com/in/haydenso/"

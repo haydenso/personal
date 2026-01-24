@@ -50,27 +50,28 @@ export function HQ() {
             </div>
           </div>
 
-          <div className="space-y-4" style={{ color: '#EBEFF4' }}>
-            <div className="mt-2 grid grid-cols-2 gap-6 text-sm pb-4">
-              <div className="space-y-1">
-                <p className="text-xs tracking-[0.2em] text-[#E0EBFC]/70">writings</p>
-                <a href="/musings" className={`inline-flex items-center gap-2 ${linkClass}`}>
-                  <span>peek my notes app</span>
-                  <img src="/notes.webp" alt="" className="h-4 w-4 object-contain" aria-hidden="true" />
-                </a>
-                <a href="/blogs" className={`block ${linkClass}`}>long-form essays</a>
-                <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs  tracking-[0.2em] text-[#E0EBFC]/70">selected projects</p>
-                <a href="/github" className={`block ${linkClass}`}>people searcher</a>
-                <a href="/github" className={`block ${linkClass}`}>rl environments</a>
-                <a href="/blogs/ikea" className={`block ${linkClass}`}>automations</a>
-              </div>
-            </div>
 
             <div className="text-sm pb-3">
               <p className="font-bold">current shower thoughts: (1) RL, data and adoption, (2) politics of ai, (3) accelerating scientific discovery</p>
+            </div>
+
+          <div className="space-y-4">
+            <div className="mt-2 grid grid-cols-2 gap-6 text-sm pb-4 " >
+              <div className="space-y-1">
+                <p className="text-xs tracking-[0.2em] text-[#EBEFF4]/70">writings</p>
+                <a href="/musings" className={`block ${linkMutedClass}`}>
+                  <img src="/notes.webp" alt="" className="inline-block h-4 w-4 object-contain align-middle mr-2" aria-hidden="true" />
+                  <span>peek my notes app</span>
+                </a>
+                <a href="/blogs" className={`block ${linkMutedClass}`}>long-form essays</a>
+                <a href="/rcn" className={`block ${linkMutedClass}`}>reflecting on high school</a>
+              </div>
+              <div className="space-y-1">
+                <p className="text-xs  tracking-[0.2em] text-[#EBEFF4]/70">selected projects</p>
+                <a href="/github" className={`block ${linkMutedClass}`}>people searcher</a>
+                <a href="/github" className={`block ${linkMutedClass}`}>rl environments</a>
+                <a href="/blogs/ikea" className={`block ${linkMutedClass}`}>automations</a>
+              </div>
             </div>
 
             <div>

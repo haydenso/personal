@@ -75,7 +75,7 @@ export function HQ() {
             <div className="md:mt-2 grid grid-cols-2 gap-6 text-xs md:text-sm pb-3 ml:pb-2 xl:pb-2">
               <div className="space-y-1">
                 <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">writings</p>
-                <a href="/musings" className={`block ${linkClass}`}>
+                <a href="/musings" className={`inline-flex items-center ${linkClass}`}>
                   <Image
                     src="/notes.webp"
                     alt=""
@@ -84,7 +84,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="inline-block h-4 w-4 object-contain align-middle mr-2"
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
                     aria-hidden
                   />
                   <span>peek my notes app</span>

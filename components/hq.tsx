@@ -6,7 +6,7 @@ export function HQ() {
 
   return (
     <main
-      className="flex-1 px-8 md:px-45 overflow-y-auto pt-20 md:pt-16 flex flex-col min-h-screen pb-8"
+      className="flex-1 px-10 md:px-70 xl:px-90 overflow-y-auto pt-15 md:pt-16 xl-pt-12 flex flex-col min-h-screen pb-8"
       style={{
         backgroundColor: '#086EB8',
         backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
@@ -18,7 +18,7 @@ export function HQ() {
     >
       <div className="max-w-2xl mx-auto w-full">
         {/* Hero Image */}
-        <div className="mb-6 md:mb-12">
+        <div className="mb-6 md:mb-6 xl:mb-7">
           <Image
             src="/hq.jpeg"
             alt="HQ"
@@ -31,7 +31,7 @@ export function HQ() {
         </div>
 
         {/* Content */}
-        <div className="space-y-4 font-serif text-sm md:text-base">
+        <div className="space-y-3 font-serif text-sm md:text-base">
           <div>
             <div className="flex justify-between gap-2">
               <div>
@@ -59,29 +59,41 @@ export function HQ() {
                 width={48}
                 height={48}
                 sizes="(max-width: 768px) 48px, 56px"
-                className="w-12 h-12 md:w-13 md:h-13 rounded-md object-cover"
+                priority
+                quality={70}
+                className="w-12 h-12 md:w-13 md:h-13 xl:h-12 xl:w-12 rounded-md object-cover"
               />
             </div>
           </div>
 
 
-            <div className="text-xs md:text-sm pb-3">
-              <p className="font-bold">current shower thoughts: (1) RL, data and adoption, (2) politics of ai, (3) accelerating scientific discovery</p>
+            <div className="text-xs md:text-sm pb-2">
+              <p className="font-bold">current shower thoughts: (1) reinforcement learning &amp; agents, (2) politics of ai, (3) accelerating scientific discovery</p>
             </div>
 
           <div className="space-y-4">
-            <div className="mt-2 grid grid-cols-2 gap-6 text-xs md:text-sm pb-4">
+            <div className="md:mt-2 grid grid-cols-2 gap-6 text-xs md:text-sm pb-3 ml:pb-2 xl:pb-2">
               <div className="space-y-1">
-                <p className="text-xs tracking-[0.2em] text-[#EBEFF4]/70">writings</p>
+                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">writings</p>
                 <a href="/musings" className={`block ${linkClass}`}>
-                  <Image src="/notes.webp" alt="" width={16} height={16} className="inline-block h-4 w-4 object-contain align-middle mr-2" aria-hidden />
+                  <Image
+                    src="/notes.webp"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="inline-block h-4 w-4 object-contain align-middle mr-2"
+                    aria-hidden
+                  />
                   <span>peek my notes app</span>
                 </a>
                 <a href="/blogs" className={`block ${linkClass}`}>long-form essays</a>
                 <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
               </div>
               <div className="space-y-1">
-                <p className="text-xs  tracking-[0.2em] text-[#EBEFF4]/70">selected projects</p>
+                <p className="text-xs  tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
                 <a href="/github" className={`block ${linkClass}`}>people searcher</a>
                 <a href="/github" className={`block ${linkClass}`}>rl environments</a>
                 <a href="/blogs/ikea" className={`block ${linkClass}`}>automations</a>
@@ -89,11 +101,11 @@ export function HQ() {
             </div>
 
             <div>
-              <p className="pb-2 text-xs md:text-sm font-bold">my first 20 years, i've:</p>
-              <ul className="space-y-2 ml-6 list-disc text-xs md:text-sm pb-3">
-                    <li>sold guns in the arctic and led janitorial operations</li>
+              <p className="pb-1 text-xs md:text-sm font-bold">in my 20 years, i've:</p>
+              <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
+                <li>sold guns in the arctic and led janitorial operations</li>
                 <li>dabbled in applied ai, private equity, consulting, academia and gov/policy</li>
-                <li>from/live in hong kong (hkust), did high school in norway (uwc!)</li>
+                <li>based + from hong kong (hkust), did high school in norway (uwc!)</li>
               </ul>
             </div>
 
@@ -116,7 +128,7 @@ export function HQ() {
               >
                 sherlock
               </a>
-              , rabbitholing niche chinese politics, devouring engineering blogs, pondering the human condition or strategizing {""} 
+              , rabbitholing niche chinese politics or engineering blogs, pondering the human condition or strategizing {""} 
                             <a
                 href="https://haydenso.com/blogs/rollup-rl"
                 target="_blank"

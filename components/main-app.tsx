@@ -265,15 +265,15 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
   return (
     <div className="flex h-screen overflow-hidden">
       <div
-        className="fixed top-0 left-0 right-0 z-40 h-20 md:hidden pointer-events-none backdrop-blur-md"
+        className="fixed top-0 left-0 right-0 z-40 h-15 md:hidden pointer-events-none backdrop-blur-md"
         style={headerFadeStyle}
       />
       <button
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="fixed top-6 left-6 z-50 md:hidden bg-[#E0EBFC] border border-[#A5D8FF] text-[#1D376B] rounded-lg p-2.5 hover:bg-[#CFE0F7] shadow-sm"
+        className="fixed top-4 left-4 z-50 md:hidden bg-[#E0EBFC] border border-[#A5D8FF] text-[#1D376B] rounded-md p-1.5 hover:bg-[#CFE0F7] shadow-sm"
         aria-label="Toggle menu"
       >
-        {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
       </button>
 
       <Sidebar

@@ -9,6 +9,7 @@ export interface BlogMetadata {
   slug: string
   title: string
   date: string
+  desc: string
   excerpt: string
 }
 
@@ -66,6 +67,7 @@ export function getAllBlogs(): BlogMetadata[] {
       slug,
       title: data.title || slug,
       date: data.date || "",
+      desc: data.desc || "",
       excerpt: data.excerpt || "",
     }
   })
@@ -84,6 +86,7 @@ export function getBlogBySlug(slug: string): BlogWithContent | null {
       slug,
       title: data.title || slug,
       date: data.date || "",
+      desc: data.desc || "",
       excerpt: data.excerpt || "",
       content,
     }

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Image from "next/image"
 import { books } from "@/content/books"
 import { albums } from "@/content/music"
 import { cn } from "@/lib/utils"
@@ -9,6 +10,7 @@ type Tab = "books" | "music"
 export function Bookshelf() {
   const [activeTab, setActiveTab] = useState<Tab>("books")
   const [selectedItem, setSelectedItem] = useState<string | null>(null)
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set())
 
   // Books are already filtered for hidden ones
   const currentItems = activeTab === "books" ? books : albums
@@ -59,20 +61,33 @@ export function Bookshelf() {
               onClick={() => setSelectedItem(item.slug)}
             >
               <div className={cn(
-                "bg-muted overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded",
+                "relative bg-muted overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded",
                 activeTab === "books" ? "aspect-[3/4]" : "aspect-square"
               )}>
-                <img
-                  src={`/${imagePath}/${item.slug}.jpg`}
-                  alt={`Cover of ${item.title}`}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback to placeholder if image doesn't exist
-                    e.currentTarget.style.display = 'none'
-                    e.currentTarget.nextElementSibling!.classList.remove('hidden')
-                  }}
-                />
-                <div className="w-full h-full bg-gradient-to-br from-muted-foreground/20 to-muted-foreground/10 items-center justify-center hidden">
+                {!failedImages.has(item.slug) ? (
+                  <Image
+                    src={`/${imagePath}/${item.slug}.jpg`}
+                    alt={`Cover of ${item.title}`}
+                    fill
+                    sizes={activeTab === "books"
+                      ? "(max-width: 640px) 48vw, (max-width: 1024px) 30vw, (max-width: 1280px) 22vw, 18vw"
+                      : "(max-width: 640px) 48vw, (max-width: 1024px) 30vw, (max-width: 1280px) 22vw, 18vw"
+                    }
+                    quality={70}
+                    className="object-cover"
+                    onError={() => {
+                      setFailedImages((prev) => {
+                        const next = new Set(prev)
+                        next.add(item.slug)
+                        return next
+                      })
+                    }}
+                  />
+                ) : null}
+                <div className={cn(
+                  "w-full h-full bg-gradient-to-br from-muted-foreground/20 to-muted-foreground/10 items-center justify-center",
+                  failedImages.has(item.slug) ? "flex" : "hidden"
+                )}>
                   <div className="text-center p-4">
                     <div className="text-xs text-muted-foreground mb-2">Cover</div>
                     <div className="text-sm font-medium text-foreground line-clamp-3">

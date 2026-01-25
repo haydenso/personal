@@ -1,32 +1,47 @@
 ---
 title: oh my clawd
-date: January 2026
+date: January 25 2026
+desc: make codings agents go brrr
 ---
-dear clawd, you're the closest thing to magic. 
+> clawd code and coding agents are the closest thing to magic.
 
-i don't why you WOULDN'T use a coding agent. the whole appeal is that it knows what tools to use and what to think about and reference without needing you to explicitly tell it what to.
+i've been BEGGING my friends but aren't actively on tpot to use coding agents more generously. i'm surprised beyond tech twitter this isn't that mainstream; they are very technical in their own right but simply aren't hooked on this yet. the link hoarder i am, i figured i'll write this concise piece on my key takeaways (by experimenting + reading a bunch of blogs) as well as a quick setup guide.
 
-a quick start guide:
-- choose what coding agent you want to use and where.
+### general principles
+1. you do not have to overdo it with as many MCPs as possible, since it might then unnecessary call 
 
-for those who like videos, anthropic's tutorial is pretty great (here)[https://anthropic.skilljar.com/claude-code-in-action] 
-
-my 3 favorite engineering blogs on coding agents in general:
+### key lessons from my favorite engineering blogs on coding agents in general:
 - [Steinberger's shipping at inference speed](https://steipete.me/posts/2025/shipping-at-inference-speed). His other stuff is also great.
 - [OpenAI's unrolling the codex agent loop](https://openai.com/index/unrolling-the-codex-agent-loop/)
 - [OpenAI on how they shipped sora for android in 28 days](https://openai.com/index/shipping-sora-for-android-with-codex/)
+- [coding agents for non-technical peeps])(https://x.com/bentossell/status/2014348465086595557?s=46)
 
-**Building on top of an coding agent**. In a sense, if you wanted to build your own workflows, the major 
+there are many more and please email me them!
 
-in a sense, knowing the architecture and system design, as well as what 
+### a quick start guide:
+- choose what coding agent you want to use and where (terminal vs in VS code). i personally have one open in my terminal and one cloud agent open in my VS code since I can swoop in to view the files and check the structure more intuitively
+- create your custom .md file (CLAUDE.md, AGENTS.md). This is the core instruction file where you can specify where things are, what you want it to do (e.g use uv instead of pip) and how to test itself. this should look like notes, without too much fluff to confuse the agent.
+- **plan vs think mode**. often it is good to have an agent go through a few cycles of planning so it knows what to do before actually coding.
+- **misc considerations.** as you grow your project in size, you probably want to think about how to manage your context (/compact or /clear) or design your own commands (in your .claude, create a generate.md, which becomes a slash agent for your command line). if your agent goes down the wrong path, often it is wise to just clear the session and restart it via another implementation.
+- **repos and testing**. admittedly, since i run pretty solo scrappy projects most of the time, i don't have the absolute best practises in branching and writing good commit comments, same goes with testing bugs. i usually just past the error message or describe the bug and have it fix it. in a sense, it is better practise to have the agent explain why it thinks the bug exists, write a unit test and then fix it until it passes the test case.
+
+for those who like videos + walk through guides, anthropic's tutorial is pretty great [here](https://anthropic.skilljar.com/claude-code-in-action); the instructions can be generalized to any domain.
+
+**building on top of an coding agent**. in a sense, if you wanted to build your own workflows, an often major bottleneck is figuring out the orchestration as well as tool, mcp and search capabilities of your agent. most coding agents now have their own SDK you can build on top off, so you have these ready made pasta sauce for your agentic applications. i haven't properly looked at the economics of doing so and realize doing so probably means slower  
+
+in a sense, knowing the architecture and system design, as well as how you want to implement it is very important. when i first started coding 
+
+i don't why you WOULDN'T use a coding agent. the whole appeal is that it knows what tools to use and what to think about and reference without needing you to explicitly tell it what to.
 
 **mcp**
 - basically a series of tools 
 - mcps are great for things hidden behind authentication 
 
+i think a good tacit activity is to click around and see with your own eyes how these skills look like. we often have this mental model of how complicated they are but they really are just well documented instructions, code snippets and links that gets the agent to do what we want. 
+
 **skills**
-- [Zhang's ML Paper Writing](https://github.com/zechenzhangAGI/AI-research-SKILLs/tree/main/20-ml-paper-writing). This is a tool  
+- [zhang's ml paper writing repo](https://github.com/zechenzhangAGI/AI-research-SKILLs/tree/main/20-ml-paper-writing). this is sooo cool; the best paper practises are taken (from nanda, farquhar etc.), as well as the latex templates to the top conferences/journals. all you have to do is direct your coding agent to the repo where your experiment files are and it gives you a pretty good first draft paper. most importantly, it prevents hallucinated references by making sure to use the semantic scholar api to cross reference it.
 - [Anthropic official skills](https://github.com/anthropics/skills). 
 - [Github Copilot skills](https://github.com/github/awesome-copilot) and how to add them [instructions](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)
-- [tweet on good UI tools](https://x.com/colderoshay/status/2012202861883441597)
+- [tweet on good UI tools](https://x.com/colderoshay/status/2012202861883441597). without proper design guidelines, the visual design can look messy. this is a good starting point for unified UIs.
 

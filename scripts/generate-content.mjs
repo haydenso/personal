@@ -436,6 +436,7 @@ function generateBlogs() {
       slug,
       title: data.title || slug,
       date: data.date || "",
+      desc: data.desc || "",
       excerpt: data.excerpt || "",
       content: markdownToHtml(content),
     }
@@ -448,6 +449,7 @@ function generateBlogs() {
   slug: string
   title: string
   date: string
+  desc: string
   excerpt: string
   content: string
 }

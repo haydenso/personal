@@ -48,7 +48,7 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
   const [selectedMusing, setSelectedMusing] = useState<string | null>(null)
   const [selectedMusingCategory, setSelectedMusingCategory] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [interestsExpanded, setInterestsExpanded] = useState(false)
+  const [interestsExpanded, setInterestsExpanded] = useState(true)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -380,6 +380,7 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
                           {interest}
                         </li>
                       ))}
+                      <li className="leading-relaxed">more coming soon...</li>
                     </ol>
                   )}
                 </div>

@@ -41,7 +41,7 @@ export function Timeline() {
                   <div className="flex items-center gap-4">
                     <div className="text-xs text-muted-foreground">{item.date}</div>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className={`transform transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}>
-                      <path d="M6 9l6 6 6-6" stroke="#E0B326" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M6 9l6 6 6-6" stroke="#086EB8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </button>

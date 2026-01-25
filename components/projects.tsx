@@ -1,17 +1,5 @@
 import { Footer } from "./footer"
 
-const interests = [
-  "Chinese elite politics and political economy",
-  "multi-agent collaboration and agent infrastructure",
-  "continual learning in token space and RL x alignment problems",  "intraday energy markets and commodities trading",
-  "watching brainrot (it's anthropology i swear)",
-  "weather prediction (ML vs numerical)",
-  "laufey and olivia dean",
-  "sherlock holmes and crime investigations",
-  "the economics of warfare",
-  "progress studies, formation of states (Singapore & LKY), state capacity libertarianism and supply side progressivism",
-]
-
 export function Projects() {
   return (
     <main className="flex-1 overflow-y-auto pt-28 md:pt-16 flex flex-col min-h-screen pb-0">
@@ -93,22 +81,6 @@ export function Projects() {
             <span className="text-xl">✦</span>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="text-xl italic font-serif">things i think about/interested in</h2>
-            <ol className="space-y-2 font-serif text-md text-muted-foreground list-decimal list-inside">
-              {interests.map((interest, index) => (
-                <li key={index} className="leading-relaxed">
-                  {interest}
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="space-y-6">
-            <p className="text-muted-foreground font-serif italic">
-              more coming soon...
-            </p>
-          </div>
         </div>
       </div>
       <div className="px-6 md:px-16 w-full max-w-3xl mx-auto">

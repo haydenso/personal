@@ -30,8 +30,8 @@ export function MusingReader({ slug, onBack }: MusingReaderProps) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 md:px-12 py-8 overflow-y-auto bg-white min-h-0" style={{ paddingLeft: 'max(7vw, 1rem)', paddingRight: 'max(7vw, 1rem)' }}>
-        <article className="max-w-none mx-auto w-full" style={{ maxWidth: 'min(72ch, 100%)' }}>
+      <div className="flex-1 md:px-12 lg:px-1 py-8 overflow-y-auto bg-white min-h-0" style={{ paddingLeft: 'max(7vw, 1rem)', paddingRight: 'max(7vw, 1rem)' }}>
+        <article className="max-w-none mx-auto w-full">
           <div className="note-time text-sm text-[#888] mb-8">
             {musing.date}
             {musing.lastUpdated && ` • Last updated ${musing.lastUpdated}`}

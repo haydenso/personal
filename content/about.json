@@ -3,6 +3,11 @@
     "text": "/currently/ - starting",
     "link": { "text": "sidoai.org", "href": "https://sidoai.org/" }
   },
+  "highlights": [
+    "reinforcement learning & agents",
+    "politics of AI",
+    "accelerating scientific discovery"
+  ],
   "sections": [
     {
       "title": null,

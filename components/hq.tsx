@@ -6,7 +6,7 @@ export function HQ() {
 
   return (
     <main
-      className="flex-1 px-10 md:px-70 xl:px-90 2xl:px-123 not-only-of-type:overflow-y-auto pt-15 md:pt-16 xl-pt-12 flex flex-col min-h-screen pb-8"
+      className="flex-1 px-10 md:px-70 xl:px-90 2xl:px-123 overflow-y-auto pt-15 md:pt-16 xl-pt-12 flex flex-col min-h-screen pb-8"
       style={{
         backgroundColor: '#086EB8',
         backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",

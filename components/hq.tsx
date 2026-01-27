@@ -6,7 +6,7 @@ export function HQ() {
 
   return (
     <main
-      className="flex-1 px-10 md:px-70 xl:px-90 overflow-y-auto pt-15 md:pt-16 xl-pt-12 flex flex-col min-h-screen pb-8"
+      className="flex-1 px-10 md:px-70 xl:px-90 2xl:px-123 not-only-of-type:overflow-y-auto pt-15 md:pt-16 xl-pt-12 flex flex-col min-h-screen pb-8"
       style={{
         backgroundColor: '#086EB8',
         backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
@@ -68,7 +68,12 @@ export function HQ() {
 
 
             <div className="text-xs md:text-sm pb-2">
-              <p className="font-bold">current shower thoughts: (1) reinforcement learning &amp; agents, (2) politics of ai, (3) accelerating scientific discovery</p>
+              <p>
+                my shower thoughts:&nbsp;
+                <strong>reinforcement learning &amp; agents</strong>,&nbsp;
+                <strong>politics of AI</strong>,&nbsp;
+                <strong>accelerating scientific discovery</strong>
+              </p>
             </div>
 
           <div className="space-y-4">
@@ -101,10 +106,10 @@ export function HQ() {
             </div>
 
             <div>
-              <p className="pb-1 text-xs md:text-sm font-bold">in my 20 years, i've:</p>
+              <p className="pb-1 text-xs md:text-sm font-bold">past 20 years, i've:</p>
               <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
                 <li>sold guns in the arctic and led janitorial operations</li>
-                <li>dabbled in applied ai, private equity, consulting, academia and gov/policy</li>
+                <li>dabbled in applied ai, energy private equity, consulting, ml research and gov/policy</li>
                 <li>based + from hong kong (hkust), did high school in norway (uwc!)</li>
               </ul>
             </div>
@@ -128,7 +133,7 @@ export function HQ() {
               >
                 sherlock
               </a>
-              , rabbitholing niche chinese politics or engineering blogs, pondering the human condition or strategizing {""} 
+              , rabbitholing niche chinese politics and engineering blogs, pondering the human condition or strategizing {""} 
                             <a
                 href="https://haydenso.com/blogs/rollup-rl"
                 target="_blank"

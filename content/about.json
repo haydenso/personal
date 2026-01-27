@@ -1,0 +1,24 @@
+{
+  "badge": {
+    "text": "/currently/ - starting",
+    "link": { "text": "sidoai.org", "href": "https://sidoai.org/" }
+  },
+  "sections": [
+    {
+      "title": null,
+      "bullets": [
+        "thinking and writing about applied AI + RL, geopolitics and growth strategy",
+        "studying cs + planets at hkust, politics at hku",
+        "reading sherlock and engineering blogs, listening to laufey and dwarkesh"
+      ]
+    },
+    {
+      "title": "/previously/",
+      "bullets": [
+        "sold guns in the arctic for a summer (polar bears!), did high school in Norway",
+        "NLP research at Yale and software engineering at Set Sail AI",
+        "hybrid: tech strategy consulting, district governance and AI adoption; energy private equity"
+      ]
+    }
+  ]
+}

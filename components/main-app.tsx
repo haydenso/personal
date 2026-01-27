@@ -20,6 +20,7 @@ import { ContentPanel } from "@/components/content-panel"
 import { HQ } from "@/components/hq"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
+import about from "@/content/about.json"
 
 export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
@@ -350,10 +351,34 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
                       borderRadius: '0.125rem',
                       display: 'inline-block',
                     }}
-                  >/currently/ - starting <a href="https://sidoai.org/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">sidoai.org</a></p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground text-sm"><a href="/blogs" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">thinking and writing</a> about applied AI + RL, geopolitics and growth strategy</li>
-                    <li className="text-foreground text-sm">studying cs + planets at hkust, politics at hku</li>
-                    <li className="text-foreground text-sm"><a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">reading sherlock and engineering blogs</a>, listening to laufey and dwarkesh</li>
+                  >
+                    {about.badge?.text}
+                    {about.badge?.link && (
+                      <a
+                        href={about.badge.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid ml-1"
+                      >
+                        {about.badge.link.text}
+                      </a>
+                    )}
+                  </p>
+
+                  {about.highlights && about.highlights.length > 0 && (
+                    <p className="font-serif mt-3 mb-2 text-sm" style={{ color: '#1D376B' }}>
+                      <span className="opacity-70">current shower thoughts:&nbsp;</span>
+                      {about.highlights.map((h, idx) => (
+                        <strong key={idx} className="text-foreground">{h}{idx < about.highlights.length - 1 ? ', ' : ''}</strong>
+                      ))}
+                    </p>
+                  )}
+
+                  <ol className="space-y-2 list-decimal list-inside font-serif">
+                    {(about.sections?.[0]?.bullets || []).map((b, i) => (
+                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: b }} />
+                    ))}
+
                     <li className="text-foreground text-sm">
                       <button 
                         onClick={() => setInterestsExpanded(!interestsExpanded)}
@@ -395,11 +420,13 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
                       borderRadius: '0.125rem',
                       display: 'inline-block',
                     }}
-                  >/previously/</p>                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    <li className="text-foreground text-sm">sold guns in the arctic for a summer (polar bears!), did high school in <a href="https://uwcrcn.no" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Norway</a></li>
-                    <li className="text-foreground text-sm">technical: NLP research at <a href="https://medicine.yale.edu/biomedical-informatics-data-science/" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Yale</a> and software engineering at <a href="https://chatbot.com.hk" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">Set Sail AI</a></li>
-                    <li className="text-foreground text-sm">hybrid: tech strategy consulting and <a href="https://en.wikipedia.org/wiki/Administrative_Officer_(Hong_Kong)" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">district governance</a> + AI adoption</li>
-                    <li className="text-foreground text-sm">non-technical: HK's foreign relations and trade (Brussels) and <a href="https://www.cip.com/" target="_blank" rel="noopener noreferrer" className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">energy</a> private equity</li>                  </ol>
+                  >{about.sections?.[1]?.title}</p>
+
+                  <ol className="space-y-2 list-decimal list-inside font-serif">
+                    {(about.sections?.[1]?.bullets || []).map((b, i) => (
+                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: b }} />
+                    ))}
+                  </ol>
                 </div>
               </div>
 

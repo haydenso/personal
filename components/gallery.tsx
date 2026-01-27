@@ -20,17 +20,9 @@ export function Gallery() {
     // Dynamically load all images from gallery folder
     const loadImages = async () => {
       try {
-        // Get all SVG files from gallery folder
-        const imageFiles = [
-          'image-1.svg',
-          'image-2.svg',
-          'image-3.svg',
-          'image-4.svg',
-          'image-5.svg',
-          'image-6.svg',
-          'image-7.svg',
-          'image-8.svg',
-        ]
+        // Generate array of gallery image filenames (update count as needed)
+        const imageCount = 7;
+        const imageFiles = Array.from({ length: imageCount }, (_, i) => `gallery-${i + 1}.jpg`);
 
         const loadedImages = imageFiles.map((file, i) => ({
           id: `${i}`,
@@ -104,13 +96,13 @@ export function Gallery() {
                     boxShadow: '0 4px 6px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.15)'
                   }}
                 >
-                  {/* Image container */}
-                  <div className="relative w-full aspect-square bg-gray-100 mb-2">
+                  {/* Image container - maintains aspect ratio */}
+                  <div className="relative w-full aspect-square bg-gray-50 mb-2 flex items-center justify-center">
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
                       priority={img.index < 5}
                       quality={85}
@@ -126,7 +118,7 @@ export function Gallery() {
                         fontSize: '0.875rem'
                       }}
                     >
-                      memory #{img.index + 1}
+                      archive #{img.index + 1}
                     </p>
                   </div>
                 </div>

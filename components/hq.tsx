@@ -67,14 +67,14 @@ export function HQ() {
           </div>
 
 
-            <div className="text-xs md:text-sm pb-2">
-              <p>
-                my shower thoughts:&nbsp;
-                <strong>reinforcement learning &amp; agents</strong>,&nbsp;
-                <strong>politics of AI</strong>,&nbsp;
-                <strong>accelerating scientific discovery</strong>
-              </p>
-            </div>
+          <div className="text-xs md:text-sm pb-2">
+            <p>
+              my shower thoughts:&nbsp;
+              <strong>reinforcement learning &amp; agents</strong>,&nbsp;
+              <strong>politics of AI</strong>,&nbsp;
+              <strong>accelerating scientific discovery</strong>
+            </p>
+          </div>
 
           <div className="space-y-4">
             <div className="md:mt-2 grid grid-cols-2 gap-6 text-xs md:text-sm pb-3 ml:pb-2 xl:pb-2">

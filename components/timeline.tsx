@@ -1,59 +1,72 @@
 import { useState } from "react"
-
-const timelineData = [
-  {
-    slug: "h2-2025",
-    title: "h2 2025: finally some action",
-    date: "Jul - Dec 2025",
-    content: `
-      <p>To be added!</p>
-    `,
-  },
-  {
-    slug: "h1-2025",
-    title: "h1 2025: a period of inaction",
-    date: "Jan - Jun 2025",
-    content: `<p>Doing nothing.</p>`,
-  },
-]
+import Image from "next/image"
+import { timeline } from "@/content/timeline"
 
 export function Timeline() {
-  const [open, setOpen] = useState<number | null>(0)
+  const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <main className="flex-1 px-6 md:px-16 pt-28 md:pt-16 pb-0 overflow-y-auto">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-serif mb-8">timeline - under construction!</h1>
-        <p className="text-muted-foreground mb-8">i optimistically aim to do monthly updates, but probably more like quarterly. inspired by <a className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid" href="https://selvaradov.net/">rohan</a></p>
+    <main className="flex-1 px-6 md:px-16 pt-28 md:pt-16 pb-8 overflow-y-auto" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+      <div className="max-w-2xl mx-auto">
+        <p className="text-sm text-muted-foreground mb-8">Underconsutrction. I'm up to, updated occasionally. Inspired by <a className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid" href="https://sive.rs/now" target="_blank" rel="noopener noreferrer">Derek Sivers</a>.</p>
 
-        <div className="space-y-4">
-          {timelineData.map((item, i) => {
-            const isOpen = open === i
-            return (
-              <div key={item.slug}>
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full text-left rounded-md border border-border bg-[#FEEABF] flex items-center justify-between p-3"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="text-md font-serif text-foreground">{item.title}</div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-xs text-muted-foreground">{item.date}</div>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className={`transform transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}>
-                      <path d="M6 9l6 6 6-6" stroke="#086EB8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                </button>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-[7px] top-0 bottom-0 w-0.5 bg-border" />
 
-                {isOpen && (
-                  <div className="mt-2 border border-border rounded-md bg-white p-4 font-serif">
-                    <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          <div className="space-y-8">
+            {timeline.map((item, i) => {
+              const isOpen = open === i
+              return (
+                <div key={item.slug} className="relative">
+                  {/* Timeline dot */}
+                  <div className="absolute left-0 top-3 w-4 h-4 rounded-full bg-background border-2 border-border z-10" />
+
+                  <div className="ml-10">
+                    {/* Image card */}
+                    <div 
+                      className="cursor-pointer group"
+                      onClick={() => setOpen(isOpen ? null : i)}
+                    >
+                      {item.image && (
+                        <div className="relative w-full h-48 mb-3 rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 600px"
+                          />
+                        </div>
+                      )}
+
+                      {item.badge && (
+                        <div className="inline-block bg-muted px-2 py-0.5 rounded text-xs font-mono text-muted-foreground uppercase tracking-widest mb-2">
+                          {item.badge}
+                        </div>
+                      )}
+
+                      <p className="text-xs text-muted-foreground mb-1">{item.date}</p>
+                      <h2 className="text-lg font-serif mb-2 group-hover:underline">
+                        {item.title} <span className="text-muted-foreground">→</span>
+                      </h2>
+                      
+                      {!isOpen && item.excerpt && (
+                        <p className="text-sm text-muted-foreground">{item.excerpt}</p>
+                      )}
+                    </div>
+
+                    {/* Expanded content */}
+                    {isOpen && (
+                      <div className="mt-4 prose prose-sm max-w-none">
+                        <div dangerouslySetInnerHTML={{ __html: item.content }} />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            )
-          })}
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </main>

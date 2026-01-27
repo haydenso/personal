@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { JetBrains_Mono, STIX_Two_Text, Zalando_Sans } from "next/font/google"
+import { JetBrains_Mono, STIX_Two_Text, Zalando_Sans, Caveat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import "katex/dist/katex.min.css"
@@ -18,6 +18,11 @@ const stixTwoText = STIX_Two_Text({
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+})
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-handwriting",
   display: "swap",
 })
 
@@ -45,7 +50,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="hayden's blueprint" />
         <meta name="theme-color" content="#FFD52E" />
       </head>
-      <body className={`${stixTwoText.variable} ${zalandoSans.variable} ${jetBrainsMono.variable} font-sans antialiased overflow-hidden`}>
+      <body className={`${stixTwoText.variable} ${zalandoSans.variable} ${jetBrainsMono.variable} ${caveat.variable} font-sans antialiased overflow-hidden`}>
         {children}
         <Analytics />
       </body>

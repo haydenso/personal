@@ -17,10 +17,20 @@ export function Bookshelf() {
   const imagePath = activeTab === "books" ? "books" : "music"
 
   return (
-    <div className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0">
+    <div 
+      className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0"
+      style={{
+        backgroundColor: '#086EB8',
+        backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.9)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
+        backgroundRepeat: 'no-repeat, repeat',
+        backgroundSize: 'auto, 320px',
+        backgroundPosition: 'center, top left',
+        color: '#EBEFF4'
+      }}
+    >
       <div className="max-w-6xl mx-auto w-full">
-        <h1 className="text-4xl font-serif mb-8">bookshelf</h1>
-        <p className="text-muted-foreground mb-8">
+        <h1 className="text-4xl font-serif mb-8 text-[#E0EBFC]">bookshelf</h1>
+        <p className="text-[#A5D8FF] mb-8">
           {activeTab === "books"
             ? "my books since childhood. powered by my Goodreads RSS feed (so cool this is open)"
             : "my music on repeat "
@@ -28,14 +38,14 @@ export function Bookshelf() {
         </p>
 
         {/* Tab buttons */}
-        <div className="flex gap-1 mb-8 p-1 bg-muted rounded-lg w-fit">
+        <div className="flex gap-1 mb-8 p-1 bg-[#086EB8]/30 border border-[#A5D8FF]/30 rounded-lg w-fit">
           <button
             onClick={() => setActiveTab("books")}
             className={cn(
               "px-4 py-2 rounded-md text-sm font-medium transition-colors",
               activeTab === "books"
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-[#E0EBFC] text-[#1D376B] shadow-sm"
+                : "text-[#A5D8FF] hover:text-[#E0EBFC]"
             )}
           >
             Books
@@ -45,8 +55,8 @@ export function Bookshelf() {
             className={cn(
               "px-4 py-2 rounded-md text-sm font-medium transition-colors",
               activeTab === "music"
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-[#E0EBFC] text-[#1D376B] shadow-sm"
+                : "text-[#A5D8FF] hover:text-[#E0EBFC]"
             )}
           >
             Music
@@ -100,10 +110,10 @@ export function Bookshelf() {
                 </div>
               </div>
               <div className="mt-2 text-center">
-                <h3 className="text-base font-serif font-medium text-foreground line-clamp-2">
+                <h3 className="text-base font-serif font-medium text-[#E0EBFC] line-clamp-2">
                   {item.title}
                 </h3>
-                <p className="text-sm font-serif text-muted-foreground">
+                <p className="text-sm font-serif text-[#A5D8FF]">
                   {activeTab === "books" ? (item as any).author : (item as any).artist}, {item.lastUpdated || item.date}
                 </p>
               </div>

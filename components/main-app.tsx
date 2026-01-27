@@ -21,6 +21,7 @@ import { HQ } from "@/components/hq"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
 import about from "@/content/about.json"
+import { parseMarkdown } from "@/lib/markdown"
 
 export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
@@ -339,7 +340,7 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
                     <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
                   </div>
                 </div>
-              <div className="space-y-4">
+              <div className="space-y-4 prose prose-sm max-w-none">
                 <p className="text-muted-foreground font-serif">non-technically technical and technically non-technical</p>
                 <div>
                   <p
@@ -365,18 +366,9 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
                     )}
                   </p>
 
-                  {about.highlights && about.highlights.length > 0 && (
-                    <p className="font-serif mt-3 mb-2 text-sm" style={{ color: '#1D376B' }}>
-                      <span className="opacity-70">current shower thoughts:&nbsp;</span>
-                      {about.highlights.map((h, idx) => (
-                        <strong key={idx} className="text-foreground">{h}{idx < about.highlights.length - 1 ? ', ' : ''}</strong>
-                      ))}
-                    </p>
-                  )}
-
                   <ol className="space-y-2 list-decimal list-inside font-serif">
                     {(about.sections?.[0]?.bullets || []).map((b, i) => (
-                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: b }} />
+                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: parseMarkdown(b) }} />
                     ))}
 
                     <li className="text-foreground text-sm">
@@ -424,7 +416,7 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
 
                   <ol className="space-y-2 list-decimal list-inside font-serif">
                     {(about.sections?.[1]?.bullets || []).map((b, i) => (
-                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: b }} />
+                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: parseMarkdown(b) }} />
                     ))}
                   </ol>
                 </div>

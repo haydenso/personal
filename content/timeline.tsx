@@ -10,14 +10,14 @@ export interface TimelineEntry {
 
 export const timeline: TimelineEntry[] = [
   {
-    slug: "dec-2024",
-    title: "a little ponderin",
-    date: "December 26, 2025",
-    image: "/timeline/dec-2024.jpg",
+    slug: "marathon-2026",
+    title: "42.195kms with no training",
+    date: "January 18 2026",
+    image: "/timeline/marathon.jpg",
     badge: "CURRENT",
-    excerpt: "starting new things",
+    excerpt: "marathon done!",
     content: `
-      <p>more to come</p>
+      <p>i stupidly finished the hong kong marathon with no training. my dad was injured so i ran in his place with 3 days notice having not ran for around 3 months seriously. do not recommend.</p>
     `,
   },
   {

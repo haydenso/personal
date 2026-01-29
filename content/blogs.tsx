@@ -9,6 +9,14 @@ export interface Blog {
 
 export const blogs: Blog[] = [
   {
+    "slug": "dryft",
+    "title": "dryft.ai tweets",
+    "date": "January 30 2026",
+    "desc": "thoughts on RLMs and context windows for ERP systems",
+    "excerpt": "",
+    "content": "<p>limited context windows remain a bottleneck for intelligence in large-scale ERP systems.</p>\n<p>at dryft.ai we’re thinking about how the Recursive Language Model (RLMs) paradigm can help us solve context rot. instead of cramming up the context window, what if we program our way through it? here’s how it works (1/6)</p>\n<hr/>\n<p>RLMs has a root LM (depth=0) that spins up sub models (depth=1+ LM). rather than stuffing context into tokens, we store it as a Python variable in a persistent REPL environment.</p>\n<p>the sub-LM can write code to inspect, slice, filter, and recursively query and return back to the root LM with what is important. attention is expensive, memory is cheap. (2/6)</p>\n<hr/>\n<p>ERP system decisions are long-horizon  + complex. our goal is for our agents to get as much access to data (full stream of operational events) and memory. RLMs help us reduce the strain on context window and helps us reach true manufacturing optmization. (3/6)</p>\n<hr/>\n<p>in line with mathematical optimization in our agents, having our agents programmatically digest relevant information prevents attention dilution and errors that compound over long horizons. (4/6)</p>\n<hr/>\n<p>recent work from Alex Zhang et al suggests post-training models on RLM trajectories can 8x base performance. we’re determined to optmize how our agents make the thousand of small operational decisions. (5/6)</p>\n<hr/>\n<p>agents and the RLM paradigm are not mutually exclusive. more efficient and cleaner context window management improves downstream agentic capabilities.</p>\n<p>further readings in descending order of technicality ~<a href=\"https://mack.work/blog/recursive-language-models\" target=\"_blank\" rel=\"noopener noreferrer\">Alex Mackenzie</a>~, ~<a href=\"https://www.k-a.in/RLM.html\" target=\"_blank\" rel=\"noopener noreferrer\">Arjun</a>~, ~<a href=\"https://alexzhang13.github.io/blog/2025/rlm/\" target=\"_blank\" rel=\"noopener noreferrer\">Alex Zhang</a>~, ~<a href=\"https://www.primeintellect.ai/blog/rlm#summary-and-conclusion\" target=\"_blank\" rel=\"noopener noreferrer\">Prime Intellect</a>~ and ofc the ~<a href=\"https://arxiv.org/abs/2512.24601\" target=\"_blank\" rel=\"noopener noreferrer\">Arxiv paper</a>~(6/6)</p>"
+  },
+  {
     "slug": "clawd",
     "title": "oh my clawd",
     "date": "January 25 2026",

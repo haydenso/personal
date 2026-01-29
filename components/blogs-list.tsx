@@ -59,7 +59,7 @@ export function BlogsList({ selectedBlog, onSelectBlog, width, isDragging, onMou
       return new Date(year, month, day).getTime()
     }
     // List of blog slugs to hide from the list
-    const hiddenSlugs = ['chinamaim', 'chinaai']
+    const hiddenSlugs = ['chinamaim', 'chinaai', 'dryft']
     
     return [...blogs]
       .filter(blog => !hiddenSlugs.includes(blog.slug))

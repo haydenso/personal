@@ -3,18 +3,19 @@ title: oh my clawd
 date: January 25 2026
 desc: make codings agents go brrr
 ---
-> clawd code and coding agents are the closest thing to magic.
+> the new hottest programming language is english. claude code and coding agents are the closest thing to magic.
 
 i've been BEGGING my friends but aren't actively on tpot to use coding agents more generously. i'm surprised beyond tech twitter this isn't that mainstream; they are very technical in their own right but simply aren't hooked on this yet. the link hoarder i am, i figured i'll write this concise piece on my key takeaways (by experimenting + reading a bunch of blogs) as well as a quick setup guide.
 
-### general principles
-1. you do not have to overdo it with as many MCPs as possible, since it might then unnecessary call 
-
-### key lessons from my favorite engineering blogs on coding agents in general:
-- [Steinberger's shipping at inference speed](https://steipete.me/posts/2025/shipping-at-inference-speed). His other stuff is also great.
-- [OpenAI's unrolling the codex agent loop](https://openai.com/index/unrolling-the-codex-agent-loop/)
-- [OpenAI on how they shipped sora for android in 28 days](https://openai.com/index/shipping-sora-for-android-with-codex/)
-- [coding agents for non-technical peeps])(https://x.com/bentossell/status/2014348465086595557?s=46)
+### key lessons :
+here is a selection of my favourite claude code blogs
+- [Steinberger's shipping at inference speed](https://steipete.me/posts/2025/shipping-at-inference-speed). his other stuff is great too, he’s behind clawdbot.
+- [openai's unrolling the codex agent loop](https://openai.com/index/unrolling-the-codex-agent-loop/)
+- [openai on how they shipped sora for android in 28 days](https://openai.com/index/shipping-sora-for-android-with-codex/)
+- [coding agents for non-technical peeps](https://x.com/bentossell/status/2014348465086595557?s=46)
+- [shipping a macOS app built entirely with claude code](https://www.indragie.com/blog/i-shipped-a-macos-app-built-entirely-by-claude-code)
+- [sankalp’s guide to Claude Code](https://sankalp.bearblog.dev/my-experience-with-claude-code-20-and-how-to-get-better-at-using-coding-agents/)
+- [how claude code was built](https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built)
 
 there are many more and please email me them!
 
@@ -24,24 +25,44 @@ there are many more and please email me them!
 - **plan vs think mode**. often it is good to have an agent go through a few cycles of planning so it knows what to do before actually coding.
 - **misc considerations.** as you grow your project in size, you probably want to think about how to manage your context (/compact or /clear) or design your own commands (in your .claude, create a generate.md, which becomes a slash agent for your command line). if your agent goes down the wrong path, often it is wise to just clear the session and restart it via another implementation.
 - **repos and testing**. admittedly, since i run pretty solo scrappy projects most of the time, i don't have the absolute best practises in branching and writing good commit comments, same goes with testing bugs. i usually just past the error message or describe the bug and have it fix it. in a sense, it is better practise to have the agent explain why it thinks the bug exists, write a unit test and then fix it until it passes the test case.
+- **other tips.**
+  - you can tell the agent to learn something (let’s say attach the docs to some tool) and tell it to figure out how it can be useful.
+  - **subagents.** tell it to spin up async background agents to handle some other sub task. 
+  - **tell it to make it more beautiful.** stealing this from indragie’s blog, you can make UI nicer by telling it to do so.
+  - for those who like videos + walk through guides, anthropic's tutorial is pretty great [here](https://anthropic.skilljar.com/claude-code-in-action); the instructions can be generalized to any coding agent.
+  - when i am lazy (and i use copilot), i kick it off with `copilot --allow-all-tools` and it works nicely 
+  - you do not have to overdo it with as many MCPs as possible, since it might then unnecessary call 
+  - opencode has actually grown to be one of my favorite coding agents. i can put my copilot pro plan or claude, kimi or azure endpoints and get a coding agent to work. and they make the connection so seamless too. i want to spend sometime looking at how they achieved this.
+    
+**chinese claude code alternatives**
+[zai's GLM coding plan](https://z.ai/subscribe), [kimi coding plan](https://www.kimi.com/code/en), [doubao/bytedance coding plan](https://www.volcengine.com/activity/codingplan), [qwen code](https://github.com/QwenLM/qwen-code). they all have claude compatiable api endpoints and have their own setup tool that makes it seamless to use on top of your usual claude code.
 
-for those who like videos + walk through guides, anthropic's tutorial is pretty great [here](https://anthropic.skilljar.com/claude-code-in-action); the instructions can be generalized to any domain.
+> to my friends in hong kong, the trick to enable claude code is to find your **.claude.json** file and add  the line **“hasCompletedOnboarding": true**.
+> you can then configure it with one of the chinese versions above by changing the auth method or use your own claude api key from azure (though this is probably 100x more expensive than just opting for a chinese model). it detects that you have another api key. there are hacky ways to route claude over copilot but once again this is not token friendly. better to use opencode or chinese alternatives.
 
-**building on top of an coding agent**. in a sense, if you wanted to build your own workflows, an often major bottleneck is figuring out the orchestration as well as tool, mcp and search capabilities of your agent. most coding agents now have their own SDK you can build on top off, so you have these ready made pasta sauce for your agentic applications. i haven't properly looked at the economics of doing so and realize doing so probably means slower  
+**building on top of an coding agent**. in a sense, if you wanted to build your own workflows, an often major bottleneck is figuring out the orchestration as well as tool, mcp and search capabilities of your agent. most coding agents now have their own SDK you can build on top off, so you have these ready made pasta sauce for your agentic applications. i haven't properly looked at the economics of doing so and realize doing so probably means slower results. 
 
-in a sense, knowing the architecture and system design, as well as how you want to implement it is very important. when i first started coding 
+you can always just start barebones with an LLM and crewAI/pydantic for best token economics. a step up would be use Langchain’s Deepagent which seems like an agent type harness. I want to look more into dSpy.
 
-i don't why you WOULDN'T use a coding agent. the whole appeal is that it knows what tools to use and what to think about and reference without needing you to explicitly tell it what to.
+**/slash comments are overpowered.** instead of building your own custom workflow on n8n or hacking away your own agent, you can build it off a well written skill and have your coding agent navigate through it
+
+### spec-driven design
+**on karparthy’s tweet**. in typical karapthy fashion, he drops a banger [tweet](https://x.com/karpathy/status/2015883857489522876). here’s kaparthy’s tweet turned into an [agent skill](https://x.com/jiayuan_jy/status/2015998216517583211). in a sense, knowing the architecture and system design, as well as how you want to implement it is very important. when i first started coding, i had to decide between flask vs django for my high school project, as well as figure out the ins and outs of a digital cloud droplet using stack overflow. i don't why you WOULDN'T use a coding agent. the whole appeal is that it knows what tools to use and what to think about and reference without needing you to explicitly tell it what to.
 
 **mcp**
 - basically a series of tools 
 - mcps are great for things hidden behind authentication 
+- Figma’s MCP is pretty goated cause you can take designs from it but also added benefit fo generating nice diagrams or visuals for writing blogs or doing research (e.g flow charts).
 
 i think a good tacit activity is to click around and see with your own eyes how these skills look like. we often have this mental model of how complicated they are but they really are just well documented instructions, code snippets and links that gets the agent to do what we want. 
 
-**skills**
+**skills** (one stop shop: [Agent Skills Marketplace](https://skillsmp.com/))
+- i want to do a lot of gmail automation ([gmail skill on github](https://github.com/sanjay3290/ai-skills/tree/main/skills/gmail)) is one of the easiest and best gmail senders. it can automate sending emails straight from my terminal.
 - [zhang's ml paper writing repo](https://github.com/zechenzhangAGI/AI-research-SKILLs/tree/main/20-ml-paper-writing). this is sooo cool; the best paper practises are taken (from nanda, farquhar etc.), as well as the latex templates to the top conferences/journals. all you have to do is direct your coding agent to the repo where your experiment files are and it gives you a pretty good first draft paper. most importantly, it prevents hallucinated references by making sure to use the semantic scholar api to cross reference it.
 - [Anthropic official skills](https://github.com/anthropics/skills). 
 - [Github Copilot skills](https://github.com/github/awesome-copilot) and how to add them [instructions](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)
 - [tweet on good UI tools](https://x.com/colderoshay/status/2012202861883441597). without proper design guidelines, the visual design can look messy. this is a good starting point for unified UIs.
+- using skills to get an LLM finedtuned for[Gertrude Stein's writing style](https://muratcankoylan.com/projects/gertrude-stein-style-training/)
+- general curations: [AGENTS.md](agents.md), [SKILLS.sh](https://skills.sh/)
 
+ending note: i’m still in school so the speed of change is a little scary. it’s scary to see my favourite engineers and researchers barely read their code, even guys at the top frontier labs. we shall see what will happen.

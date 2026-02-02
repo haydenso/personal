@@ -22,7 +22,7 @@ there are many more and please email me them!
 ### a quick start guide:
 - choose what coding agent you want to use and where (terminal vs in VS code). i personally have one open in my terminal and one cloud agent open in my VS code since I can swoop in to view the files and check the structure more intuitively
 - create your custom .md file (CLAUDE.md, AGENTS.md). This is the core instruction file where you can specify where things are, what you want it to do (e.g use uv instead of pip) and how to test itself. this should look like notes, without too much fluff to confuse the agent.
-- **plan vs think mode**. often it is good to have an agent go through a few cycles of planning so it knows what to do before actually coding.
+- **plan vs think mode**. often it is good to have an agent go through a few cycles of planning so it knows what to do before actually coding. learning how to properly use plan mode to flesh out the idea is probably the most high leverage thing to do. tell it to **interview you** is a great starting point for misunderstandings, especailly when most coding agent are pretty good at asking questions and having an UI that makes this seamless.
 - **misc considerations.** as you grow your project in size, you probably want to think about how to manage your context (/compact or /clear) or design your own commands (in your .claude, create a generate.md, which becomes a slash agent for your command line). if your agent goes down the wrong path, often it is wise to just clear the session and restart it via another implementation.
 - **repos and testing**. admittedly, since i run pretty solo scrappy projects most of the time, i don't have the absolute best practises in branching and writing good commit comments, same goes with testing bugs. i usually just past the error message or describe the bug and have it fix it. in a sense, it is better practise to have the agent explain why it thinks the bug exists, write a unit test and then fix it until it passes the test case.
 - **other tips.**
@@ -34,7 +34,8 @@ there are many more and please email me them!
   - you do not have to overdo it with as many MCPs as possible, since it might then unnecessary call 
   - **hooks**. they are basically triggers for when something changes/happens with the coding agent. for instance, a common use case is to get a notification when you need a human input. or to refractor/remove redundant/format code when the coding agent makes edits.
   - opencode has actually grown to be one of my favorite coding agents. i can put my copilot pro plan or claude, kimi or azure endpoints and get a coding agent to work. and they make the connection so seamless too. i want to spend sometime looking at how they achieved this. with github copilot, since it is configured to consume the same amount of premium requests, i can set up subagent to use the free gpt-5-mini to consume less of my premium requests (although it is discussed that subagents are considered tool use and hence not counted toward premium usage).
-    
+  - **git worktrees**. [claude guide](https://code.claude.com/docs/en/common-workflows) is a good starting point for how the claude code team uses claude code themselves and what works for them.    
+
 **chinese claude code alternatives**
 [zai's GLM coding plan](https://z.ai/subscribe), [kimi coding plan](https://www.kimi.com/code/en), [doubao/bytedance coding plan](https://www.volcengine.com/activity/codingplan), [qwen code](https://github.com/QwenLM/qwen-code). they all have claude compatiable api endpoints and have their own setup tool that makes it seamless to use on top of your usual claude code.
 

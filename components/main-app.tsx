@@ -332,16 +332,21 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
       ) : (
         <main className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row gap-12 lg:gap-16">
-            {/* Left column: Bio and images - 60% width on large screens */}
-            <div className="lg:w-[60%] space-y-8">
+            {/* Left column: Bio and images - 60% width on large screens; expand to full width for the about page */}
+            <div className={activeTab === 'about' ? 'w-full mx-auto max-w-3xl space-y-8' : 'lg:w-[60%] space-y-8'}>
               <div>
+                {about.topImage?.src && (
+                  <div className="mb-6">
+                    <img src={about.topImage.src} alt={about.topImage.caption || 'portrait'} className="w-full max-w-[360px] rounded-md object-cover" />
+                    {about.topImage.caption && <p className="text-sm text-muted-foreground mt-2">{about.topImage.caption}</p>}
+                  </div>
+                )}
                 <div className="flex items-center gap-4 pb-6">
                   <div>
                     <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
                   </div>
                 </div>
               <div className="space-y-4 prose prose-sm max-w-none">
-                <p className="text-muted-foreground font-serif">non-technically technical and technically non-technical</p>
                 <div>
                   <p
                     className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
@@ -401,6 +406,15 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
                     </ol>
                   )}
                 </div>
+
+                {/* Inline images for about page */}
+                {activeTab === 'about' && about.images && about.images.length > 0 && (
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {((about.images || []) as any[]).map((img: any, idx: number) => (
+                          <img key={idx} src={img.src} alt={img.alt || ''} className="w-full rounded-md object-cover" />
+                        ))}
+                  </div>
+                )}
 
                 <div>
                   <p
@@ -517,15 +531,17 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
             </div>
             
 
-            {/* Right column: Images + Interests - 40% width on large screens */}
-            <div className="lg:w-[40%] lg:mt-0 space-y-6">
-              <InterestsSection />
-              <ImagesRow images={[
-                { src: "/about/about-1.jpg", alt: "Image 1" },
-                { src: "/about/about-2.jpg", alt: "Image 2" },
-                { src: "/about/about-3.jpg", alt: "Image 3" }
-              ]} />
-            </div>
+            {/* Right column: Images + Interests - 40% width on large screens (hidden on about) */}
+            {activeTab !== 'about' && (
+              <div className="lg:w-[40%] lg:mt-0 space-y-6">
+                <InterestsSection />
+                <ImagesRow images={[
+                  { src: "/about/about-1.jpg", alt: "Image 1" },
+                  { src: "/about/about-2.jpg", alt: "Image 2" },
+                  { src: "/about/about-3.jpg", alt: "Image 3" }
+                ]} />
+              </div>
+            )}
           </div>
           
           {/* images moved into the right column (see above) */}

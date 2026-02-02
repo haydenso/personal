@@ -33,7 +33,7 @@ export function BlogReader({ slug }: BlogReaderProps) {
     <div className="flex-1 px-6 md:px-1 lg:px-5 py-2 md:py-6 overflow-y-auto min-h-0" style={{ paddingLeft: 'max57vw, 1rem)', paddingRight: 'max(5vw, 1rem)' }}>
       <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest mb-2">{blog.date}</p>
       <article className="prose prose-sm prose-neutral dark:prose-invert max-w-none mx-auto w-full md:w-[75%]">
-        <h1 className="text-3xl md:text-4xl font-serif mb-6 md:mb-8" style={{ color: '#086EB8', textAlign: 'left' }}>{blog.title}</h1>
+        <h1 className="text-3xl md:text-4xl font-serif mb-6 md:mb-8" style={{ color: '#002366', textAlign: 'left' }}>{blog.title}</h1>
         {blog.desc?.trim() ? (
           <p className="text-sm text-muted-foreground -mt-4 mb-6">{blog.desc}</p>
         ) : null}

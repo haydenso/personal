@@ -75,7 +75,7 @@
 }
 
 @theme inline {
-  --font-sans: "Zalando Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-serif: "ET Book", "Georgia", serif;
   --color-background: var(--background);

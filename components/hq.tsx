@@ -106,7 +106,7 @@ export function HQ() {
             </div>
 
             <div>
-              <p className="pb-1 text-xs md:text-sm font-bold">past 20 years, i've:</p>
+              <p className="pb-1 text-xs md:text-sm font-bold">in my 20 years, i've:</p>
               <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
                 <li>sold guns in the arctic and led janitorial operations</li>
                 <li>dabbled in applied ai, energy private equity, consulting, ml research and gov/policy</li>

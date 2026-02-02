@@ -3,6 +3,12 @@
     "text": "/currently/ - starting",
     "link": { "text": "sidoai.org", "href": "https://sidoai.org/" }
   },
+  "topImage": {
+    "src": "/saul.jpeg",
+    "caption": "Saul Steinberg, Self Portrait, 1949"
+  },
+  "images": [
+  ],
   "sections": [
     {
       "title": null,

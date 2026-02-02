@@ -80,8 +80,34 @@ export function Projects() {
             <span className="text-xl">✦</span>
             <span className="text-xl">✦</span>
           </div>
+          
+          <div className="space-y-6">
+            <h2 className="italic text-xl font-serif text-foreground">other projects</h2>
+            
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="font-serif text-foreground">
+                  built the website + part of dev team for the backend payment system at givewise.org.hk
+                </h3>
+                <p className="text-sm text-muted-foreground font-serif">
+                  accelerating effective charity giving
+                </p>
+              </div>
 
+            </div>
+                        <div className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="font-serif text-foreground">
+                  represented Norway at the International Mathematical Modelling Competition
+                </h3>
+                <p className="text-sm text-muted-foreground font-serif">
+                  making simulations go brrrrrrr
+                </p>
+              </div>
+
+            </div>
         </div>
+      </div>
       </div>
       <div className="px-6 md:px-16 w-full max-w-3xl mx-auto">
         <Footer />

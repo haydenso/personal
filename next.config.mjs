@@ -8,6 +8,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    qualities: [70, 75],
   },
   allowedDevOrigins: ['192.168.1.38'],
   async redirects() {

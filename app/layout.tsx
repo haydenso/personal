@@ -9,6 +9,7 @@ const zalandoSans = Zalando_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  adjustFontFallback: false,
 })
 const stixTwoText = STIX_Two_Text({
   subsets: ["latin"],

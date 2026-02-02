@@ -58,6 +58,7 @@ you can always just start barebones with an LLM and crewAI/pydantic for best tok
 
 i think a good tacit activity is to click around and see with your own eyes how these skills look like. we often have this mental model of how complicated they are but they really are just well documented instructions, code snippets and links that gets the agent to do what we want. 
 
+to add skills, vercel has made it super easy with their 'npx skills add' [repo](https://github.com/vercel-labs/skills?tab=readme-ov-file). it works with 36 coding agents and you can target it for the user vs project or for only a specific agent.
 **skills** (one stop shop: [Agent Skills Marketplace](https://skillsmp.com/))
 - i want to do a lot of gmail automation ([gmail skill on github](https://github.com/sanjay3290/ai-skills/tree/main/skills/gmail)) is one of the easiest and best gmail senders. it can automate sending emails straight from my terminal.
 - [zhang's ml paper writing repo](https://github.com/zechenzhangAGI/AI-research-SKILLs/tree/main/20-ml-paper-writing). this is sooo cool; the best paper practises are taken (from nanda, farquhar etc.), as well as the latex templates to the top conferences/journals. all you have to do is direct your coding agent to the repo where your experiment files are and it gives you a pretty good first draft paper. most importantly, it prevents hallucinated references by making sure to use the semantic scholar api to cross reference it.

@@ -20,29 +20,20 @@ import { ContentPanel } from "@/components/content-panel"
 import { HQ } from "@/components/hq"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
-import about from "@/content/about.json"
-import { parseMarkdown } from "@/lib/markdown"
 
 export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
-const interests = [
-  "Chinese elite politics and political economy",
-  "multi-agent collaboration and agent infrastructure",
-  "continual learning in token space and RL x alignment problems",
-  "intraday energy markets and commodities trading",
-  "watching brainrot (it's anthropology i swear)",
-  "weather prediction (ML vs numerical)",
-  "laufey and olivia dean",
-  "sherlock holmes and crime investigations",
-  "the economics of warfare",
-  "progress studies, formation of states (Singapore & LKY), state capacity libertarianism and supply side progressivism",
-]
+const aboutTopImage = {
+  src: "/saul.jpeg",
+  caption: "Saul Steinberg's Self Portrait, 1949",
+}
 
 interface MainAppProps {
   initialTab?: Tab
+  aboutHtml?: string
 }
 
-export function MainApp({ initialTab = "hq" }: MainAppProps) {
+export function MainApp({ initialTab = "hq", aboutHtml = "" }: MainAppProps) {
   // derive the current tab primarily from the URL (single source of truth)
   // use a short-lived `pendingTab` to reflect immediate UI after user tap
   const [pendingTab, setPendingTab] = useState<Tab | null>(null)
@@ -50,7 +41,6 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
   const [selectedMusing, setSelectedMusing] = useState<string | null>(null)
   const [selectedMusingCategory, setSelectedMusingCategory] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [interestsExpanded, setInterestsExpanded] = useState(true)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -334,199 +324,114 @@ export function MainApp({ initialTab = "hq" }: MainAppProps) {
           <div className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row gap-12 lg:gap-16">
             {/* Left column: Bio and images - 60% width on large screens; expand to full width for the about page */}
             <div className={activeTab === 'about' ? 'w-full mx-auto max-w-3xl space-y-8' : 'lg:w-[60%] space-y-8'}>
-              <div>
-                {about.topImage?.src && (
-                  <div className="mb-6">
-                    <img src={about.topImage.src} alt={about.topImage.caption || 'portrait'} className="w-full max-w-[360px] rounded-md object-cover" />
-                    {about.topImage.caption && <p className="text-sm text-muted-foreground mt-2">{about.topImage.caption}</p>}
-                  </div>
-                )}
-                <div className="flex items-center gap-4 pb-6">
-                  <div>
-                    <p className="text-muted-foreground text-sm font-serif">hong kong / haydenso.hk [at] gmail.com</p>
-                  </div>
-                </div>
-              <div className="space-y-4 prose prose-sm max-w-none">
-                <div>
-                  <p
-                    className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
-                    style={{
-                      color: '#1D376B',
-                      backgroundColor: '#E0EBFC',
-                      padding: '0 0.375rem',
-                      borderRadius: '0.125rem',
-                      display: 'inline-block',
-                    }}
-                  >
-                    {about.badge?.text}
-                    {about.badge?.link && (
-                      <a
-                        href={about.badge.link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid ml-1"
-                      >
-                        {about.badge.link.text}
-                      </a>
+                <div className="space-y-4 prose prose-sm max-w-none">
+                  <div className="after:clear-both after:block after:content-['']">
+                    {aboutTopImage?.src && (
+                      <figure className="md:float-right md:w-[220px] md:max-w-[34vw] md:ml-6 md:mb-4 md:mt-0 w-full max-w-[260px] mx-auto mb-6 mt-0">
+                        <img src={aboutTopImage.src} alt={aboutTopImage.caption || 'portrait'} className="w-full rounded-sm object-cover" />
+                        {aboutTopImage.caption && (
+                          <figcaption className="text-[13px] text-muted-foreground mt-1 font-serif">
+                            {aboutTopImage.caption}
+                          </figcaption>
+                        )}
+                      </figure>
                     )}
-                  </p>
-
-                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    {(about.sections?.[0]?.bullets || []).map((b, i) => (
-                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: parseMarkdown(b) }} />
-                    ))}
-
-                    <li className="text-foreground text-sm">
-                      <button 
-                        onClick={() => setInterestsExpanded(!interestsExpanded)}
-                        className="inline-flex items-center gap-1 text-foreground hover:opacity-70 transition-opacity"
-                        aria-label="Toggle interests"
-                      >
-                        <span>interested in (reveal)</span>
-                        <svg 
-                          className={`w-3 h-3 transition-transform ${interestsExpanded ? 'rotate-180' : ''}`}
-                          fill="none" 
-                          strokeWidth="2.5" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                    </li>
-                  </ol>
-                  {interestsExpanded && (
-                    <ol className="mt-3 space-y-1.5 list-decimal list-inside font-serif ml-4 text-sm text-muted-foreground italic">
-                      {interests.map((interest, index) => (
-                        <li key={index} className="leading-relaxed">
-                          {interest}
-                        </li>
-                      ))}
-                      <li className="leading-relaxed">more coming soon...</li>
-                    </ol>
-                  )}
+                    <div className="md:pt-0">
+                      {aboutHtml ? <div dangerouslySetInnerHTML={{ __html: aboutHtml }} /> : null}
+                    </div>
+                  </div>
                 </div>
 
-                {/* Inline images for about page */}
-                {activeTab === 'about' && about.images && about.images.length > 0 && (
-                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {((about.images || []) as any[]).map((img: any, idx: number) => (
-                          <img key={idx} src={img.src} alt={img.alt || ''} className="w-full rounded-md object-cover" />
-                        ))}
-                  </div>
-                )}
+              {/* Peek into quick links (sticky note buttons) */}
+              <div className="pt-3 mt-6">
+                <div className="font-serif text-[15px] mb-2">
+                  <span style={{ color: '#1D376B', backgroundColor: '#E0EBFC', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
+                </div>
+                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                  <button
+                    onClick={() => { handleTabChange('musings'); setSelectedMusing(null); }}
+                    aria-label="Open notes app"
+                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                  >
+                    notes app
+                  </button>
 
-                <div>
-                  <p
-                    className="font-serif pt-1.5 mt-4 mb-2 text-[15px]"
-                    style={{
-                      color: '#1D376B',
-                      backgroundColor: '#E0EBFC',
-                      padding: '0 0.375rem',
-                      borderRadius: '0.125rem',
-                      display: 'inline-block',
-                    }}
-                  >{about.sections?.[1]?.title}</p>
+                  <button
+                    onClick={() => { handleTabChange('blogs'); setSelectedBlog(null); }}
+                    aria-label="Open writings"
+                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                  >
+                    writings
+                  </button>
 
-                  <ol className="space-y-2 list-decimal list-inside font-serif">
-                    {(about.sections?.[1]?.bullets || []).map((b, i) => (
-                      <li key={i} className="text-foreground text-sm" dangerouslySetInnerHTML={{ __html: parseMarkdown(b) }} />
-                    ))}
-                  </ol>
+                  <button
+                    onClick={() => { handleTabChange('bookshelf'); }}
+                    aria-label="Open bookshelf"
+                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                  >
+                    bookshelf
+                  </button>
+
+                  <button
+                    onClick={() => { handleTabChange('gallery'); }}
+                    aria-label="Open gallery"
+                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                  >
+                    gallery
+                  </button>
+
+                  <button
+                    onClick={() => { handleTabChange('projects'); }}
+                    aria-label="Open projects"
+                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                  >
+                    projects
+                  </button>
                 </div>
               </div>
 
-                  {/* Peek into quick links (sticky note buttons) */}
-                  <div className="pt-3 mt-6">
-                    <div className="font-serif text-[15px] mb-2">
-                      <span style={{ color: '#1D376B', backgroundColor: '#E0EBFC', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
-                    </div>
-                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                      <button
-                        onClick={() => { handleTabChange('musings'); setSelectedMusing(null); }}
-                        aria-label="Open notes app"
-                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
-                      >
-                        notes app
-                      </button>
-
-                      <button
-                        onClick={() => { handleTabChange('blogs'); setSelectedBlog(null); }}
-                        aria-label="Open writings"
-                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
-                      >
-                        writings
-                      </button>
-
-                      <button
-                        onClick={() => { handleTabChange('bookshelf'); }}
-                        aria-label="Open bookshelf"
-                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
-                      >
-                        bookshelf
-                      </button>
-
-                      <button
-                        onClick={() => { handleTabChange('gallery'); }}
-                        aria-label="Open gallery"
-                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
-                      >
-                        gallery
-                      </button>
-
-                      <button
-                        onClick={() => { handleTabChange('projects'); }}
-                        aria-label="Open projects"
-                        className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
-                      >
-                        projects
-                      </button>
-                    </div>
-                  </div>
-
-                <div className="flex flex-wrap gap-4 pt-8 font-serif justify-center md:justify-start text-center">
-            <span className="text-muted-foreground">contact:</span>
-            <a
-              href="https://www.linkedin.com/in/haydenso/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-            >
-              linkedin
-            </a>
-            <a
-              href="https://github.com/haydenso"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-            >
-              github
-            </a>
-            <a
-              href="https://x.com/haydsso"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-            >
-              twitter
-            </a>
-            <a              
-              href="haydenso.hk@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-            >
-            email</a>
-                        <a
-              href="https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
-            >
-              scholar
-            </a>
-          </div>
-
+              <div className="flex flex-wrap gap-4 pt-8 font-serif justify-center md:justify-start text-center">
+                <span className="text-muted-foreground">contact:</span>
+                <a
+                  href="https://www.linkedin.com/in/haydenso/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                >
+                  linkedin
+                </a>
+                <a
+                  href="https://github.com/haydenso"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                >
+                  github
+                </a>
+                <a
+                  href="https://x.com/haydsso"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                >
+                  twitter
+                </a>
+                <a
+                  href="mailto:haydenso.hk@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                >
+                  email
+                </a>
+                <a
+                  href="https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                >
+                  scholar
+                </a>
               </div>
             </div>
             

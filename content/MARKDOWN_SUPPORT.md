@@ -44,6 +44,31 @@ Standard markdown links:
 }
 ```
 
+### 5. **Lists**
+Each slide of bullet text can now include unordered or ordered lists. Start an unordered item with `-` or `*`, and use `1.`, `2.`, etc. for numbered steps.
+
+```json
+{
+  "bullets": [
+    "- first unordered point",
+    "- second unordered point",
+    "1. ordered step one",
+    "2. ordered step two"
+  ]
+}
+```
+
+### 6. **Blockquotes**
+Prefix a line with `>` to render a styled blockquote with the existing prose styles.
+
+```json
+{
+  "bullets": [
+    "> this belongs in a callout"
+  ]
+}
+```
+
 ## Implementation
 
 The markdown parsing is handled by `/lib/markdown.ts` which:

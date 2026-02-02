@@ -56,5 +56,81 @@ export function parseMarkdown(text: string): string {
     processed = processed.replace(`___LINK_${i}___`, linkHtml)
   })
 
-  return processed
+  return formatBlocks(processed)
+}
+
+function formatBlocks(raw: string): string {
+  const lines = raw.split("\n")
+  const parts: string[] = []
+  let paragraphLines: string[] = []
+  let openList: "ul" | "ol" | null = null
+
+  const flushParagraph = () => {
+    if (paragraphLines.length === 0) return
+    const text = paragraphLines.join(" ").trim()
+    if (text) {
+      parts.push(text)
+    }
+    paragraphLines = []
+  }
+
+  const closeList = () => {
+    if (!openList) return
+    parts.push(`</${openList}>`)
+    openList = null
+  }
+
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index]
+
+    if (/^\s*$/.test(line)) {
+      flushParagraph()
+      closeList()
+      continue
+    }
+
+    const blockquoteMatch = line.match(/^>\s?(.*)$/)
+    if (blockquoteMatch) {
+      flushParagraph()
+      closeList()
+      const quoteLines: string[] = [blockquoteMatch[1].trim()]
+      while (index + 1 < lines.length && /^>\s?/.test(lines[index + 1])) {
+        index++
+        quoteLines.push(lines[index].replace(/^>\s?/, "").trim())
+      }
+      parts.push(`<blockquote>${quoteLines.filter(Boolean).join("<br/>")}</blockquote>`)
+      continue
+    }
+
+    const unorderedMatch = line.match(/^[-*]\s+(.*)$/)
+    if (unorderedMatch) {
+      flushParagraph()
+      if (openList !== "ul") {
+        closeList()
+        parts.push("<ul>")
+        openList = "ul"
+      }
+      parts.push(`<li>${unorderedMatch[1].trim()}</li>`)
+      continue
+    }
+
+    const orderedMatch = line.match(/^\d+\.\s+(.*)$/)
+    if (orderedMatch) {
+      flushParagraph()
+      if (openList !== "ol") {
+        closeList()
+        parts.push("<ol>")
+        openList = "ol"
+      }
+      parts.push(`<li>${orderedMatch[1].trim()}</li>`)
+      continue
+    }
+
+    paragraphLines.push(line.trim())
+  }
+
+  flushParagraph()
+  closeList()
+
+  return parts.join("\n")
 }

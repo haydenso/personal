@@ -88,7 +88,7 @@ export const musings: Musing[] = [
     "lastUpdated": "01-05-2026",
     "pinned": false,
     "category": "misc",
-    "content": "<h2>useful tools</h2>\n<ul><li>handy (local inference speech to text)</li><li>excalidraw (graphs/diagrams for research)</li><li>the terminal (+ a coding agent)</li><li><a href=\"https://github.com/tw93/Mole\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #086EB8;\">mole terminal based disk cleaner</a></li></ul>\n<p><strong>wanna try out</strong></p>\n<ul><li>eigent.ai</li><li>openwork (accomplish.ai) --&gt; open source claude cowork alternative</li></ul>"
+    "content": "<h2>useful tools</h2>\n<ul><li>handy (local inference speech to text)</li><li>excalidraw (graphs/diagrams for research)</li><li><a href=\"https://github.com/tw93/Mole\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #086EB8;\">mole terminal based disk cleaner</a></li><li>warp (a better terminal!!!) <a href=\"https://warp.dev\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #086EB8;\">warp.dev</a></li><li>gt worktree shortcut</li></ul>\n<p><strong>wanna try out</strong></p>\n<ul><li>eigent.ai</li><li>openwork (accomplish.ai) --&gt; open source claude cowork alternative</li><li>marimo (jupyter notebook alternative)</li></ul>"
   },
   {
     "slug": "china-ai",

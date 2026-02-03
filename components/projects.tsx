@@ -82,8 +82,17 @@ export function Projects() {
           </div>
           
           <div className="space-y-6">
-            <h2 className="italic text-xl font-serif text-foreground">other projects</h2>
-            
+                        <div className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="font-serif text-foreground">
+                  leading research + co-founder for ai policy/safety hong kong
+                </h3>
+                <p className="text-sm text-muted-foreground font-serif">
+                  aisafetyhk.org
+                </p>
+              </div>
+
+            </div>            
             <div className="space-y-6">
               <div className="space-y-2">
                 <h3 className="font-serif text-foreground">

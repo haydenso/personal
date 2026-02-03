@@ -146,8 +146,8 @@ export function getMusingBySlug(slug: string): MusingWithContent | null {
   }
 }
 
-// Minimal Markdown → HTML converter for our MDX content
-// Supports: headings, paragraphs, blockquotes, lists, links, and fenced code blocks
+// Full-featured Markdown → HTML converter for our MDX content
+// Supports: headings, paragraphs, blockquotes, lists, links, images, code blocks, bold, italic, strikethrough, math (KaTeX), tables
 export function markdownToHtml(markdown: string): string {
   const lines = markdown.replace(/\r\n?/g, "\n").split("\n")
 
@@ -181,8 +181,35 @@ export function markdownToHtml(markdown: string): string {
     // Replace links with placeholders
     processedText = processedText.replace(linkPattern, '___LINK___')
 
-    // Escape HTML in the remaining text
+    // Escape HTML but preserve our custom tags
+    processedText = processedText
+      .replace(/<mark>/g, '___MARK_START___')
+      .replace(/<\/mark>/g, '___MARK_END___')
+      .replace(/<span style="[^"]*color:[^"]*">/g, '___SPAN_START___')
+      .replace(/<\/span>/g, '___SPAN_END___')
+      .replace(/<u>/g, '___U_START___')
+      .replace(/<\/u>/g, '___U_END___')
+
     processedText = escapeHtml(processedText)
+
+    // Restore our custom tags
+    processedText = processedText
+      .replace(/___MARK_START___/g, '<mark>')
+      .replace(/___MARK_END___/g, '</mark>')
+      .replace(/___SPAN_START___/g, '<span style="color: red">')
+      .replace(/___SPAN_END___/g, '</span>')
+      .replace(/___U_START___/g, '<u>')
+      .replace(/___U_END___/g, '</u>')
+
+    // Process bold and italic
+    processedText = processedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    processedText = processedText.replace(/\*(.*?)\*/g, '<em>$1</em>')
+
+    // Handle strikethrough
+    processedText = processedText.replace(/~~(.*?)~~/g, '<del>$1</del>')
+
+    // Handle inline code
+    processedText = processedText.replace(/`([^`]+)`/g, '<code>$1</code>')
 
     // Restore images as HTML
     images.forEach(({ alt, url, attrs }) => {
@@ -192,10 +219,10 @@ export function markdownToHtml(markdown: string): string {
         `<img src="${url}" alt="${alt}"${widthAttr} />`)
     })
 
-    // Restore links as HTML
+    // Restore links as HTML with color
     links.forEach(({ text, url }) => {
       processedText = processedText.replace('___LINK___',
-        `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`)
+        `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #086EB8;">${text}</a>`)
     })
 
     return processedText
@@ -242,32 +269,150 @@ export function markdownToHtml(markdown: string): string {
       continue
     }
 
-    if (/^[-*]\s+/.test(line)) {
-      const items: string[] = []
-      while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
-        const itemText = processInlineMarkdown(lines[i].replace(/^[-*]\s+/, ""))
-        items.push(`<li>${itemText}</li>`)
-        i++
+    // Unordered lists with nesting support
+    if (/^(\s*)[-*]\s+/.test(line)) {
+      function parseNestedList(startIndex: number, baseIndent = 0): { html: string; nextIndex: number } {
+        const items: string[] = []
+        let j = startIndex
+        
+        while (j < lines.length) {
+          const listMatch = lines[j].match(/^(\s*)[-*]\s+(.*)$/)
+          if (!listMatch) break
+          
+          const indent = listMatch[1].length
+          const content = listMatch[2]
+          
+          if (indent < baseIndent) break
+          
+          if (indent === baseIndent) {
+            const itemText = processInlineMarkdown(content)
+            j++
+            
+            if (j < lines.length) {
+              const nextMatch = lines[j].match(/^(\s*)[-*]\s+/)
+              if (nextMatch && nextMatch[1].length > indent) {
+                const nestedResult = parseNestedList(j, nextMatch[1].length)
+                items.push(`<li>${itemText}${nestedResult.html}</li>`)
+                j = nestedResult.nextIndex
+              } else {
+                items.push(`<li>${itemText}</li>`)
+              }
+            } else {
+              items.push(`<li>${itemText}</li>`)
+            }
+          } else {
+            break
+          }
+        }
+        
+        return {
+          html: `<ul>${items.join('')}</ul>`,
+          nextIndex: j
+        }
       }
-      html.push(`<ul>${items.join("")}</ul>`)
+      
+      const result = parseNestedList(i, line.match(/^(\s*)[-*]\s+/)![1].length)
+      html.push(result.html)
+      i = result.nextIndex
       continue
     }
 
-    if (/^\d+\.\s+/.test(line)) {
-      const items: string[] = []
-      while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
-        const itemText = processInlineMarkdown(lines[i].replace(/^\d+\.\s+/, ""))
-        items.push(`<li>${itemText}</li>`)
+    // Ordered lists with nesting support
+    if (/^(\s*)\d+\.\s+/.test(line)) {
+      function parseNestedOrderedList(startIndex: number, baseIndent = 0): { html: string; nextIndex: number } {
+        const items: string[] = []
+        let j = startIndex
+        
+        while (j < lines.length) {
+          const listMatch = lines[j].match(/^(\s*)\d+\.\s+(.*)$/)
+          if (!listMatch) break
+          
+          const indent = listMatch[1].length
+          const content = listMatch[2]
+          
+          if (indent < baseIndent) break
+          
+          if (indent === baseIndent) {
+            const itemText = processInlineMarkdown(content)
+            j++
+            
+            if (j < lines.length) {
+              const nextOrderedMatch = lines[j].match(/^(\s*)\d+\.\s+/)
+              const nextUnorderedMatch = lines[j].match(/^(\s*)[-*]\s+/)
+              
+              if (nextOrderedMatch && nextOrderedMatch[1].length > indent) {
+                const nestedResult = parseNestedOrderedList(j, nextOrderedMatch[1].length)
+                items.push(`<li>${itemText}${nestedResult.html}</li>`)
+                j = nestedResult.nextIndex
+              } else if (nextUnorderedMatch && nextUnorderedMatch[1].length > indent) {
+                const nestedResult = parseNestedList(j, nextUnorderedMatch[1].length)
+                items.push(`<li>${itemText}${nestedResult.html}</li>`)
+                j = nestedResult.nextIndex
+              } else {
+                items.push(`<li>${itemText}</li>`)
+              }
+            } else {
+              items.push(`<li>${itemText}</li>`)
+            }
+          } else {
+            break
+          }
+        }
+        
+        return {
+          html: `<ol>${items.join('')}</ol>`,
+          nextIndex: j
+        }
+      }
+      
+      const result = parseNestedOrderedList(i, line.match(/^(\s*)\d+\.\s+/)![1].length)
+      html.push(result.html)
+      i = result.nextIndex
+      continue
+    }
+
+    // Horizontal rules
+    if (/^---+$/.test(line)) {
+      html.push('<hr/>')
+      i++
+      continue
+    }
+
+    // Tables
+    if (/^\|.*\|$/.test(line)) {
+      const table: string[] = []
+      table.push(lines[i])
+      i++
+
+      if (i < lines.length && /^\|[\s\-\|:]+\|$/.test(lines[i])) {
+        table.push(lines[i])
         i++
       }
-      html.push(`<ol>${items.join("")}</ol>`)
+
+      while (i < lines.length && /^\|.*\|$/.test(lines[i])) {
+        table.push(lines[i])
+        i++
+      }
+
+      const tableHtml = table.map(row => {
+        const cells = row.split('|').slice(1, -1).map(cell => cell.trim())
+        if (table.indexOf(row) === 0) {
+          return `<tr>${cells.map(cell => `<th>${processInlineMarkdown(cell)}</th>`).join('')}</tr>`
+        } else if (table.indexOf(row) === 1) {
+          return ''
+        } else {
+          return `<tr>${cells.map(cell => `<td>${processInlineMarkdown(cell)}</td>`).join('')}</tr>`
+        }
+      }).filter(row => row).join('')
+
+      html.push(`<table>${tableHtml}</table>`)
       continue
     }
 
     const para: string[] = [line]
     i++
     while (i < lines.length && !/^\s*$/.test(lines[i])) {
-      if (/^(?:```|#{1,6}\s|>\s|[-*]\s|\d+\.\s)/.test(lines[i])) break
+      if (/^(?:```|#{1,6}\s|>\s|[-*]\s|\d+\.\s|^\|.*\|$)/.test(lines[i])) break
       para.push(lines[i])
       i++
     }

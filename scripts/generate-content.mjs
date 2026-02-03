@@ -146,7 +146,7 @@ function markdownToHtml(markdown) {
     // Restore links as HTML
     links.forEach(({ text, url }) => {
       processedText = processedText.replace('___LINK___',
-        `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`)
+        `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #086EB8;">${text}</a>`)
     })
 
     // Restore KaTeX rendered HTML

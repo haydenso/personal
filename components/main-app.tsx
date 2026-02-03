@@ -20,10 +20,11 @@ import { ContentPanel } from "@/components/content-panel"
 import { HQ } from "@/components/hq"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
+import type { AboutContent } from "@/lib/about"
 
 export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
 
-const aboutTopImage = {
+const defaultAboutTopImage = {
   src: "/saul.jpeg",
   caption: "Saul Steinberg's Self Portrait, 1949",
 }
@@ -31,9 +32,10 @@ const aboutTopImage = {
 interface MainAppProps {
   initialTab?: Tab
   aboutHtml?: string
+  aboutContent?: AboutContent
 }
 
-export function MainApp({ initialTab = "hq", aboutHtml = "" }: MainAppProps) {
+export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: MainAppProps) {
   // derive the current tab primarily from the URL (single source of truth)
   // use a short-lived `pendingTab` to reflect immediate UI after user tap
   const [pendingTab, setPendingTab] = useState<Tab | null>(null)
@@ -54,6 +56,11 @@ export function MainApp({ initialTab = "hq", aboutHtml = "" }: MainAppProps) {
 
   const derivedTab = deriveTabFromPath(pathname)
   const activeTab = pendingTab ?? derivedTab
+  const isAboutTab = activeTab === "about"
+  const aboutSections = aboutContent?.sections ?? []
+  const aboutImages = aboutContent?.images ?? []
+  const aboutBadge = aboutContent?.badge
+  const aboutTopImageData = aboutContent?.topImage ?? defaultAboutTopImage
 
   // Lock sidebar to the minimum width and disable resizing by constraining min/max to the same value
   const sidebar = useResizable({ initialWidth: 150, minWidth: 150, maxWidth: 150 })
@@ -326,17 +333,32 @@ export function MainApp({ initialTab = "hq", aboutHtml = "" }: MainAppProps) {
             <div className={activeTab === 'about' ? 'w-full mx-auto max-w-3xl space-y-8' : 'lg:w-[60%] space-y-8'}>
                 <div className="space-y-4 prose prose-sm max-w-none">
                   <div className="after:clear-both after:block after:content-['']">
-                    {aboutTopImage?.src && (
+                    {aboutTopImageData?.src && (
                       <figure className="md:float-right md:w-[220px] md:max-w-[34vw] md:ml-6 md:mb-4 md:mt-0 w-full max-w-[260px] mx-auto mb-6 mt-0">
-                        <img src={aboutTopImage.src} alt={aboutTopImage.caption || 'portrait'} className="w-full rounded-sm object-cover" />
-                        {aboutTopImage.caption && (
+                        <img src={aboutTopImageData.src} alt={aboutTopImageData.caption || 'portrait'} className="w-full rounded-sm object-cover" />
+                        {aboutTopImageData.caption && (
                           <figcaption className="text-[13px] text-muted-foreground mt-1 font-serif">
-                            {aboutTopImage.caption}
+                            {aboutTopImageData.caption}
                           </figcaption>
                         )}
                       </figure>
                     )}
                     <div className="md:pt-0">
+                      {isAboutTab && aboutBadge && (
+                        <div className="mb-3 flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-[0.4em] text-[#086EB8]">
+                          <span>{aboutBadge.text}</span>
+                          {aboutBadge.link && (
+                            <a
+                              href={aboutBadge.link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#086EB8] underline decoration-dotted decoration-1 underline-offset-2"
+                            >
+                              {aboutBadge.link.text}
+                            </a>
+                          )}
+                        </div>
+                      )}
                       {aboutHtml ? <div dangerouslySetInnerHTML={{ __html: aboutHtml }} /> : null}
                     </div>
                   </div>
@@ -433,6 +455,52 @@ export function MainApp({ initialTab = "hq", aboutHtml = "" }: MainAppProps) {
                   scholar
                 </a>
               </div>
+              {isAboutTab && aboutSections.length > 0 && (
+                <div className="mt-10 space-y-6">
+                  {aboutSections.map((section, sectionIndex) => (
+                    <section
+                      key={`about-section-${sectionIndex}`}
+                      className="rounded-3xl border border-border bg-white/70 p-6 shadow-sm text-foreground"
+                    >
+                      {section.title && (
+                        <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground mb-3">
+                          {section.title}
+                        </p>
+                      )}
+                      <div className="space-y-4 text-sm leading-relaxed">
+                        {section.bullets.map((bullet, bulletIndex) => (
+                          <div
+                            key={`section-${sectionIndex}-bullet-${bulletIndex}`}
+                            className="prose prose-sm max-w-none"
+                            dangerouslySetInnerHTML={{ __html: bullet }}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              )}
+              {isAboutTab && aboutImages.length > 0 && (
+                <div className="mt-8 grid gap-4 md:grid-cols-3">
+                  {aboutImages.map((image, index) => (
+                    <figure
+                      key={`about-image-${index}`}
+                      className="overflow-hidden rounded-2xl border border-border bg-white/70"
+                    >
+                      <img
+                        src={image.src}
+                        alt={image.alt || image.caption || `about image ${index + 1}`}
+                        className="h-40 w-full object-cover"
+                      />
+                      {image.caption && (
+                        <figcaption className="px-3 py-2 text-[12px] text-muted-foreground">
+                          {image.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ))}
+                </div>
+              )}
             </div>
             
 

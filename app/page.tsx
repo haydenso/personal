@@ -1,5 +1,6 @@
 import { MainApp } from "@/components/main-app"
 import { markdownToHtml } from "@/lib/mdx"
+import { getAboutContent } from "@/lib/about"
 import { readFile } from "fs/promises"
 import path from "path"
 
@@ -14,5 +15,7 @@ export default async function Page() {
     aboutHtml = ""
   }
 
-  return <MainApp initialTab={"hq"} aboutHtml={aboutHtml} />
+  const aboutContent = await getAboutContent()
+
+  return <MainApp initialTab={"hq"} aboutHtml={aboutHtml} aboutContent={aboutContent} />
 }

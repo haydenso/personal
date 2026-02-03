@@ -55,9 +55,10 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
     return { pinned, categoryMap, categories }
   }, [])
   
-  // Track which categories are expanded (start all expanded)
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    new Set(categories)
+  // Track which categories are expanded. Start closed by default; if a
+  // deep-linked `selectedCategoryProp` is provided, open that one.
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(() =>
+    new Set(selectedCategoryProp ? [selectedCategoryProp] : [])
   )
   
   const toggleCategory = useCallback((category: string) => {
@@ -71,6 +72,16 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
       return next
     })
   }, [])
+
+  // If the parent provides a selectedCategory later (deep-link), ensure it's open
+  useEffect(() => {
+    if (!selectedCategoryProp) return
+    setExpandedCategories(prev => {
+      const next = new Set(prev)
+      next.add(selectedCategoryProp)
+      return next
+    })
+  }, [selectedCategoryProp])
 
   // Memoized click handler for musing items
   const handleMusingClick = useCallback((musing: typeof musings[0], e: React.MouseEvent) => {
@@ -118,10 +129,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
       >
         <div className="flex flex-col">
           <div className="flex items-center justify-between mb-1">
-            <h3 className={cn(
-              "text-sm font-semibold truncate",
-              isSelected ? "text-foreground" : "text-foreground"
-            )}>
+            <h3 className="text-sm font-semibold truncate text-[#086EB8]">
               {musing.title}
             </h3>
           </div>

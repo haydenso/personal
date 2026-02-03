@@ -52,7 +52,7 @@ export function parseMarkdown(text: string): string {
 
   // Restore links
   links.forEach(({ text, url }, i) => {
-    const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid">${text}</a>`
+    const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #086EB8;" class="underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid">${text}</a>`
     processed = processed.replace(`___LINK_${i}___`, linkHtml)
   })
 

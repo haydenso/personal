@@ -99,7 +99,7 @@ export function HQ() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs  tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
-                <a href="/github" className={`block ${linkClass}`}>people searcher</a>
+                <a href="https://clauscii.haydenso.com" className={`block ${linkClass}`}>claude ascii generator</a>
                 <a href="/github" className={`block ${linkClass}`}>rl environments</a>
                 <a href="/blogs/ikea" className={`block ${linkClass}`}>automations</a>
               </div>

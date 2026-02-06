@@ -22,26 +22,6 @@ export function Projects() {
 
           <div className="space-y-3">
             <div className="flex items-start gap-2">
-              <span className="text-[#A5D8FF] mt-0.5">📹</span>
-              <div className="flex-1">
-                <a href="https://llm.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
-                  pocket llm
-                </a>
-                <p className="text-sm text-[#A5D8FF] font-serif">llm inference via webGPU all in your browser</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-2">
-              <span className="text-[#A5D8FF] mt-0.5">📠</span>
-              <div className="flex-1">
-                <a href="https://typewriter.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
-                  remington
-                </a>
-                <p className="text-sm text-[#A5D8FF] font-serif">typewriter for google docs and microsoft word. stop jumping paragraphs!</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-2">
               <span className="text-[#A5D8FF] mt-0.5">🎮</span>
               <div className="flex-1">
                 <a href="https://clauscii.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
@@ -81,6 +61,26 @@ export function Projects() {
               </div>
             </div>
           </div>
+
+                      <div className="flex items-start gap-2">
+              <span className="text-[#A5D8FF] mt-0.5">📹</span>
+              <div className="flex-1">
+                <a href="https://llm.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                  pocket llm (soon)
+                </a>
+                <p className="text-sm text-[#A5D8FF] font-serif">llm inference via webGPU all in your browser</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <span className="text-[#A5D8FF] mt-0.5">📠</span>
+              <div className="flex-1">
+                <a href="https://typewriter.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                  remington (soon)
+                </a>
+                <p className="text-sm text-[#A5D8FF] font-serif">typewriter for google docs and microsoft word. stop jumping paragraphs!</p>
+              </div>
+            </div>
 
           <div className="flex justify-center gap-3 text-[#A5D8FF]/40 py-4">
             <span className="text-xl">✦</span>

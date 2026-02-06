@@ -12,7 +12,7 @@ export function Timeline() {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-[7px] top-0 bottom-0 w-0.5 bg-border" />
+          <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-[#E0EBFC] z-0" />
 
           <div className="space-y-8">
             {timeline.map((item, i) => {
@@ -20,7 +20,7 @@ export function Timeline() {
               return (
                 <div key={item.slug} className="relative">
                   {/* Timeline dot */}
-                  <div className="absolute left-0 top-3 w-4 h-4 rounded-full bg-background border-2 border-border z-10" />
+                  <div className="absolute left-2 top-3 w-4 h-4 rounded-full bg-background border-2 border-[#E0EBFC] z-10" />
 
                   <div className="ml-10">
                     {/* Image card */}

@@ -10,7 +10,9 @@ export function Research() {
             <p className="text-muted-foreground mb-6">my academic work & publications.</p>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
+            <p className="font-serif mb-6">currently my main technical research interests are interpretability of ai weather models, continual learning and reinforcement learning</p>
+
             <div className="space-y-6">
               <div className="space-y-2">
                 <h3 className="font-serif font-semibold text-foreground">

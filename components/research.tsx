@@ -68,15 +68,15 @@ export function Research() {
             </div>
           </div>
 
-          <p className="text-[#A5D8FF] italic font-serif">other side quests</p>
+          <p className=" italic font-serif">other side quests</p>
 
           <div className="space-y-3 pb-10">
             <div className="flex items-start gap-2">
               <div className="flex-1">
-                <a href="https://aisafetyhk.org" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                <a href="https://aisafetyhk.org" className="font-serif underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
                   queuing theory paper - simulating my high school lunch queue
                 </a>
-                <p className="text-sm text-[#A5D8FF] font-serif">i hate waiting in line</p>
+                <p className="text-sm font-serif">i hate waiting in line</p>
               </div>
             </div>
           </div>

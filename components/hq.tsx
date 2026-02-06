@@ -94,7 +94,7 @@ export function HQ() {
                   />
                   <span>peek my notes app</span>
                 </a>
-                <div>
+                <a>
                 <a href="/blogs" className={`inline-flex items-center ${linkClass}`}>
                   <Image
                     src="/substack.png"
@@ -109,7 +109,7 @@ export function HQ() {
                   />
                   <span>long-form essays</span>
                 </a>
-                </div>
+                </a>
                 <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
               </div>
               <div className="space-y-1">

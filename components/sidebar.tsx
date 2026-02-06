@@ -16,7 +16,7 @@ interface SidebarProps {
 
 export function Sidebar({ activeTab, onTabChange, width, isDragging = false, onMouseDown, mobileMenuOpen = false }: SidebarProps) {
   const router = useRouter()
-  const tabs: Tab[] = ["hq", "about", "musings", "blogs", "projects", "research", "bookshelf", "now"]
+  const tabs: Tab[] = ["hq","projects","musings", "blogs", "research", "bookshelf", "now",  "about"]
 
   const handleTabClick = (tab: Tab) => {
     if (onTabChange) return onTabChange(tab)

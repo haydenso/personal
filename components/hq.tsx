@@ -89,11 +89,12 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-contain mr-2 flex-shrink-0 rounded-sm"
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
                     aria-hidden
                   />
                   <span>peek my notes app</span>
                 </a>
+                <div>
                 <a href="/blogs" className={`inline-flex items-center ${linkClass}`}>
                   <Image
                     src="/substack.png"
@@ -106,7 +107,9 @@ export function HQ() {
                     className="h-4 w-4 object-contain mr-2 flex-shrink-0 rounded-sm"
                     aria-hidden
                   />
-                  <span>long-form essays</span></a>
+                  <span>long-form essays</span>
+                </a>
+                </div>
                 <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
               </div>
               <div className="space-y-1">

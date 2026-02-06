@@ -25,7 +25,7 @@ export default async function TabPage({ params }: Params) {
 
   const aboutContent = await getAboutContent()
 
-  const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+  const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "research", "bookshelf", "now"]
   const initialTab: Tab = (allowed.includes(tab as Tab) ? (tab as Tab) : "hq")
 
   return <MainApp initialTab={initialTab} aboutHtml={aboutHtml} aboutContent={aboutContent} />

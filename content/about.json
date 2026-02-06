@@ -1,8 +1,4 @@
 {
-  "badge": {
-    "text": "/currently/ - starting",
-    "link": { "text": "sidoai.org", "href": "https://sidoai.org/" }
-  },
   "topImage": {
     "src": "/saul.jpeg",
     "caption": "Saul Steinberg, Self Portrait, 1949"
@@ -10,21 +6,5 @@
   "images": [
   ],
   "sections": [
-    {
-      "title": null,
-      "bullets": [
-        "thinking and writing about applied AI + RL, geopolitics and growth strategy",
-        "studying cs + planets at hkust, politics at hku",
-        "reading [sherlock and engineering blogs](https://www.goodreads.com/user/show/186578130-hayden-so), listening to laufey and dwarkesh"
-      ]
-    },
-    {
-      "title": "/previously/",
-      "bullets": [
-        "sold guns in the arctic for a summer (polar bears!), did high school in [Norway](https://uwcrcn.no)",
-        "NLP research at [Yale](https://medicine.yale.edu/biomedical-informatics-data-science/) and software engineering at [Set Sail AI](https://chatbot.com.hk)",
-        "hybrid: tech strategy consulting, [district governance](https://en.wikipedia.org/wiki/Administrative_Officer_(Hong_Kong)) and AI adoption; [energy](https://www.cip.com/) private equity"
-      ]
-    }
   ]
 }

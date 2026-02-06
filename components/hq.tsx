@@ -89,19 +89,31 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0 rounded-sm"
                     aria-hidden
                   />
                   <span>peek my notes app</span>
                 </a>
-                <a href="/blogs" className={`block ${linkClass}`}>long-form essays</a>
+                <a href="/blogs" className={`inline-flex items-center ${linkClass}`}>
+                  <Image
+                    src="/substack.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0 rounded-sm"
+                    aria-hidden
+                  />
+                  <span>long-form essays</span></a>
                 <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
               </div>
               <div className="space-y-1">
                 <p className="text-xs  tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
                 <a href="https://clauscii.haydenso.com" className={`block ${linkClass}`}>claude ascii generator</a>
-                <a href="/github" className={`block ${linkClass}`}>rl environments</a>
-                <a href="/blogs/ikea" className={`block ${linkClass}`}>automations</a>
+                <a href="/blogs/ikea" className={`block ${linkClass}`}>blog automations</a>
+                <a href="/projects" className={`block ${linkClass}`}>(see all &#8618;)</a>
               </div>
             </div>
 
@@ -110,7 +122,6 @@ export function HQ() {
               <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
                 <li>sold guns in the arctic and led janitorial operations</li>
                 <li>dabbled in applied ai, energy private equity, consulting, ml research and gov/policy</li>
-                <li>based + from hong kong (hkust), did high school in norway (uwc!)</li>
               </ul>
             </div>
 
@@ -133,8 +144,8 @@ export function HQ() {
               >
                 sherlock
               </a>
-              , rabbitholing niche chinese politics and engineering blogs, pondering the human condition or strategizing {""} 
-                            <a
+              , rabbitholing niche chinese politics and engineering blogs, pondering the human condition or strategizing {""}
+              <a
                 href="https://haydenso.com/blogs/rollup-rl"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -152,7 +163,7 @@ export function HQ() {
                 flat whites
               </a>
               , paul graham, kill tony, all-in, long runs, retrofuturism and vagueposting (read the {""}
-                            <a
+              <a
                 href="/evolution"
                 target="_blank"
                 rel="noopener noreferrer"

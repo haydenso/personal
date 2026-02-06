@@ -129,7 +129,7 @@ export function MusingsList({ selectedMusing, onSelectMusing, width, isDragging,
       >
         <div className="flex flex-col">
           <div className="flex items-center justify-between mb-1">
-            <h3 className="text-sm font-semibold truncate text-[#086EB8]">
+            <h3 className="text-sm font-semibold truncate text-[#000000]">
               {musing.title}
             </h3>
           </div>

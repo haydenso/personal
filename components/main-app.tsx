@@ -13,16 +13,16 @@ import { MusingsList } from "@/components/musings-list"
 import { BlogReader } from "@/components/blog-reader"
 import { MusingReader } from "@/components/musing-reader"
 import { Bookshelf } from "@/components/bookshelf"
-import { Gallery } from "@/components/gallery"
-import { Timeline } from "@/components/timeline"
+import { Now } from "@/components/now"
 import { Projects } from "@/components/projects"
+import { Research } from "@/components/research"
 import { ContentPanel } from "@/components/content-panel"
 import { HQ } from "@/components/hq"
 import { musings } from "@/content/musings"
 import { blogs } from "@/content/blogs"
 import type { AboutContent } from "@/lib/about"
 
-export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "bookshelf" | "gallery" | "timeline"
+export type Tab = "hq" | "about" | "musings" | "blogs" | "projects" | "research" | "bookshelf" | "now"
 
 const defaultAboutTopImage = {
   src: "/saul.jpeg",
@@ -50,7 +50,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
   const deriveTabFromPath = (path?: string | null): Tab => {
     if (!path) return initialTab
     const seg = path.split('/')[1] || ''
-    const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+    const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "research", "bookshelf", "now"]
     return seg === '' ? 'hq' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'hq')
   }
 
@@ -120,7 +120,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
   useEffect(() => {
     if (!pathname) return
     const seg = pathname.split('/')[1] || ''
-    const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "bookshelf", "gallery", "timeline"]
+    const allowed: Tab[] = ["hq", "about", "musings", "blogs", "projects", "research", "bookshelf", "now"]
     const tab: Tab = seg === '' ? 'hq' : (allowed.includes(seg as Tab) ? (seg as Tab) : 'hq')
     if (pendingTab === tab) setPendingTab(null)
 
@@ -318,26 +318,35 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
         </>
       ) : activeTab === "projects" ? (
         <Projects />
+      ) : activeTab === "research" ? (
+        <Research />
       ) : activeTab === "bookshelf" ? (
         <Bookshelf />
-      ) : activeTab === "gallery" ? (
-        <Gallery />
-      ) : activeTab === "timeline" ? (
-        <Timeline />
+      ) : activeTab === "now" ? (
+        <Now />
       ) : activeTab === "hq" ? (
         <HQ />
       ) : (
-        <main className="flex-1 px-6 md:px-16 overflow-y-auto pt-28 md:pt-16 flex flex-col justify-between min-h-screen pb-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-          <div className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row gap-12 lg:gap-16">
-            {/* Left column: Bio and images - 60% width on large screens; expand to full width for the about page */}
-            <div className={activeTab === 'about' ? 'w-full mx-auto max-w-3xl space-y-8' : 'lg:w-[60%] space-y-8'}>
-                <div className="space-y-4 prose prose-sm max-w-none">
+        <main 
+          className="flex-1 px-10 md:px-70 xl:px-90 2xl:px-123 overflow-y-auto pt-15 md:pt-16 xl:pt-12 flex flex-col min-h-screen pb-8"
+          style={{
+            backgroundColor: '#086EB8',
+            backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
+            backgroundRepeat: 'no-repeat, repeat',
+            backgroundSize: 'auto, 320px',
+            backgroundPosition: 'center, top left',
+            color: '#EBEFF4'
+          }}
+        >
+          <div className="max-w-2xl mx-auto w-full">
+            <div className="space-y-8">
+                <div className="space-y-4 prose prose-sm prose-invert max-w-none">
                   <div className="after:clear-both after:block after:content-['']">
                     {aboutTopImageData?.src && (
                       <figure className="md:float-right md:w-[220px] md:max-w-[34vw] md:ml-6 md:mb-4 md:mt-0 w-full max-w-[260px] mx-auto mb-6 mt-0">
                         <img src={aboutTopImageData.src} alt={aboutTopImageData.caption || 'portrait'} className="w-full rounded-sm object-cover" />
                         {aboutTopImageData.caption && (
-                          <figcaption className="text-[13px] text-muted-foreground mt-1 font-serif">
+                          <figcaption className="text-[13px] text-[#A5D8FF] mt-1 font-serif">
                             {aboutTopImageData.caption}
                           </figcaption>
                         )}
@@ -345,21 +354,20 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                     )}
                     <div className="md:pt-0">
                       {isAboutTab && aboutBadge && (
-                        <div className="mb-3 flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-[0.4em] text-[#086EB8]">
+                        <div className="mb-3 flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-[0.4em] text-[#E0EBFC]">
                           <span>{aboutBadge.text}</span>
                           {aboutBadge.link && (
                             <a
                               href={aboutBadge.link.href}
                               target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[#086EB8] underline decoration-dotted decoration-1 underline-offset-2"
+                              className="text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid"
                             >
                               {aboutBadge.link.text}
                             </a>
                           )}
                         </div>
                       )}
-                      {aboutHtml ? <div dangerouslySetInnerHTML={{ __html: aboutHtml }} /> : null}
+                      {aboutHtml ? <div className="text-[#E0EBFC] text-sm md:text-base font-serif" dangerouslySetInnerHTML={{ __html: aboutHtml }} /> : null}
                     </div>
                   </div>
                 </div>
@@ -367,13 +375,13 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
               {/* Peek into quick links (sticky note buttons) */}
               <div className="pt-3 mt-6">
                 <div className="font-serif text-[15px] mb-2">
-                  <span style={{ color: '#1D376B', backgroundColor: '#E0EBFC', padding: '0 0.375rem', borderRadius: '0.125rem', display: 'inline-block' }}>/please wander! peek into my: /</span>
+                  <span className="text-[#E0EBFC] bg-white/20 px-2 py-1 rounded-sm">/please wander! peek into my: /</span>
                 </div>
                 <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                   <button
                     onClick={() => { handleTabChange('musings'); setSelectedMusing(null); }}
                     aria-label="Open notes app"
-                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                    className="inline-block border border-dotted border-[#E0EBFC] text-[#E0EBFC] px-3 py-2 rounded-md transform -rotate-1 hover:bg-white/20 hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                   >
                     notes app
                   </button>
@@ -381,7 +389,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   <button
                     onClick={() => { handleTabChange('blogs'); setSelectedBlog(null); }}
                     aria-label="Open writings"
-                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                    className="inline-block border border-dotted border-[#E0EBFC] text-[#E0EBFC] px-3 py-2 rounded-md hover:bg-white/20 hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                   >
                     writings
                   </button>
@@ -389,23 +397,23 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   <button
                     onClick={() => { handleTabChange('bookshelf'); }}
                     aria-label="Open bookshelf"
-                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform -rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                    className="inline-block border border-dotted border-[#E0EBFC] text-[#E0EBFC] px-3 py-2 rounded-md transform -rotate-1 hover:bg-white/20 hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                   >
                     bookshelf
                   </button>
 
                   <button
-                    onClick={() => { handleTabChange('gallery'); }}
-                    aria-label="Open gallery"
-                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                    onClick={() => { handleTabChange('now'); }}
+                    aria-label="Open now page"
+                    className="inline-block border border-dotted border-[#E0EBFC] text-[#E0EBFC] px-3 py-2 rounded-md hover:bg-white/20 hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                   >
-                    gallery
+                    now
                   </button>
 
                   <button
                     onClick={() => { handleTabChange('projects'); }}
                     aria-label="Open projects"
-                    className="inline-block border border-dotted border-[#A5D8FF] text-[#1D376B] px-3 py-2 rounded-md transform rotate-1 hover:bg-[#D6E4FA] hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
+                    className="inline-block border border-dotted border-[#E0EBFC] text-[#E0EBFC] px-3 py-2 rounded-md transform rotate-1 hover:bg-white/20 hover:border-solid transition-all cursor-pointer select-none font-mono text-sm"
                   >
                     projects
                   </button>
@@ -413,12 +421,12 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
               </div>
 
               <div className="flex flex-wrap gap-4 pt-8 font-serif justify-center md:justify-start text-center">
-                <span className="text-muted-foreground">contact:</span>
+                <span className="text-[#A5D8FF]">contact:</span>
                 <a
                   href="https://www.linkedin.com/in/haydenso/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                  className="text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
                 >
                   linkedin
                 </a>
@@ -426,7 +434,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   href="https://github.com/haydenso"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                  className="text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
                 >
                   github
                 </a>
@@ -434,7 +442,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   href="https://x.com/haydsso"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                  className="text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
                 >
                   twitter
                 </a>
@@ -442,7 +450,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   href="mailto:haydenso.hk@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                  className="text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
                 >
                   email
                 </a>
@@ -450,7 +458,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   href="https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground opacity-70 underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:opacity-100 hover:decoration-solid"
+                  className="text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
                 >
                   scholar
                 </a>
@@ -460,10 +468,10 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   {aboutSections.map((section, sectionIndex) => (
                     <section
                       key={`about-section-${sectionIndex}`}
-                      className="rounded-3xl border border-border bg-white/70 p-6 shadow-sm text-foreground"
+                      className="rounded-3xl border border-[#E0EBFC]/30 bg-white/10 p-6 shadow-sm text-[#E0EBFC]"
                     >
                       {section.title && (
-                        <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground mb-3">
+                        <p className="text-xs uppercase tracking-[0.35em] text-[#A5D8FF] mb-3">
                           {section.title}
                         </p>
                       )}
@@ -471,7 +479,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                         {section.bullets.map((bullet, bulletIndex) => (
                           <div
                             key={`section-${sectionIndex}-bullet-${bulletIndex}`}
-                            className="prose prose-sm max-w-none"
+                            className="prose prose-sm prose-invert max-w-none"
                             dangerouslySetInnerHTML={{ __html: bullet }}
                           />
                         ))}
@@ -485,7 +493,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                   {aboutImages.map((image, index) => (
                     <figure
                       key={`about-image-${index}`}
-                      className="overflow-hidden rounded-2xl border border-border bg-white/70"
+                      className="overflow-hidden rounded-2xl border border-[#E0EBFC]/30 bg-white/10"
                     >
                       <img
                         src={image.src}
@@ -493,7 +501,7 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                         className="h-40 w-full object-cover"
                       />
                       {image.caption && (
-                        <figcaption className="px-3 py-2 text-[12px] text-muted-foreground">
+                        <figcaption className="px-3 py-2 text-[12px] text-[#A5D8FF]">
                           {image.caption}
                         </figcaption>
                       )}
@@ -502,24 +510,9 @@ export function MainApp({ initialTab = "hq", aboutHtml = "", aboutContent }: Mai
                 </div>
               )}
             </div>
-            
-
-            {/* Right column: Images + Interests - 40% width on large screens (hidden on about) */}
-            {activeTab !== 'about' && (
-              <div className="lg:w-[40%] lg:mt-0 space-y-6">
-                <InterestsSection />
-                <ImagesRow images={[
-                  { src: "/about/about-1.jpg", alt: "Image 1" },
-                  { src: "/about/about-2.jpg", alt: "Image 2" },
-                  { src: "/about/about-3.jpg", alt: "Image 3" }
-                ]} />
-              </div>
-            )}
           </div>
           
-          {/* images moved into the right column (see above) */}
-          
-          <div className="max-w-6xl mx-auto w-full">
+          <div className="max-w-2xl mx-auto w-full">
             <Footer />
           </div>
         </main>

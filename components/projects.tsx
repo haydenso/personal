@@ -56,7 +56,7 @@ export function Projects() {
             <div className="flex items-start gap-3">
               <span className="text-[#A5D8FF] mt-0.5">📟</span>
               <div className="flex-1">
-                <a href="huggingface.co/spaces/haydso/onnx-converter-new" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                <a href="https://huggingface.co/spaces/haydso/onnx-converter-new" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
                   model to onnx converter (huggingface space)
                 </a>
                 <p className="text-sm text-[#A5D8FF] font-serif">updated streamlit app to convert models and safetensors into onnx for onnx runtime. supports new models.</p>

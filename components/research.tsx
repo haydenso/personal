@@ -77,7 +77,7 @@ export function Research() {
 
           <p className=" italic font-serif">other side quests</p>
 
-          <div className="space-y-3 pb-10">
+          <div className="space-y-3">
             <div className="flex items-start gap-2">
               <div className="flex-1">
                 <a href="https://aisafetyhk.org" className="font-serif underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">

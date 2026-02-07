@@ -68,18 +68,37 @@ export function Research() {
             </div>
           </div>
 
+          <div className="flex justify-center gap-3 text-[#A5D8FF]/40 py-4">
+            <span className="text-xl">✦</span>
+            <span className="text-xl">✦</span>
+            <span className="text-xl">✦</span>
+          </div>
+
+
           <p className=" italic font-serif">other side quests</p>
 
           <div className="space-y-3 pb-10">
             <div className="flex items-start gap-2">
               <div className="flex-1">
                 <a href="https://aisafetyhk.org" className="font-serif underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
-                  queuing theory paper - simulating my high school lunch queue
+                  queuing theory — simulating my high school lunch queue
                 </a>
-                <p className="text-sm font-serif">i hate waiting in line</p>
+                <p className="text-sm font-serif">i hate waiting in line, so i simulated how to make it go faster</p>
               </div>
             </div>
           </div>
+
+          <div className="space-y-3 pb-10">
+            <div className="flex items-start gap-2">
+              <div className="flex-1">
+                <a href="#" className="font-serif underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                  Determining the energy of nuclear fragments produced in antiproton radiotherapy
+                </a>
+                <p className="text-sm font-serif">Submission to CERN Beamline For All Competition</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div className="px-6 md:px-16 w-full max-w-3xl mx-auto">

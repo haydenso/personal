@@ -95,6 +95,16 @@ export function Projects() {
             </div>
           </div>
 
+          <div className="flex items-start gap-3">
+            <span className="text-[#A5D8FF] mt-0.5">📹</span>
+            <div className="flex-1">
+              <a href="#" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                minimal natural language code execution in a rust-based container(soon)
+              </a>
+              <p className="text-sm text-[#A5D8FF] font-serif">nightjar + monty combined for the best of both worlds</p>
+            </div>
+          </div>
+
           <div className="flex justify-center gap-3 text-[#A5D8FF]/40 py-4">
             <span className="text-xl">✦</span>
             <span className="text-xl">✦</span>

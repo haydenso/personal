@@ -34,7 +34,7 @@ export function Projects() {
             </div>
 
             <div className="flex items-start gap-3">
-            <span className="text-[#A5D8FF] mt-0.5">📹</span>
+            <span className="text-[#A5D8FF] mt-0.5">🤖</span>
             <div className="flex-1">
               <a href="https://llm.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
                 pocket llm

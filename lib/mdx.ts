@@ -228,6 +228,48 @@ export function markdownToHtml(markdown: string): string {
     return processedText
   }
 
+  // Hoisted helper for parsing nested unordered lists so ordered list parser
+  // can reuse the same logic when mixing ordered/unordered nested lists.
+  function parseNestedList(startIndex: number, baseIndent = 0): { html: string; nextIndex: number } {
+    const items: string[] = []
+    let j = startIndex
+
+    while (j < lines.length) {
+      const listMatch = lines[j].match(/^(\s*)[-*]\s+(.*)$/)
+      if (!listMatch) break
+
+      const indent = listMatch[1].length
+      const content = listMatch[2]
+
+      if (indent < baseIndent) break
+
+      if (indent === baseIndent) {
+        const itemText = processInlineMarkdown(content)
+        j++
+
+        if (j < lines.length) {
+          const nextMatch = lines[j].match(/^(\s*)[-*]\s+/)
+          if (nextMatch && nextMatch[1].length > indent) {
+            const nestedResult = parseNestedList(j, nextMatch[1].length)
+            items.push(`<li>${itemText}${nestedResult.html}</li>`)
+            j = nestedResult.nextIndex
+          } else {
+            items.push(`<li>${itemText}</li>`)
+          }
+        } else {
+          items.push(`<li>${itemText}</li>`)
+        }
+      } else {
+        break
+      }
+    }
+
+    return {
+      html: `<ul>${items.join('')}</ul>`,
+      nextIndex: j,
+    }
+  }
+
   const html: string[] = []
   let i = 0
   while (i < lines.length) {

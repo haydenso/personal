@@ -114,8 +114,8 @@ export function HQ() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs  tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
+                <a href="https://llm.haydenso.com" className={`block ${linkClass}`}>llm in the browser (webgpu)</a>
                 <a href="https://clauscii.haydenso.com" className={`block ${linkClass}`}>claude ascii generator</a>
-                <a href="/blogs/ikea" className={`block ${linkClass}`}>blog automations</a>
                 <a href="/projects" className={`block ${linkClass}`}>(see all &#8618;)</a>
               </div>
             </div>

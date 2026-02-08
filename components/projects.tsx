@@ -44,6 +44,16 @@ export function Projects() {
           </div>
 
             <div className="flex items-start gap-3">
+            <span className="text-[#A5D8FF] mt-0.5">📠</span>
+            <div className="flex-1">
+              <a href="https://typewriter.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                typewriter!!! — remington (in progress)
+              </a>
+              <p className="text-sm text-[#A5D8FF] font-serif">typewriter for google docs and microsoft word. stop jumping paragraphs!</p>
+            </div>
+          </div>
+
+            <div className="flex items-start gap-3">
               <span className="text-[#A5D8FF] mt-0.5">🎮</span>
               <div className="flex-1">
                 <a href="https://clauscii.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
@@ -82,16 +92,6 @@ export function Projects() {
               </a>
               <p className="text-sm text-[#A5D8FF] font-serif">interactive map for visualizing chinese leadership. data from HKU's CCCW
               </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <span className="text-[#A5D8FF] mt-0.5">📠</span>
-            <div className="flex-1">
-              <a href="https://typewriter.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
-                remington (soon)
-              </a>
-              <p className="text-sm text-[#A5D8FF] font-serif">typewriter for google docs and microsoft word. stop jumping paragraphs!</p>
             </div>
           </div>
 

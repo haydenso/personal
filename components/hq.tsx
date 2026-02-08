@@ -104,18 +104,61 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-contain mr-2 flex-shrink-0 rounded-sm"
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
                     aria-hidden
                   />
                   <span>long-form essays</span>
                 </a>
                 </div>
                 <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
+                <a href="/blogs/players" className={`block ${linkClass}`}>know the players</a>
               </div>
               <div className="space-y-1">
                 <p className="text-xs  tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
-                <a href="https://llm.haydenso.com" className={`block ${linkClass}`}>llm in the browser</a>
-                <a href="https://writer.haydenso.com" className={`block ${linkClass}`}>typewriter!!!</a>
+                <a href="https://llm.haydenso.com" className={`inline-flex items-center ${linkClass}`}>
+                  <Image
+                    src="/windows.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
+                    aria-hidden
+                  />
+                  <span>llm with webgpu</span>
+                </a>
+                <div>
+                <a href="https://writer.haydenso.com" className={`inline-flex items-center ${linkClass}`}>
+                  <Image
+                    src="/type.PNG"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0 rounded-sm"
+                    aria-hidden
+                  />
+                  <span>typewriter!!!</span>
+                </a>
+                </div>
+                <a href="https://browser.haydenso.com" className={`inline-flex items-center ${linkClass}`}>
+                  <Image
+                    src="/go.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
+                    aria-hidden
+                  />
+                  <span>markdown browser</span>
+                </a>
                 <a href="/projects" className={`block ${linkClass}`}>(see all &#8618;)</a>
               </div>
             </div>

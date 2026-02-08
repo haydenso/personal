@@ -24,25 +24,25 @@ export function Projects() {
           <div className="space-y-3">
 
             <div className="flex items-start gap-3">
-              <img src="/sido.avif" alt="sido ai" className="h-5 w-5 rounded-sm mt-0.5 object-cover" />
-              <div className="flex-1">
-                <a href="https://sidoai.org" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
-                  sido ai — pro bono ai advisory for HK's small-medium-businesses
-                </a>
-                <p className="text-sm text-[#A5D8FF] font-serif">forward deployed consulting. SMBs cannot get left behind in the intelligence revolution</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
             <span className="text-[#A5D8FF] mt-0.5">🤖</span>
             <div className="flex-1">
               <a href="https://llm.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
                 pocket llm
               </a>
-              <p className="text-sm text-[#A5D8FF] font-serif">llm inference via webGPU all in your browser. it goes brrrrr</p>
+              <p className="text-sm text-[#A5D8FF] font-serif">llm inference via webGPU all in your browser. it goes brrrrr, minimal implementation.</p>
             </div>
           </div>
 
+                      <div className="flex items-start gap-3">
+            <span className="text-[#A5D8FF] mt-0.5">🔎</span>
+            <div className="flex-1">
+              <a href="https://browser.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                markdown browser in a browser
+              </a>
+              <p className="text-sm text-[#A5D8FF] font-serif">see how claude code and codex view the web! windows 98 style.</p>
+            </div>
+          </div>
+          
             <div className="flex items-start gap-3">
             <span className="text-[#A5D8FF] mt-0.5">📠</span>
             <div className="flex-1">
@@ -50,6 +50,17 @@ export function Projects() {
                 typewriter!!! — remington (in progress)
               </a>
               <p className="text-sm text-[#A5D8FF] font-serif">typewriter for google docs and microsoft word. stop jumping paragraphs!</p>
+            </div>
+          </div>
+
+
+          <div className="flex items-start gap-3">
+            <img src="/sido.avif" alt="sido ai" className="h-5 w-5 rounded-sm mt-0.5 object-cover" />
+            <div className="flex-1">
+              <a href="https://sidoai.org" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                sido ai — pro bono ai advisory for HK's small-medium-businesses
+              </a>
+              <p className="text-sm text-[#A5D8FF] font-serif">forward deployed consulting. SMBs cannot get left behind in the intelligence revolution</p>
             </div>
           </div>
 

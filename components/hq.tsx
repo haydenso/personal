@@ -135,58 +135,65 @@ export function HQ() {
               </div>
             </div>
 
-            {/* Writings and Shower Thoughts - Two Columns */}
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-4 text-xs md:text-sm">
-              <div className="space-y-1">
-                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">writings</p>
-                <a href="/musings" className={`inline-flex items-center ${linkClass}`}>
-                  <Image
-                    src="/notes.png"
-                    alt=""
-                    width={16}
-                    height={16}
-                    sizes="16px"
-                    priority
-                    quality={70}
-                    className="h-4 w-4 object-cover mr-2 flex-shrink-0"
-                    aria-hidden
-                  />
-                  <span>peek my notes</span>
-                </a>
-                <a href="/blogs" className={`block ${linkClass}`}>
-                  <Image
-                    src="/substack.png"
-                    alt=""
-                    width={16}
-                    height={1}
-                    sizes="10px"
-                    priority
-                    quality={70}
-                    className="h-4 w-4 object-cover mr-2 flex-shrink-0 inline-block"
-                    aria-hidden
-                  />
-                  <span>essays</span>
-                </a>
-                <a href="/rcn" className={`block ${linkClass}`}>
-                  <Image
-                    src="/terminal.png"
-                    alt=""
-                    width={16}
-                    height={16}
-                    sizes="16px"
-                    priority
-                    quality={70}
-                    className="h-4 w-4 object-cover mr-2 inline-block"
-                    aria-hidden
-                  />
-                  <span>engineering memos</span></a>
+            {/* Writings and Shower Thoughts */}
+            <div className="space-y-4 text-xs md:text-sm">
+              {/* Writings - 2 column grid on md+ */}
+              <div>
+                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70 mb-1">writings</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="/musings" className={`inline-flex items-center ${linkClass}`}>
+                    <Image
+                      src="/notes.png"
+                      alt=""
+                      width={16}
+                      height={16}
+                      sizes="16px"
+                      priority
+                      quality={70}
+                      className="h-4 w-4 object-cover mr-2 flex-shrink-0"
+                      aria-hidden
+                    />
+                    <span>peek my notes</span>
+                  </a>
+                  <a href="/blogs" className={`inline-flex items-center ${linkClass}`}>
+                    <Image
+                      src="/substack.png"
+                      alt=""
+                      width={16}
+                      height={16}
+                      sizes="16px"
+                      priority
+                      quality={70}
+                      className="h-4 w-4 object-cover mr-2 flex-shrink-0"
+                      aria-hidden
+                    />
+                    <span>essays</span>
+                  </a>
+                  <a href="/rcn" className={`inline-flex items-center ${linkClass}`}>
+                    <Image
+                      src="/terminal.png"
+                      alt=""
+                      width={16}
+                      height={16}
+                      sizes="16px"
+                      priority
+                      quality={70}
+                      className="h-4 w-4 object-cover mr-2"
+                      aria-hidden
+                    />
+                    <span>engineering memos</span>
+                  </a>
+                </div>
               </div>
 
-              <div className="space-y-1 pb-2">
-                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">my shower thoughts</p>
-                <a href="/projects" className={`block ${linkClass}`}>(1) reinforcement learning &amp; agents</a>
-                <a href="/projects" className={`block ${linkClass}`}>(2) politics of ai</a>
-                <a href="/projects" className={`block ${linkClass}`}>(3) accelerating scientific discovery</a>
+              {/* Shower Thoughts - horizontal row on md+ */}
+              <div className="pb-2">
+                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70 mb-1">my shower thoughts</p>
+                <div className="flex flex-col md:flex-row md:gap-6 gap-1">
+                  <a href="/projects" className={`block ${linkClass}`}>(1) reinforcement learning &amp; agents</a>
+                  <a href="/projects" className={`block ${linkClass}`}>(2) politics of ai</a>
+                  <a href="/projects" className={`block ${linkClass}`}>(3) accelerating scientific discovery</a>
+                </div>
               </div>
             </div>
           </div>

@@ -1,6 +1,10 @@
+"use client"
+
 import Image from "next/image"
+import { useState } from "react"
 
 export function HQ() {
+  const [isExpanded, setIsExpanded] = useState(false)
   const linkClass = "text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid"
   const linkMutedClass = "text-[#A5D8FF] underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid hover:opacity-100 opacity-80"
 
@@ -17,17 +21,30 @@ export function HQ() {
       }}
     >
       <div className="max-w-2xl mx-auto w-full">
-        {/* Hero Image */}
+        {/* Hero Image - mobile and desktop variants */}
         <div className="mb-6 md:mb-6 xl:mb-7">
-          <Image
-            src="/hq.jpeg"
-            alt="HQ"
-            width={919}
-            height={656}
-            priority
-            sizes="(max-width: 768px) 100vw, 640px"
-            className="w-full h-auto"
-          />
+          <div className="block md:hidden">
+            <Image
+              src="/hq-mobile.jpeg"
+              alt="HQ"
+              width={640}
+              height={456}
+              priority
+              sizes="100vw"
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="hidden md:block">
+            <Image
+              src="/hq.jpeg"
+              alt="HQ"
+              width={919}
+              height={656}
+              priority
+              sizes="(max-width: 768px) 100vw, 640px"
+              className="w-full h-auto"
+            />
+          </div>
         </div>
 
         {/* Content */}
@@ -38,19 +55,9 @@ export function HQ() {
                 <h1 className="text-lg md:text-xl font-serif font-bold mb-1">hey, i'm hayden!</h1>
                 <p>
                   &gt; i <em>flâneur</em>, {" "}
-                  <a
-                    href="/musings"
-                    className={linkClass}
-                  >
-                    blog
-                  </a>
-                  &nbsp;and{" "}
-                  <a
-                    href="/projects"
-                    className={linkClass}
-                  >
-                    clawd code
-                  </a>
+                  <a href="/musings" className={linkClass}>blog</a>
+                  &nbsp;and {" "}
+                  <a href="/projects" className={linkClass}>clawd code</a>
                 </p>
               </div>
               <Image
@@ -66,55 +73,19 @@ export function HQ() {
             </div>
           </div>
 
-
-          <div className="text-xs md:text-sm pb-2">
-            <p>
-              my shower thoughts:&nbsp;
-              <strong>reinforcement learning &amp; agents</strong>,&nbsp;
-              <strong>politics of AI</strong>,&nbsp;
-              <strong>accelerating scientific discovery</strong>
-            </p>
+          <div>
+            <p className="pb-1 text-xs md:text-sm font-bold">in my 20 years, i've:</p>
+            <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
+              <li>sold guns in the arctic and led janitorial operations</li>
+              <li>dabbled in applied ai, energy private equity, consulting, ml research and gov/policy</li>
+            </ul>
           </div>
 
           <div className="space-y-4">
-            <div className="md:mt-2 grid grid-cols-2 gap-6 text-xs md:text-sm pb-3 ml:pb-2 xl:pb-2">
-              <div className="space-y-1">
-                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">writings</p>
-                <a href="/musings" className={`inline-flex items-center ${linkClass}`}>
-                  <Image
-                    src="/notes.webp"
-                    alt=""
-                    width={16}
-                    height={16}
-                    sizes="16px"
-                    priority
-                    quality={70}
-                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
-                    aria-hidden
-                  />
-                  <span>peek my notes app</span>
-                </a>
-                <div>
-                <a href="/blogs" className={`inline-flex items-center ${linkClass}`}>
-                  <Image
-                    src="/substack.png"
-                    alt=""
-                    width={16}
-                    height={16}
-                    sizes="16px"
-                    priority
-                    quality={70}
-                    className="h-4 w-4 object-contain mr-2 flex-shrink-0"
-                    aria-hidden
-                  />
-                  <span>long-form essays</span>
-                </a>
-                </div>
-                <a href="/rcn" className={`block ${linkClass}`}>reflecting on high school</a>
-                <a href="/blogs/players" className={`block ${linkClass}`}>know the players</a>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs  tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
+            {/* Selected Projects - Full Width */}
+            <div className="space-y-1 text-xs md:text-sm">
+              <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
+              <div className="grid grid-cols-1 gap-1 w-full">
                 <a href="https://llm.haydenso.com" className={`inline-flex items-center ${linkClass}`}>
                   <Image
                     src="/windows.png"
@@ -129,7 +100,7 @@ export function HQ() {
                   />
                   <span>llm with webgpu</span>
                 </a>
-                <div>
+
                 <a href="https://writer.haydenso.com" className={`inline-flex items-center ${linkClass}`}>
                   <Image
                     src="/type.PNG"
@@ -144,7 +115,7 @@ export function HQ() {
                   />
                   <span>typewriter!!!</span>
                 </a>
-                </div>
+
                 <a href="https://browser.haydenso.com" className={`inline-flex items-center ${linkClass}`}>
                   <Image
                     src="/go.png"
@@ -159,104 +130,128 @@ export function HQ() {
                   />
                   <span>markdown browser</span>
                 </a>
-                <a href="/projects" className={`block ${linkClass}`}>(see all &#8618;)</a>
+
+                <a href="/projects" className={`inline-flex items-center ${linkClass}`}>(see all &#8618;)</a>
               </div>
             </div>
 
-            <div>
-              <p className="pb-1 text-xs md:text-sm font-bold">in my 20 years, i've:</p>
-              <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
-                <li>sold guns in the arctic and led janitorial operations</li>
-                <li>dabbled in applied ai, energy private equity, consulting, ml research and gov/policy</li>
-              </ul>
-            </div>
+            {/* Writings and Shower Thoughts - Two Columns */}
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-4 text-xs md:text-sm">
+              <div className="space-y-1">
+                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">writings</p>
+                <a href="/musings" className={`inline-flex items-center ${linkClass}`}>
+                  <Image
+                    src="/notes.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-cover mr-2 flex-shrink-0"
+                    aria-hidden
+                  />
+                  <span>peek my notes</span>
+                </a>
+                <a href="/blogs" className={`block ${linkClass}`}>
+                  <Image
+                    src="/substack.png"
+                    alt=""
+                    width={16}
+                    height={1}
+                    sizes="10px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-cover mr-2 flex-shrink-0 inline-block"
+                    aria-hidden
+                  />
+                  <span>essays</span>
+                </a>
+                <a href="/rcn" className={`block ${linkClass}`}>
+                  <Image
+                    src="/terminal.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-cover mr-2 inline-block"
+                    aria-hidden
+                  />
+                  <span>engineering memos</span></a>
+              </div>
 
-            <div className="text-xs md:text-sm">
+              <div className="space-y-1 pb-2">
+                <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">my shower thoughts</p>
+                <a href="/projects" className={`block ${linkClass}`}>(1) reinforcement learning &amp; agents</a>
+                <a href="/projects" className={`block ${linkClass}`}>(2) politics of ai</a>
+                <a href="/projects" className={`block ${linkClass}`}>(3) accelerating scientific discovery</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-xs md:text-sm">
+            {/* Desktop: always show full text */}
+            <div className="hidden md:block">
               im probably listening to {" "}
-              <a
-                href="/bookshelf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkMutedClass}
-              >
-                laufey
-              </a>
+              <a href="/bookshelf" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>laufey</a>
               &nbsp;or reading {" "}
-              <a
-                href="https://www.goodreads.com/user/show/186578130-hayden-so"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkMutedClass}
-              >
-                sherlock
-              </a>
-              , rabbitholing niche chinese politics and engineering blogs, pondering the human condition or strategizing {""}
-              <a
-                href="https://haydenso.com/blogs/rollup-rl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkMutedClass}
-              >
-                rollups and growth
-              </a>
+              <a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>sherlock</a>
+              , rabbitholing niche chinese politics and engineering blogs, pondering the human condition or strategizing {" "}
+              <a href="https://haydenso.com/blogs/rollup-rl" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>rollups and growth</a>
               . i like oat milk {" "}
-              <a
-                href="musings/life/coffee"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkMutedClass}
-              >
-                flat whites
-              </a>
-              , paul graham, kill tony, all-in, long runs, retrofuturism and vagueposting (read the {""}
-              <a
-                href="/evolution"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkMutedClass}
-              >
-                evolution of my interests
-              </a>)
+              <a href="musings/life/coffee" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>flat whites</a>
+              , paul graham, kill tony, all-in, long runs, retrofuturism and vagueposting (read the {" "}
+              <a href="/evolution" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>evolution of my interests</a>)
             </div>
-
+            
+            {/* Mobile: truncated with expand button */}
+            <div className="md:hidden">
+              <span>
+                im probably listening to {" "}
+                <a href="/bookshelf" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>laufey</a>
+                &nbsp;or reading {" "}
+                <a href="https://www.goodreads.com/user/show/186578130-hayden-so" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>sherlock</a>, rabbitholing niche&nbsp;
+              </span>
+              {!isExpanded && (
+                <button 
+                  onClick={() => setIsExpanded(true)} 
+                  className={`${linkMutedClass} ml-1`}
+                  aria-label="Show more"
+                >
+                  ...show more
+                </button>
+              )}
+              {isExpanded && (
+                <>
+                  <span>
+                    chinese politics and engineering blogs, pondering the human condition or strategizing {" "}
+                    <a href="https://haydenso.com/blogs/rollup-rl" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>rollups and growth</a>
+                    . i like oat milk {" "}
+                    <a href="musings/life/coffee" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>flat whites</a>
+                    , paul graham, kill tony, all-in, long runs, retrofuturism and vagueposting (read the {" "}
+                    <a href="/evolution" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>evolution of my interests</a>)&nbsp;
+                  </span>
+                  <button 
+                    onClick={() => setIsExpanded(false)} 
+                    className={`${linkMutedClass}`}
+                    aria-label="Show less"
+                  >
+                  ... (click to hide)
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 mb-15" >
             <span className="text-muted-foreground" style={{ color: '#A5D8FF' }}>contacts!</span>
-            <a
-              href="https://www.linkedin.com/in/haydenso/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkMutedClass}>
-              linkedin
-            </a>
-            <a
-              href="https://github.com/haydenso"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkMutedClass}>
-              github
-            </a>
-            <a
-              href="https://x.com/haydsso"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkMutedClass}>
-              twitter
-            </a>
-            <a
-              href="mailto:haydenso.hk@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkMutedClass}>
-              email</a>
-            <a
-              href="https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkMutedClass}>
-              scholar
-            </a>
+            <a href="https://www.linkedin.com/in/haydenso/" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>linkedin</a>
+            <a href="https://github.com/haydenso" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>github</a>
+            <a href="https://x.com/haydsso" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>twitter</a>
+            <a href="mailto:haydenso.hk@gmail.com" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>email</a>
+            <a href="https://scholar.google.com/citations?user=B1qjlbQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>scholar</a>
           </div>
 
         </div>

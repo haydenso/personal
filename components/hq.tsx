@@ -10,7 +10,7 @@ export function HQ() {
 
   return (
     <main
-      className="flex-1 px-10 md:px-70 xl:px-90 2xl:px-123 overflow-y-auto pt-15 md:pt-10 lg:pt-11 xl-pt-10 flex flex-col min-h-screen pb-8"
+      className="flex-1 px-10 md:px-30 xl:px-90 2xl:px-123 overflow-y-auto pt-15 md:pt-10 lg:pt-11 xl:pt-15 2xl:pt-35 flex flex-col min-h-screen pb-8 md:pb-12"
       style={{
         backgroundColor: '#086EB8',
         backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
@@ -57,7 +57,7 @@ export function HQ() {
                   &gt; i <em>flâneur</em>, {" "}
                   <a href="/musings" className={linkClass}>blog</a>
                   &nbsp;and {" "}
-                  <a href="/projects" className={linkClass}>clawd code</a>
+                  <a href="/projects" className={linkClass}>claude code</a>
                 </p>
               </div>
               <Image
@@ -74,16 +74,16 @@ export function HQ() {
           </div>
 
           <div>
-            <p className="pb-1 text-xs md:text-sm font-bold">in my 20 years, i've:</p>
-            <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm pb-1 leading-tight">
+            <p className="pb-1 text-xs tracking-[0.1em] text-[#EBEFF4]/70">in my 20 years, i've:</p>
+            <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm leading-tight">
               <li>sold guns in the arctic and led janitorial operations</li>
-              <li>dabbled in applied ai, energy private equity, consulting, ml research and gov/policy</li>
+              <li>dabbled in applied ai, consulting, ml research, energy private equity and gov/policy</li>
             </ul>
           </div>
 
           <div className="space-y-4">
             {/* Selected Projects and Writings - Two Columns on md+ */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs md:text-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs md:text-sm">
               <div className="space-y-1">
                 <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">selected projects</p>
                 <div className="grid grid-cols-1 gap-1">
@@ -180,13 +180,27 @@ export function HQ() {
                   />
                   <span>engineering memos</span>
                 </a>
+                                <a href="/rcn" className={`block ${linkClass}`}>
+                  <Image
+                    src="/arxiv.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    sizes="16px"
+                    priority
+                    quality={70}
+                    className="h-4 w-4 object-cover mr-2 rounded inline-block"
+                    aria-hidden
+                  />
+                  <span>research</span>
+                </a>
               </div>
             </div>
 
             {/* Shower Thoughts - horizontal row on md+ */}
-            <div className="pb-2 text-xs md:text-sm md:mb-4 lg:mb-4">
+            <div className="pb-5 text-xs md:text-sm md:mb-2 lg:mb-1">
               <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70 mb-1">my shower thoughts</p>
-              <div className="flex flex-col lg:flex-row lg:gap-3 gap-1">
+              <div className="flex flex-col lg:flex-row lg:gap-8 gap-1">
                 <a href="/projects" className={`lg:text-center block ${linkClass}`}>(1) reinforcement learning &amp; agents</a>
                 <a href="/projects" className={`lg:text-center block ${linkClass}`}>(2) politics of ai</a>
                 <a href="/projects" className={`lg:text-center block ${linkClass}`}>(3) accelerating scientific discovery</a>
@@ -200,7 +214,7 @@ export function HQ() {
           {/*<div className="hidden md:hidden">*/}
 
           {/* Mobile: truncated with expand button */}
-          <div className="md:block hidden">
+          <div className="">
             <span>
               im probably listening to {" "}
               <a href="/bookshelf" target="_blank" rel="noopener noreferrer" className={linkMutedClass}>laufey</a>

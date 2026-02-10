@@ -147,7 +147,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="opacity-90 h-4 w-4 object-cover mr-2 flex-shrink-0"
+                    className="opacity-85 h-4 w-4 object-cover mr-2 flex-shrink-0"
                     aria-hidden
                   />
                   <span>peek my notes</span>
@@ -161,7 +161,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="opacity-90 h-4 w-4 object-cover mr-2 flex-shrink-0 inline-block"
+                    className="opacity-85 h-4 w-4 object-cover mr-2 flex-shrink-0 inline-block"
                     aria-hidden
                   />
                   <span>essays</span>
@@ -175,7 +175,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="opacity-90 h-4 w-4 object-cover mr-2 inline-block"
+                    className="opacity-85 h-4 w-4 object-cover mr-2 inline-block"
                     aria-hidden
                   />
                   <span>engineering memos</span>
@@ -189,7 +189,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="opacity-90 h-4 w-4 object-cover mr-2 rounded inline-block"
+                    className="opacity-85 h-4 w-4 object-cover mr-2 rounded inline-block"
                     aria-hidden
                   />
                   <span>research</span>

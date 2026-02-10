@@ -11,6 +11,16 @@ export interface Musing {
 
 export const musings: Musing[] = [
   {
+    "slug": "data",
+    "title": "on data and memory",
+    "author": "Hayden",
+    "date": "2026",
+    "lastUpdated": "02-10-2026",
+    "pinned": false,
+    "category": "ai",
+    "content": "<p>the reason people in technical (or verifiable fields) is that it is easy to generate data that can be instantly verified. with code, you can run it. with math, you can solve it. with science, there is a ground truth. this is a bit harder with more creative or preference based tasks, but there has been great effort in the 'verified-nising' the evals for these domains. but there will still be a gap for a while.</p>\n<p><strong>on memory</strong> there are roughly 3 types of model memory to work on</p>\n<ul><li>in the weights. pre-training, LoRa, RLHF, Distillation, SFT</li><li>external memory. think RAG, RLMs, tool use, vector databases</li><li>in context. think optimising system prompt engineering, instructions, context engineering</li></ul>\n<p>i don't really know where RLVR and environments will fit in. in a sense it is about improving the weights via verifiable rewards but then it is also about good tool use.</p>\n<p><strong>on RL</strong></p>\n<ul><li>preference tuned</li><li>reasoning tuned (RLVR + GRPO)</li></ul>\n<blockquote>those who use AIs for programming will have a remarkably different view of AI than those who do not. The more your domain overlaps with testable synthetic data, the more you will find AIs useful as an intern. This perception gap will cloud our discussions.</blockquote>\n<p>good reading: <a href=\"https://www.dbreunig.com/2024/12/18/synthetic-data-the-growing-ai-perception-divide.html\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #086EB8;\">on synthetic data</a></p>"
+  },
+  {
     "slug": "system",
     "title": "the system knower",
     "author": "Hayden",

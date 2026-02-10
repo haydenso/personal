@@ -1,0 +1,25 @@
+---
+title: on data and memory
+author: Hayden
+date: '2026'
+lastUpdated: 02-10-2026
+pinned: false
+category: ai
+---
+the reason people in technical (or verifiable fields) is that it is easy to generate data that can be instantly verified. with code, you can run it. with math, you can solve it. with science, there is a ground truth. this is a bit harder with more creative or preference based tasks, but there has been great effort in the 'verified-nising' the evals for these domains. but there will still be a gap for a while.
+
+**on memory**
+there are roughly 3 types of model memory to work on
+- in the weights. pre-training, LoRa, RLHF, Distillation, SFT
+- external memory. think RAG, RLMs, tool use, vector databases
+- in context. think optimising system prompt engineering, instructions, context engineering
+
+i don't really know where RLVR and environments will fit in. in a sense it is about improving the weights via verifiable rewards but then it is also about good tool use. 
+
+**on RL**
+- preference tuned
+- reasoning tuned (RLVR + GRPO)
+
+> those who use AIs for programming will have a remarkably different view of AI than those who do not. The more your domain overlaps with testable synthetic data, the more you will find AIs useful as an intern. This perception gap will cloud our discussions.
+
+good reading: [on synthetic data](https://www.dbreunig.com/2024/12/18/synthetic-data-the-growing-ai-perception-divide.html)

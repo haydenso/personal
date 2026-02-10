@@ -147,7 +147,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-cover mr-2 flex-shrink-0"
+                    className="opacity-90 h-4 w-4 object-cover mr-2 flex-shrink-0"
                     aria-hidden
                   />
                   <span>peek my notes</span>
@@ -161,12 +161,12 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-cover mr-2 flex-shrink-0 inline-block"
+                    className="opacity-90 h-4 w-4 object-cover mr-2 flex-shrink-0 inline-block"
                     aria-hidden
                   />
                   <span>essays</span>
                 </a>
-                <a href="/rcn" className={`block ${linkClass}`}>
+                <a href="/projects" className={`block ${linkClass}`}>
                   <Image
                     src="/terminal.png"
                     alt=""
@@ -175,12 +175,12 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-cover mr-2 inline-block"
+                    className="opacity-90 h-4 w-4 object-cover mr-2 inline-block"
                     aria-hidden
                   />
                   <span>engineering memos</span>
                 </a>
-                                <a href="/rcn" className={`block ${linkClass}`}>
+                                <a href="/research" className={`block ${linkClass}`}>
                   <Image
                     src="/arxiv.png"
                     alt=""
@@ -189,7 +189,7 @@ export function HQ() {
                     sizes="16px"
                     priority
                     quality={70}
-                    className="h-4 w-4 object-cover mr-2 rounded inline-block"
+                    className="opacity-90 h-4 w-4 object-cover mr-2 rounded inline-block"
                     aria-hidden
                   />
                   <span>research</span>

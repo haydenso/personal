@@ -11,7 +11,7 @@ export function Research() {
           </div>
 
           <div className="space-y-4">
-            <p className="font-serif mb-6">currently my main technical research interests are interpretability of ai weather models, continual learning and reinforcement learning</p>
+            <p className="font-serif mb-6">currently technical research interests are: interpretability of ai weather models, continual learning and reinforcement learning</p>
 
             <div className="space-y-6">
               <div className="space-y-2">
@@ -75,7 +75,7 @@ export function Research() {
           </div>
 
 
-          <p className=" italic font-serif">other side quests</p>
+          <p className=" italic font-serif">misc grey literature</p>
 
           <div className="space-y-3">
             <div className="flex items-start gap-2">

@@ -136,7 +136,7 @@ export function HQ() {
                 </div>
               </div>
 
-              <div className="space-y-1 lg:mb-5">
+              <div className="space-y-1 lg:mb-1">
                 <p className="text-xs tracking-[0.1em] text-[#EBEFF4]/70">writings</p>
                 <a href="/musings" className={`inline-flex items-center ${linkClass}`}>
                   <Image

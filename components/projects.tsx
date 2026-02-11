@@ -3,7 +3,7 @@ import { Footer } from "./footer"
 export function Projects() {
   return (
     <main
-      className="flex-1 px-10 md:px-70 xl:px-90 2xl:px-123 overflow-y-auto pt-28 md:pt-16 flex flex-col min-h-screen pb-8"
+      className="flex-1 px-10 md:px-30 xl:px-90 2xl:px-123 overflow-y-auto pt-15 md:pt-10 lg:pt-11 xl:pt-15 2xl:pt-35 flex flex-col min-h-screen pb-8 md:pb-12"
       style={{
         backgroundColor: '#086EB8',
         backgroundImage: "linear-gradient(rgba(8, 110, 184, 0.9), rgba(8, 110, 184, 0.65)), image-set(url('/blueprint.jpg') type('image/jpeg'))",
@@ -17,9 +17,12 @@ export function Projects() {
         <div className="space-y-6">
           <div>
             <h1 className="text-4xl font-serif mb-2 text-[#E0EBFC]">projects</h1>
-            <p className="text-[#A5D8FF] mb-4">things i've built & side quests</p>
+            <p className="text-[#A5D8FF] mb-2">things i've built & side quests</p>
           </div>
 
+          <div className="mb-6">
+            <img src="https://ghchart.rshah.org/haydenso" alt="GitHub Contribution Chart" className="w-full rounded" />
+          </div>
 
           <div className="space-y-3">
 
@@ -130,7 +133,7 @@ export function Projects() {
             <span className="text-[#A5D8FF] mt-0.5">📹</span>
             <div className="flex-1">
               <a href="#" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
-               rlmbox: recursive language models in a rust-based sandbox(soon)
+               rlmbox: recursive language models in a rust-based sandbox (soon)
               </a>
               <p className="text-sm text-[#A5D8FF] font-serif">rlms + monty combined for the best of both worlds.</p>
             </div>

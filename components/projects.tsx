@@ -1,4 +1,5 @@
 import { Footer } from "./footer"
+import Image from "next/image"
 
 export function Projects() {
   return (
@@ -21,7 +22,7 @@ export function Projects() {
           </div>
 
           <div className="mb-6">
-            <img src="https://ghchart.rshah.org/haydenso" alt="GitHub Contribution Chart" className="w-full rounded" />
+            <Image src="https://ghchart.rshah.org/haydenso" alt="GitHub Contribution Chart" className="w-full rounded" width={800} height={200} />
           </div>
 
           <div className="space-y-3">
@@ -55,6 +56,7 @@ export function Projects() {
                 <p className="text-sm text-[#A5D8FF] font-serif">the most authentic typewriter experience. stop jumping paragraphs! chrome extension for google docs and microsoft word coming soon.</p>
               </div>
             </div>
+            
 
 
             <div className="flex items-start gap-3">
@@ -64,6 +66,16 @@ export function Projects() {
                   sido ai — pro bono ai advisory for HK's small-medium-businesses
                 </a>
                 <p className="text-sm text-[#A5D8FF] font-serif">forward deployed consulting. SMBs cannot get left behind in the intelligence revolution</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <img src="/notes.png" alt="sido ai" className="h-5 w-5 rounded-sm mt-0.5 object-cover" />
+              <div className="flex-1">
+                <a href="https://github.com/haydenso/notego" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                  rust cli for apple notes app to markdown
+                </a>
+                <p className="text-sm text-[#A5D8FF] font-serif">rust + apple script cli for exporting notes into markdown/mdx. useful for blog automations.</p>
               </div>
             </div>
 
@@ -122,7 +134,7 @@ export function Projects() {
             <div className="flex items-start gap-3">
               <span className="text-[#A5D8FF] mt-0.5">🎮</span>
               <div className="flex-1">
-                <a href="https://clauscii.haydenso.com" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
+                <a href="#" className="font-serif text-[#E0EBFC] underline decoration-dotted decoration-1 underline-offset-2 hover:decoration-solid">
                   coderleaf: github repository to conference paper
                 </a>
                 <p className="text-sm text-[#A5D8FF] font-serif">have a coding agent write a conference-ready latex manuscript for your code. using the best writing practices + top conference templates.</p>

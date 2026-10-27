@@ -74,7 +74,7 @@ export function HQ() {
           </div>
 
           <div>
-            <p className="pb-1 text-xs tracking-[0.1em] text-[#EBEFF4]/70">in my 21 years, i've:</p>
+            <p className="pb-1 text-xs tracking-[0.1em] text-[#EBEFF4]/70">in my 21 years:</p>
             <ul className="space-y-1 ml-4 list-disc text-xs md:text-sm leading-tight">
               <li>currently in Africa, leading AI and strategic initiatives for Kenyan agriculture</li>
               <li>sold guns in the arctic and led janitorial operations</li>

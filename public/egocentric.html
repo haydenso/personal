@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egocentric data collection: unit economics, East Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1f3f7; --panel:#ffffff; --ink:#16202b; --mute:#58656f; --line:#dbe0e7;
+  --accent:#2d3da0; --accent-soft:#e8ebf8; --good:#177a52; --bad:#bb3a33; --warn:#a8710f;
+  --c1:#2d3da0; --c2:#c98a1b; --c3:#5f7a96; --c4:#b0527a; --c5:#8a929b; --c6:#c25a4f; --c7:#2e9a68;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0f141a; --panel:#171e27; --ink:#e7ecf1; --mute:#98a5b2; --line:#2a3541;
+    --accent:#93a2ff; --accent-soft:#232c45; --good:#4cc38a; --bad:#ff7b73; --warn:#e5ac3f;
+    --c1:#93a2ff; --c2:#e5ac3f; --c3:#8fa8c2; --c4:#e07fa8; --c5:#a5adb6; --c6:#f0877b; --c7:#4cc38a;
+  }
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 56px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:26px;line-height:1.2;margin:0 0 6px;font-weight:600;letter-spacing:-.01em}
+.topbar p{margin:0;color:var(--mute);max-width:64ch}
+.currency{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:13px;font-weight:500;padding:6px 14px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.seg button[aria-pressed="true"]{color:#0f141a}}
+.fxbox{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mute)}
+.fxbox input{font:inherit;font-family:var(--mono);font-size:13px;width:64px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)}
+.layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.controls{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:900px){.controls{position:static;max-height:none}}
+fieldset{border:0;padding:0;margin:0 0 18px}
+legend{font-weight:600;font-size:14px;padding:0;margin-bottom:8px}
+.presets{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}
+.presets button{font:inherit;font-size:13px;padding:8px 4px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.presets button[aria-pressed="true"]{color:#0f141a}}
+.presetnote{font-size:12.5px;color:var(--mute);min-height:34px;margin:0 0 16px}
+.ctl{margin-bottom:12px}
+.ctl .top{display:flex;justify-content:space-between;gap:8px;font-size:13.5px}
+.ctl output{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.ctl input[type=range]{width:100%;accent-color:var(--accent);margin:4px 0 0}
+.hint{font-size:12px;color:var(--mute);margin-top:1px}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:end}
+@media (max-width:700px){.hero{grid-template-columns:1fr}}
+.hero .lbl{font-size:13px;color:var(--mute)}
+.big{font-family:var(--mono);font-size:42px;line-height:1.1;font-weight:500;letter-spacing:-.02em;overflow-wrap:anywhere}
+.big.neg{color:var(--bad)} .big.pos{color:var(--good)}
+.hero .sub{color:var(--mute);font-size:13.5px;margin-top:4px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.stat .n{font-family:var(--mono);font-size:18px;font-weight:500;overflow-wrap:anywhere}
+.stat .l{font-size:12.5px;color:var(--mute)}
+h2{font-size:15px;margin:0 0 12px;font-weight:600}
+.stack{display:flex;height:30px;border-radius:6px;overflow:hidden;margin-bottom:12px;background:var(--line)}
+.stack div{min-width:0;transition:width .15s}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;font-size:13.5px}
+@media (max-width:600px){.legend{grid-template-columns:1fr}}
+.legend div{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding:5px 0}
+.legend i{width:11px;height:11px;border-radius:3px;flex:none}
+.legend span.nm{flex:1}
+.legend b{font-family:var(--mono);font-weight:500;font-size:13px}
+.sec{margin-top:20px}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--sans);fill:var(--mute);font-size:11px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--mute)}
+td{font-family:var(--mono)}
+td.p{color:var(--good)} td.n{color:var(--bad)}
+td.cur,th.cur{background:var(--accent-soft)}
+.scroll{overflow-x:auto}
+.notes{font-size:13px;color:var(--mute);margin:20px 0 0;padding-left:18px}
+.notes li{margin-bottom:4px}
+.reset{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 10px;border-radius:8px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.stack div{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar">
+  <div>
+    <h1>Unit economics: egocentric data collection, East Africa</h1>
+    <p>Change the pay to collectors, the owner fee, the field-team cost and the rate you quote. Everything recalculates per accepted hour, per month and per camera. These are planning assumptions until the pilot gives you real yield.</p>
+  </div>
+  <div class="currency" role="group" aria-label="Currency">
+    <div class="seg">
+      <button type="button" id="cUSD" aria-pressed="true">USD</button>
+      <button type="button" id="cKES" aria-pressed="false">KES</button>
+    </div>
+    <label class="fxbox" for="fx">KES per USD <input type="number" id="fx" min="80" max="250" step="1" value="129"></label>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="panel controls" aria-label="Assumptions">
+    <fieldset>
+      <legend>Scenario</legend>
+      <div class="presets" id="presets">
+        <button type="button" data-p="cons" aria-pressed="false">Conservative</button>
+        <button type="button" data-p="lean" aria-pressed="false">Lean</button>
+        <button type="button" data-p="opt" aria-pressed="true">Optimistic</button>
+      </div>
+      <p class="presetnote" id="presetnote"></p>
+    </fieldset>
+    <div id="ctls"></div>
+    <button class="reset" id="reset" type="button">Reset to Optimistic</button>
+  </aside>
+
+  <main>
+    <section class="panel">
+      <div class="hero">
+        <div>
+          <div class="lbl">Monthly profit after fixed costs</div>
+          <div class="big" id="profit"></div>
+          <div class="sub" id="profitsub"></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n" id="mph"></div><div class="l">margin per accepted hour</div></div>
+          <div class="stat"><div class="n" id="be"></div><div class="l">break-even cameras per day</div></div>
+          <div class="stat"><div class="n" id="float"></div><div class="l">cash float before first payout</div></div>
+          <div class="stat"><div class="n" id="sites"></div><div class="l">new sites needed per week</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel sec">
+      <h2>Where each accepted hour goes</h2>
+      <div class="stack" id="stack" role="img" aria-label="Cost split per accepted hour"></div>
+      <div class="legend" id="legend"></div>
+    </section>
+
+    <section class="panel sec">
+      <h2>Monthly profit as camera count grows</h2>
+      <div id="chart"></div>
+    </section>
+
+    <section class="panel sec">
+      <h2>Monthly profit at the current camera count, by rate and yield</h2>
+      <div class="scroll"><table id="sens"></table></div>
+      <p class="hint" style="margin-top:8px">Rows are the all-in rate per accepted hour. Columns are accepted hours per camera-day. Highlighted cells match your current sliders.</p>
+    </section>
+
+    <ul class="notes">
+      <li>Your rate is paid in USD. Collector pay, owner fees, field staff and fixed costs are in KES, so a weaker shilling widens margin and a stronger one narrows it. Change the exchange rate at the top to test that.</li>
+      <li>Collector pay is a fixed KES amount per operator-day, so it costs more per accepted hour when yield is low. Informal daily wage is about KES 500, so the extra is shown as a percentage uplift.</li>
+      <li>Scout cost is a flat fee per qualified site spread over the accepted hours that site yields. Small businesses cap at 50 accepted hours, which is why many sites are needed.</li>
+      <li>Cash float is spend on collectors, owners and field staff over the payment lag (deployment length plus the 7 to 10 business days Human Archive takes to pay).</li>
+      <li>The Optimistic scenario assumes high yield, minimal owner fees and a lean team. Treat it as the upside to earn through the pilot, not as the plan to quote against.</li>
+    </ul>
+  </main>
+</div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+/* Canonical units: rate is USD; every other money input is KES (the local cost base). */
+const PRESETS = {
+  cons: {note:"Generous collector and owner pay, heavier field team, lower yield.",
+         v:{cams:30,hrs:2.5,days:22,siteHrs:35,rate:6,kes:580,own:130,coord:155,fee:1290,qa:80,kit:25,fix:129000,lag:4}},
+  lean: {note:"Collector KES 250 a day, owner about KES 50 an hour, tighter field ops.",
+         v:{cams:30,hrs:3,days:22,siteHrs:40,rate:6,kes:250,own:50,coord:130,fee:1032,qa:65,kit:25,fix:129000,lag:4}},
+  opt:  {note:"5 accepted hours per camera-day, KES 200 collectors, minimal owner fee, a blended rate that includes some higher-paying sites. Needs proof from the pilot.",
+         v:{cams:40,hrs:5,days:22,siteHrs:50,rate:6.5,kes:200,own:35,coord:100,fee:774,qa:50,kit:20,fix:129000,lag:3}}
+};
+
+const GROUPS = [
+  {name:"Volume", items:[
+    {id:"cams", label:"Cameras per day", min:5, max:150, step:5, fmt:v=>v},
+    {id:"hrs",  label:"Accepted hours per camera-day", min:1.5, max:9, step:0.25, fmt:v=>v.toFixed(2), hint:"Up to 8 to 9 recorded hours a day; accepted is about half to two thirds. Their cap is 5 hours per person per task."},
+    {id:"days", label:"Working days per month", min:18, max:30, step:1, fmt:v=>v},
+    {id:"siteHrs", label:"Accepted hours per site", min:20, max:100, step:5, fmt:v=>v, hint:"50 is the cap for small businesses."}
+  ]},
+  {name:"Price", items:[
+    {id:"rate", canon:"usd", label:"Rate quoted per accepted hour", rU:[3,14,0.25], rK:[400,1800,25], dec:2}
+  ]},
+  {name:"Pay to the field", items:[
+    {id:"kes",  canon:"kes", label:"Collector extra per day", rU:[1,6,0.25], rK:[100,800,25], dec:2},
+    {id:"own",  canon:"kes", label:"Site owner fee per hour", rU:[0,2,0.05], rK:[0,260,5], dec:2},
+    {id:"coord",canon:"kes", label:"Coordinators and cluster leads per hour", rU:[0.3,2,0.05], rK:[40,260,5], dec:2},
+    {id:"fee",  canon:"kes", label:"Scout fee per qualified site", rU:[2,46,0.5], rK:[250,6000,50], dec:2},
+    {id:"qa",   canon:"kes", label:"QA, offload, connectivity per hour", rU:[0.1,1.5,0.05], rK:[15,200,5], dec:2},
+    {id:"kit",  canon:"kes", label:"Kit loss reserve per hour", rU:[0,0.6,0.05], rK:[0,80,5], dec:2}
+  ]},
+  {name:"Business", items:[
+    {id:"fix",  canon:"kes", label:"Fixed costs per month", rU:[0,10000,250], rK:[0,1300000,25000], dec:0},
+    {id:"lag",  label:"Payment lag, weeks", min:1, max:8, step:1, fmt:v=>v, hint:"Deployment plus 7 to 10 business days."}
+  ]}
+];
+
+let cur = "USD";
+let active = "opt";
+let state = {...PRESETS.opt.v, fx:129};
+
+/* ---------- formatting ---------- */
+const fmtUSD = (x,d) => (x<0?"-":"") + "$" + Math.abs(x).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtKES = x => (x<0?"-":"") + "KES " + Math.abs(Math.round(x)).toLocaleString();
+function money(usd){ return cur==="USD" ? fmtUSD(usd,0) : fmtKES(usd*state.fx); }
+function perHr(usd){ return cur==="USD" ? fmtUSD(usd,2) : fmtKES(usd*state.fx); }
+function compact(usd){
+  const x = cur==="USD" ? usd : usd*state.fx;
+  const a = Math.abs(x), pre = cur==="USD" ? "$" : "KES ", sg = x<0 ? "-" : "";
+  let s;
+  if(a>=1e6) s = (a/1e6).toFixed(1)+"M";
+  else if(a>=1e4) s = Math.round(a/1e3)+"k";
+  else if(a>=1e3) s = (a/1e3).toFixed(1)+"k";
+  else s = String(Math.round(a));
+  return sg+pre+s;
+}
+
+/* ---------- control value conversion ---------- */
+function toDisp(it,v){ return it.canon==="usd" ? (cur==="USD"?v:v*state.fx) : (cur==="KES"?v:v/state.fx); }
+function fromDisp(it,sv){ return it.canon==="usd" ? (cur==="USD"?sv:sv/state.fx) : (cur==="KES"?sv:sv*state.fx); }
+function dispStr(it,v){
+  const x = toDisp(it,v);
+  return cur==="USD" ? "$"+x.toLocaleString(undefined,{minimumFractionDigits:it.dec,maximumFractionDigits:it.dec}) : "KES "+Math.round(x).toLocaleString();
+}
+
+/* ---------- model (all results in USD) ---------- */
+function calc(s){
+  const fx = s.fx;
+  const col = s.kes/fx/s.hrs;
+  const scout = s.fee/fx/s.siteHrs;
+  const parts = [
+    ["Collector incentive", col, "--c1"],
+    ["Site owner fee", s.own/fx, "--c2"],
+    ["Coordinators and cluster leads", s.coord/fx, "--c3"],
+    ["Scouts and agents", scout, "--c4"],
+    ["QA, offload, connectivity", s.qa/fx, "--c5"],
+    ["Kit loss reserve", s.kit/fx, "--c6"]
+  ];
+  const direct = parts.reduce((a,p)=>a+p[1],0);
+  const m = s.rate - direct;
+  const hours = s.cams * s.hrs * s.days;
+  const fixUSD = s.fix/fx;
+  const profit = hours*m - fixUSD;
+  const mpc = m * s.hrs * s.days;
+  const be = mpc>0 ? fixUSD/mpc : Infinity;
+  const flt = s.cams * s.hrs * direct * s.lag * 5;
+  const sites = s.cams * s.hrs * 5 / s.siteHrs;
+  return {parts, direct, m, hours, profit, be, flt, sites};
+}
+
+/* ---------- controls ---------- */
+function buildControls(){
+  const root = $("ctls"); root.innerHTML = "";
+  GROUPS.forEach(g=>{
+    const fs = document.createElement("fieldset");
+    const lg = document.createElement("legend"); lg.textContent = g.name; fs.appendChild(lg);
+    g.items.forEach(it=>{
+      const d = document.createElement("div"); d.className = "ctl";
+      d.innerHTML = `<div class="top"><label for="${it.id}">${it.label}</label><output id="${it.id}_o" for="${it.id}"></output></div><input type="range" id="${it.id}">` + (it.hint?`<div class="hint">${it.hint}</div>`:"");
+      fs.appendChild(d);
+    });
+    root.appendChild(fs);
+  });
+  GROUPS.forEach(g=>g.items.forEach(it=>{
+    $(it.id).addEventListener("input", e=>{
+      const sv = parseFloat(e.target.value);
+      state[it.id] = it.canon ? fromDisp(it,sv) : sv;
+      active = null; syncPresets(); render();
+    });
+  }));
+}
+function syncControls(){
+  GROUPS.forEach(g=>g.items.forEach(it=>{
+    const el = $(it.id);
+    if(it.canon){
+      const r = cur==="USD" ? it.rU : it.rK;
+      el.min = r[0]; el.max = r[1]; el.step = r[2];
+      el.value = toDisp(it, state[it.id]);
+      $(it.id+"_o").textContent = dispStr(it, state[it.id]);
+    } else {
+      el.min = it.min; el.max = it.max; el.step = it.step;
+      el.value = state[it.id];
+      $(it.id+"_o").textContent = it.fmt(state[it.id]);
+    }
+  }));
+}
+function syncPresets(){
+  document.querySelectorAll("#presets button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.p===active)));
+  $("presetnote").textContent = active ? PRESETS[active].note : "Custom settings. Pick a scenario to reset the assumptions.";
+}
+function syncCurrency(){
+  $("cUSD").setAttribute("aria-pressed", String(cur==="USD"));
+  $("cKES").setAttribute("aria-pressed", String(cur==="KES"));
+}
+
+/* ---------- rendering ---------- */
+function renderStack(r){
+  const total = Math.max(state.rate, r.direct);
+  let html = "", leg = "";
+  r.parts.forEach(p=>{
+    html += `<div style="width:${(p[1]/total*100).toFixed(2)}%;background:var(${p[2]})" title="${p[0]}"></div>`;
+    leg += `<div><i style="background:var(${p[2]})"></i><span class="nm">${p[0]}</span><b>${perHr(p[1])}</b></div>`;
+  });
+  if(r.m>0) html += `<div style="width:${(r.m/total*100).toFixed(2)}%;background:var(--c7)" title="Margin"></div>`;
+  leg += `<div><i style="background:var(--c7)"></i><span class="nm">Margin (${Math.round(r.m/state.rate*100)}% of rate)</span><b style="color:var(${r.m<0?'--bad':'--ink'})">${perHr(r.m)}</b></div>`;
+  $("stack").innerHTML = html; $("legend").innerHTML = leg;
+}
+
+function renderChart(){
+  const W=700,H=260,L=78,R=16,T=14,B=36;
+  const xs=[]; for(let c=0;c<=150;c+=5) xs.push(c);
+  const ys = xs.map(c=>calc({...state,cams:c}).profit);
+  const ymin = Math.min(0,...ys), ymax = Math.max(0,...ys);
+  const pad = (ymax-ymin)*0.08 || 100;
+  const lo = ymin-pad, hi = ymax+pad;
+  const X = c => L + (c/150)*(W-L-R);
+  const Y = v => T + (1-(v-lo)/(hi-lo))*(H-T-B);
+  let g = "";
+  for(let i=0;i<=4;i++){
+    const v = lo+(hi-lo)*i/4;
+    g += `<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${compact(v)}</text>`;
+  }
+  [0,30,60,90,120,150].forEach(c=>{ g += `<text x="${X(c)}" y="${H-14}" text-anchor="middle">${c}</text>`; });
+  g += `<text x="${(L+W-R)/2}" y="${H-1}" text-anchor="middle">cameras per day</text>`;
+  g += `<line x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--mute)" stroke-dasharray="4 3"/>`;
+  g += `<path d="${xs.map((c,i)=>(i?"L":"M")+X(c).toFixed(1)+" "+Y(ys[i]).toFixed(1)).join(" ")}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>`;
+  const r = calc(state);
+  if(isFinite(r.be) && r.be<=150){
+    g += `<line x1="${X(r.be)}" x2="${X(r.be)}" y1="${T}" y2="${H-B}" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="3 3"/><text x="${X(r.be)+5}" y="${T+11}" style="fill:var(--warn)">break-even ${Math.ceil(r.be)}</text>`;
+  }
+  g += `<circle cx="${X(Math.min(state.cams,150))}" cy="${Y(r.profit)}" r="5" fill="var(--accent)" stroke="var(--panel)" stroke-width="2"/>`;
+  $("chart").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Monthly profit versus cameras per day">${g}</svg>`;
+}
+
+function renderSens(){
+  const rates = Array.from(new Set([4,5,6,7,8,10,12,state.rate])).sort((a,b)=>a-b);
+  const hrsList = Array.from(new Set([2,3,4,5,6,8,state.hrs])).sort((a,b)=>a-b);
+  let h = "<tr><th>Rate</th>" + hrsList.map(x=>`<th class="${x===state.hrs?'cur':''}">${x} hrs</th>`).join("") + "</tr>";
+  rates.forEach(rt=>{
+    h += `<tr><td>${perHr(rt)}</td>` + hrsList.map(x=>{
+      const p = calc({...state,rate:rt,hrs:x}).profit;
+      const cc = (rt===state.rate && x===state.hrs) ? " cur" : "";
+      return `<td class="${p>=0?'p':'n'}${cc}">${compact(p)}</td>`;
+    }).join("") + "</tr>";
+  });
+  $("sens").innerHTML = h;
+}
+
+function render(){
+  syncControls(); syncCurrency();
+  const r = calc(state);
+  const p = $("profit");
+  p.textContent = money(r.profit);
+  p.className = "big " + (r.profit<0?"neg":"pos");
+  const uplift = Math.round(state.kes/500*100);
+  $("profitsub").textContent = `${Math.round(r.hours).toLocaleString()} accepted hours a month, ${money(r.hours*r.m)} margin before fixed costs. Collectors earn about ${uplift}% on top of a KES 500 day.`;
+  $("mph").textContent = perHr(r.m) + " (" + Math.round(r.m/state.rate*100) + "%)";
+  $("be").textContent = isFinite(r.be) ? Math.ceil(r.be) : "never";
+  $("float").textContent = money(r.flt);
+  $("sites").textContent = r.sites.toFixed(1);
+  renderStack(r); renderChart(); renderSens();
+}
+
+/* ---------- events ---------- */
+document.querySelectorAll("#presets button").forEach(b=>b.addEventListener("click",()=>{
+  active = b.dataset.p; state = {...PRESETS[active].v, fx:state.fx}; syncPresets(); render();
+}));
+$("reset").addEventListener("click",()=>{ active="opt"; state={...PRESETS.opt.v, fx:state.fx}; syncPresets(); render(); });
+$("cUSD").addEventListener("click",()=>{ cur="USD"; render(); });
+$("cKES").addEventListener("click",()=>{ cur="KES"; render(); });
+$("fx").addEventListener("input",e=>{
+  const v = parseFloat(e.target.value);
+  if(v>0){ state.fx = v; render(); }
+});
+
+buildControls(); syncPresets(); render();
+</script>
+</body>
+</html>
